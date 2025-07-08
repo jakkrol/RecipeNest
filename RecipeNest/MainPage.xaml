@@ -30,6 +30,8 @@
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Fill" />
+            <Button x:Name="RouteButton" Text="ROUTING TESTS" Clicked="RouteButton_Clicked"/>
+            
         </VerticalStackLayout>
     </ScrollView>
 

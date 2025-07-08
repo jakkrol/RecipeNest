@@ -19,6 +19,13 @@
                 CounterBtn.Text = $"Clicked {count} times";
 
             SemanticScreenReader.Announce(CounterBtn.Text);
+
+
+        }
+
+        private async void RouteButton_Clicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("///RecipesPage");
         }
     }
 }
