@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RecipeNest
+namespace RecipeNest.Models
 {
     public class Recipe
     {
@@ -14,7 +14,7 @@ namespace RecipeNest
         public List<string> Ingredients { get; set; }
         public string Instructions { get; set; }
         public string ImageUrl { get; set; }
-        public Recipe(string name, string category, string description, string ingredients, string instructions, string imageUrl)
+        public Recipe(string name, string category, string description, string ingredients, string instructions, string imageUrl = null)
         {
             Name = name;
             Category = category;
@@ -23,5 +23,6 @@ namespace RecipeNest
             Instructions = instructions;
             ImageUrl = imageUrl;
         }
+        public Recipe() { }
     }
 }

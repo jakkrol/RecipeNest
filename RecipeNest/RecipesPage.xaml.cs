@@ -14,4 +14,9 @@ public partial class RecipesPage : ContentPage
     {
 		
     }
+
+    private void AddRecipe_Clicked(object sender, EventArgs e)
+    {
+
+    }
 }

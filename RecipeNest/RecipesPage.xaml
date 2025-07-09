@@ -3,29 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RecipeNest.RecipesPage"
              Title="My Recipes">
-    <VerticalStackLayout Padding="20" Spacing="15">
-        <!-- Header -->
-        <Label Text="🍽️ My Recipes" FontSize="28" FontAttributes="Bold" />
-
+    <VerticalStackLayout Padding="20" Spacing="15" >
         <!-- Search Bar + Add Button -->
-        <HorizontalStackLayout Spacing="10">
+        <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+            <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
+                <Label Text="🍽️ My Recipes" FontSize="28" FontAttributes="Bold"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="Center">
             <SearchBar Placeholder="Search recipes..."
-                       Text="{Binding SearchText}"
-                       SearchCommand="{Binding PerformSearchCommand}" 
-                       HorizontalOptions="FillAndExpand"/>
+                Text="{Binding SearchText}"
+                SearchCommand="{Binding PerformSearchCommand}" 
+                HorizontalOptions="FillAndExpand"/>
             <Button Text="➕" 
-                    Command="{Binding AddRecipeCommand}"
-                    WidthRequest="50"/>
+                Clicked="AddRecipe_Clicked"
+                WidthRequest="50"/>
         </HorizontalStackLayout>
+        </VerticalStackLayout>
 
         <!-- Recipes List -->
         <CollectionView ItemsSource="{Binding FilteredRecipes}"
                         SelectionMode="Single"
-                        SelectionChanged="CollectionView_SelectionChanged">
+                        SelectionChanged="CollectionView_SelectionChanged"
+                        Margin="15"
+                        >
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame BorderColor="#cccccc" CornerRadius="10" Padding="10" Margin="5">
-                        <Label Text="{Binding Name}" FontSize="18" />
+                    <Frame BorderColor="#cccccc" BackgroundColor="Black" VerticalOptions="Center" CornerRadius="10" Padding="10" Margin="5">
+                        <Label Text="{Binding Name}" FontSize="18" Margin="10" />
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
