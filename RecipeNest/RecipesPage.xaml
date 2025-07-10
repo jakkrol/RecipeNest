@@ -1,46 +1,48 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RecipeNest.RecipesPage"
              Title="My Recipes">
-    <VerticalStackLayout Padding="20" Spacing="15" >
-        <!-- Search Bar + Add Button -->
-        <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
-            <HorizontalStackLayout HorizontalOptions="Center">
-                <Label Text="🍽️ My Recipes" FontSize="28" FontAttributes="Bold"/>
-            </HorizontalStackLayout>
+    <Grid RowDefinitions="Auto, *" Padding="20" >
+
+        <!-- Top Header Section -->
+        <VerticalStackLayout Grid.Row="0" Spacing="10">
+            <Label Text="🍽️ My Recipes"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
-            <SearchBar Placeholder="Search recipes..."
-                Text="{Binding SearchText}"
-                SearchCommand="{Binding PerformSearchCommand}" 
-                HorizontalOptions="Fill" />
-            <Button Text="➕" 
-                Clicked="AddRecipe_Clicked"
-                WidthRequest="50" />
-        </HorizontalStackLayout>
+                <SearchBar Placeholder="Search recipes..."
+                           Text="{Binding SearchText}"
+                           SearchCommand="{Binding PerformSearchCommand}"
+                           HorizontalOptions="Fill" />
+                <Button Text="➕"
+                        Clicked="AddRecipe_Clicked"
+                        WidthRequest="50" />
+            </HorizontalStackLayout>
         </VerticalStackLayout>
 
-        <!-- Recipes List -->
-        <CollectionView ItemsSource="{Binding FilteredRecipes}"
+        <!-- Scrollable Recipe List -->
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding FilteredRecipes}"
                         SelectionMode="Single"
                         SelectionChanged="CollectionView_SelectionChanged"
                         Margin="15"
-                        >
+                        VerticalOptions="Fill">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" />
             </CollectionView.ItemsLayout>
-            
+
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Border  BackgroundColor="Black" VerticalOptions="Center" Padding="10" Margin="5">
+                        <Border BackgroundColor="Black"
+                                VerticalOptions="Center"
+                                Padding="10"
+                                Margin="5">
                             <Border.StrokeShape>
                                 <RoundRectangle CornerRadius="10"/>
                             </Border.StrokeShape>
@@ -50,5 +52,5 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-    </VerticalStackLayout>
+    </Grid>
 </ContentPage>

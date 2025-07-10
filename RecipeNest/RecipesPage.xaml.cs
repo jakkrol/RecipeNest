@@ -15,8 +15,8 @@ public partial class RecipesPage : ContentPage
 		
     }
 
-    private void AddRecipe_Clicked(object sender, EventArgs e)
+    private async void AddRecipe_Clicked(object sender, EventArgs e)
     {
-
+        await Shell.Current.GoToAsync("AddRecipePage");
     }
 }
