@@ -1,46 +1,73 @@
-﻿    using System;
-    using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using System.Windows.Input;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Input;
 
     namespace RecipeNest.ViewModels
     {
         public class RecipeViewModel : INotifyPropertyChanged
         {
-        public ObservableCollection<Models.Recipe> FilteredRecipes { get; set; } = Services.RecipeService.Instance.Recipes;
-        private string searchText;
-
-            public string SearchText
+        private ObservableCollection<Models.Recipe> Recipes;
+        //public ObservableCollection<Models.Recipe> FilteredRecipes { get; set; } = null;
+        private ObservableCollection<Models.Recipe> filteredRecipes;
+        public ObservableCollection<Models.Recipe> FilteredRecipes
+        {
+            get => filteredRecipes;
+            set
             {
-                get => searchText;
-                set
+                if (filteredRecipes != value)
                 {
-                    if (searchText != value)
-                    {
-                        searchText = value;
-                        OnPropertyChanged(nameof(SearchText));
-                    }
+                    filteredRecipes = value;
+                    OnPropertyChanged(nameof(FilteredRecipes));
                 }
             }
+        }
 
-            public ICommand PerformSearchCommand { get; }
-            public RecipeViewModel()
+        private string searchText;
+        public string SearchText
+        {
+            get => searchText;
+            set
             {
-                PerformSearchCommand = new Command(PerformSearch);
+                if (searchText != value)
+                {
+                    searchText = value;
+                    OnPropertyChanged(nameof(SearchText));
+                }
             }
+        }
+        public ICommand PerformSearchCommand { get; }
+        public RecipeViewModel()
+        {
+            Recipes = Services.RecipeService.Instance.Recipes;
+            FilteredRecipes = new ObservableCollection<Models.Recipe>(Recipes);
+            Recipes.CollectionChanged += Recipes_CollectionChanged;
+            PerformSearchCommand = new Command(PerformSearch);
+        }
 
-            private void PerformSearch()
+        private void Recipes_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            PerformSearch();
+        }
+
+        private void PerformSearch()
             {
                 Debug.WriteLine($"Searching for: {SearchText}");
-                // Logic to perform search
-                // This could involve filtering a list of recipes based on a search term
-                // For example, you might filter a collection of recipes by name or category
+                if(SearchText == null || SearchText == "")
+                {
+                    FilteredRecipes = Recipes;
+                }
+                else
+                {
+                    FilteredRecipes = new ObservableCollection<Models.Recipe>(
+                        Recipes.Where(r => r.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase) || r.Category.Contains(SearchText, StringComparison.OrdinalIgnoreCase) || r.Description.Contains(SearchText, StringComparison.OrdinalIgnoreCase)));
+                }
             }
 
 
