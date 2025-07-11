@@ -2,11 +2,29 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RecipeNest.AddRecipePage"
-             Title="AddRecipePage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="Add Recipe">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <Label Text="Recipe Name" />
+            <Entry Text="{Binding Name}" Placeholder="e.g., Spaghetti Carbonara" />
+
+            <Label Text="Category" />
+            <Entry Text="{Binding Category}" Placeholder="e.g., Italian" />
+
+            <Label Text="Description" />
+            <Editor Text="{Binding Description}" Placeholder="Short description..." AutoSize="TextChanges" HeightRequest="80" />
+
+            <Label Text="Ingredients (comma separated)" />
+            <Editor Text="{Binding Ingredients}" Placeholder="e.g., pasta, eggs, cheese" AutoSize="TextChanges" HeightRequest="80" />
+
+            <Label Text="Instructions" />
+            <Editor Text="{Binding Instructions}" Placeholder="How to make it..." AutoSize="TextChanges" HeightRequest="120" />
+
+            <Label Text="Image URL (optional)" />
+            <Entry Text="{Binding ImageUrl}" Placeholder="http://..." />
+
+            <Button Text="Add Recipe" Command="{Binding SaveRecipeCommand}" />
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

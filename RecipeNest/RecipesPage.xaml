@@ -2,23 +2,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RecipeNest.RecipesPage"
              Title="My Recipes">
-    <Grid RowDefinitions="Auto, *" Padding="20" >
+    <Grid RowDefinitions="Auto, *" Padding="20">
 
         <!-- Top Header Section -->
         <VerticalStackLayout Grid.Row="0" Spacing="10">
             <Label Text="🍽️ My Recipes"
                    FontSize="28"
                    FontAttributes="Bold"
-                   HorizontalOptions="Center" />
+                   HorizontalOptions="Center"/>
 
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
                 <SearchBar Placeholder="Search recipes..."
                            Text="{Binding SearchText}"
                            SearchCommand="{Binding PerformSearchCommand}"
-                           HorizontalOptions="Fill" />
+                           HorizontalOptions="Fill"/>
                 <Button Text="➕"
                         Clicked="AddRecipe_Clicked"
-                        WidthRequest="50" />
+                        WidthRequest="50"/>
             </HorizontalStackLayout>
         </VerticalStackLayout>
 
@@ -30,14 +30,14 @@
                         Margin="15"
                         VerticalOptions="Fill">
             <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical" />
+                <LinearItemsLayout Orientation="Vertical"/>
             </CollectionView.ItemsLayout>
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Border BackgroundColor="Black"
                                 VerticalOptions="Center"
@@ -46,7 +46,7 @@
                             <Border.StrokeShape>
                                 <RoundRectangle CornerRadius="10"/>
                             </Border.StrokeShape>
-                            <Label Text="{Binding Name}" FontSize="18" Margin="10" />
+                            <Label Text="{Binding Name}" FontSize="18" Margin="10"/>
                         </Border>
                     </Grid>
                 </DataTemplate>
