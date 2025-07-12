@@ -1,6 +1,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RecipeNest.RecipesPage"
+             x:Name="RecipesPageContext"
              Title="My Recipes">
     <Grid RowDefinitions="Auto, *" Padding="20">
         <VerticalStackLayout Grid.Row="0" Spacing="10">
@@ -55,12 +56,15 @@
                                        VerticalOptions="Center"
                                        Grid.Column="0"/>
 
-                                <Button Text="Modify"
+                                <Button Text="Update"
+
                                         VerticalOptions="Center"
                                         HorizontalOptions="End"
                                         Grid.Column="1"/>
 
                                 <Button Text="Delete"
+                                        Command="{Binding BindingContext.DeleteRecipeCommand, Source={x:Reference RecipesPageContext}}"
+                                        CommandParameter="{Binding .}"
                                         VerticalOptions="Center"
                                         HorizontalOptions="End"
                                         Grid.Column="2"

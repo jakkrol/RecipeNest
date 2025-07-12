@@ -26,17 +26,19 @@ namespace RecipeNest.ViewModels
 
         private async void SaveRecipe()
         {   
-            Recipe newRecipe = new Recipe
-            {
-                Name = Name,
-                Category = Category,
-                Description = Description,
-                Ingredients = Ingredients.Split(',').Select(i => i.Trim()).ToList(),
-                Instructions = Instructions,
-                ImageUrl = ImageUrl
-            };
-            Services.RecipeService.Instance.Recipes.Add(newRecipe);
+            Services.RecipeService.Instance.AddNewRecipe(Name, Category, Description, Ingredients, Instructions, ImageUrl);
+            //Recipe newRecipe = new Recipe
+            //{
+            //    Name = Name,
+            //    Category = Category,
+            //    Description = Description,
+            //    Ingredients = Ingredients.Split(',').Select(i => i.Trim()).ToList(),
+            //    Instructions = Instructions,
+            //    ImageUrl = ImageUrl
+            //};
+            //Services.RecipeService.Instance.Recipes.Add(newRecipe);
             await Shell.Current.GoToAsync(".."); 
         }
+
     }
 }

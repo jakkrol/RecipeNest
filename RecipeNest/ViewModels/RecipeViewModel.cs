@@ -43,12 +43,14 @@ using System.Windows.Input;
             }
         }
         public ICommand PerformSearchCommand { get; }
+        public ICommand DeleteRecipeCommand { get; }
         public RecipeViewModel()
         {
             Recipes = Services.RecipeService.Instance.Recipes;
             FilteredRecipes = new ObservableCollection<Models.Recipe>(Recipes);
             Recipes.CollectionChanged += Recipes_CollectionChanged;
             PerformSearchCommand = new Command(PerformSearch);
+            DeleteRecipeCommand = new Command<Models.Recipe>(DeleteRecipe);
         }
 
         private void Recipes_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
@@ -57,7 +59,7 @@ using System.Windows.Input;
         }
 
         private void PerformSearch()
-            {
+        {
                 Debug.WriteLine($"Searching for: {SearchText}");
                 if(SearchText == null || SearchText == "")
                 {
@@ -68,10 +70,16 @@ using System.Windows.Input;
                     FilteredRecipes = new ObservableCollection<Models.Recipe>(
                         Recipes.Where(r => r.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase) || r.Category.Contains(SearchText, StringComparison.OrdinalIgnoreCase) || r.Description.Contains(SearchText, StringComparison.OrdinalIgnoreCase)));
                 }
-            }
+        }
+
+        private void DeleteRecipe(Models.Recipe recipe)
+        {
+            Debug.WriteLine($"Deleting recipe: {recipe.Name}");
+            Services.RecipeService.Instance.Recipes.Remove(recipe);
+        }
 
 
-            public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
             protected void OnPropertyChanged(string propertyName)
             {

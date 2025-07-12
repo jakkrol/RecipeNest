@@ -1,4 +1,5 @@
 using RecipeNest.ViewModels;
+using System.Diagnostics;
 namespace RecipeNest;
 
 public partial class RecipesPage : ContentPage
@@ -19,4 +20,5 @@ public partial class RecipesPage : ContentPage
     {
         await Shell.Current.GoToAsync("AddRecipePage");
     }
+
 }

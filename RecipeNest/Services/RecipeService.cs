@@ -115,18 +115,34 @@ namespace RecipeNest.Services
             };
         }
 
-        public void AddNewRecipe(string name, string category, string description, List<string> ingredients, string instructions, string imageUrl = null)
+        public void AddNewRecipe(string name, string category, string description, string ingredients, string instructions, string imageUrl = null)
         {
             var newRecipe = new Recipe
             {
                 Name = name,
                 Category = category,
                 Description = description,
-                Ingredients = ingredients,
+                Ingredients = ingredients.Split(',').Select(i => i.Trim()).ToList(),
                 Instructions = instructions,
                 ImageUrl = imageUrl
             };
             Recipes.Add(newRecipe);
         }
+        public void RemoveRecipe(Recipe recipe)
+        {
+            if (Recipes.Contains(recipe))
+            {
+                Recipes.Remove(recipe);
+            }
+        }
+        public void UpdateRecipe(Recipe oldRecipe, Recipe newRecipe)
+        {
+            int index = Recipes.IndexOf(oldRecipe);
+            if (index != -1)
+            {
+                Recipes[index] = newRecipe;
+            }
+        }
+
     }
 }
