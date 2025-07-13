@@ -135,12 +135,26 @@ namespace RecipeNest.Services
                 Recipes.Remove(recipe);
             }
         }
-        public void UpdateRecipe(Recipe oldRecipe, Recipe newRecipe)
+        public void UpdateRecipe(string id, string name, string category, string description, string ingredients, string instructions, string imageUrl = null)
         {
-            int index = Recipes.IndexOf(oldRecipe);
-            if (index != -1)
+            var newRecipe = new Recipe
             {
-                Recipes[index] = newRecipe;
+                Id = id,
+                Name = name,
+                Category = category,
+                Description = description,
+                Ingredients = ingredients.Split(',').Select(i => i.Trim()).ToList(),
+                Instructions = instructions,
+                ImageUrl = imageUrl
+            };
+            for (int i = 0; i < Recipes.Count; i++)
+            {
+                if (Recipes[i].Id == id)
+                {
+                    Recipes.RemoveAt(i);
+                    Recipes.Insert(i, newRecipe);
+                    break;
+                }
             }
         }
 

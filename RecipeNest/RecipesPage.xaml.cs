@@ -1,5 +1,6 @@
 using RecipeNest.ViewModels;
 using System.Diagnostics;
+using System.Threading.Tasks;
 namespace RecipeNest;
 
 public partial class RecipesPage : ContentPage
@@ -21,4 +22,9 @@ public partial class RecipesPage : ContentPage
         await Shell.Current.GoToAsync("AddRecipePage");
     }
 
+    private async void Update_Clicked(object sender, EventArgs e)
+    {
+        Models.Recipe selectedRecipe = (Models.Recipe)((Button)sender).BindingContext;
+        await Shell.Current.GoToAsync($"AddRecipePage?recipeId={selectedRecipe.Id}");
+    }
 }

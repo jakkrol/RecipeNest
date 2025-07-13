@@ -50,14 +50,14 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <Label Text="{Binding Name}"
+                                <Label Text="{Binding Id}"
                                        FontSize="18"
                                        TextColor="White"
                                        VerticalOptions="Center"
                                        Grid.Column="0"/>
 
                                 <Button Text="Update"
-
+                                        Clicked="Update_Clicked"
                                         VerticalOptions="Center"
                                         HorizontalOptions="End"
                                         Grid.Column="1"/>
