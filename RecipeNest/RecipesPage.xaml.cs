@@ -27,4 +27,9 @@ public partial class RecipesPage : ContentPage
         Models.Recipe selectedRecipe = (Models.Recipe)((Button)sender).BindingContext;
         await Shell.Current.GoToAsync($"AddRecipePage?recipeId={selectedRecipe.Id}");
     }
+
+    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    {
+
+    }
 }

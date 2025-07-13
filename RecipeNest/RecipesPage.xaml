@@ -41,7 +41,9 @@
                             <Border.StrokeShape>
                                 <RoundRectangle CornerRadius="10"/>
                             </Border.StrokeShape>
-
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                            </Border.GestureRecognizers>
                             <Grid HorizontalOptions="Fill" VerticalOptions="Center">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
@@ -50,7 +52,7 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <Label Text="{Binding Id}"
+                                <Label Text="{Binding Name}"
                                        FontSize="18"
                                        TextColor="White"
                                        VerticalOptions="Center"
