@@ -74,8 +74,8 @@ using System.Windows.Input;
 
         private void DeleteRecipe(Models.Recipe recipe)
         {
-            Debug.WriteLine($"Deleting recipe: {recipe.Name}");
-            Services.RecipeService.Instance.Recipes.Remove(recipe);
+            //Debug.WriteLine($"Deleting recipe: {recipe.Name}");
+            Services.RecipeService.Instance.RemoveRecipe(recipe);
         }
 
 

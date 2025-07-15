@@ -1,4 +1,6 @@
-﻿using RecipeNest.ViewModels;
+﻿using RecipeNest.DbConfig;
+using RecipeNest.Services;
+using RecipeNest.ViewModels;
 namespace RecipeNest
 {
     public partial class MainPage : ContentPage
@@ -7,7 +9,13 @@ namespace RecipeNest
         public MainPage()
         {
             InitializeComponent();
+
             this.BindingContext = ViewModel;
+        }
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            await RecipeService.Instance.LoadRecipesFromDb();
         }
         private async void OnBrowseRecipes(object sender, EventArgs e)
         {

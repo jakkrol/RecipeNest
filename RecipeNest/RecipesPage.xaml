@@ -10,13 +10,15 @@
                    FontAttributes="Bold"
                    HorizontalOptions="Center"/>
 
-            <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+            <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
                 <SearchBar Placeholder="Search recipes..."
                            Text="{Binding SearchText}"
                            SearchCommand="{Binding PerformSearchCommand}"
-                           HorizontalOptions="Fill"/>
+                           HorizontalOptions="Center"
+                           WidthRequest="250"/>
                 <Button Text="➕"
                         Clicked="AddRecipe_Clicked"
+                        HorizontalOptions="Center"
                         WidthRequest="50"/>
             </HorizontalStackLayout>
         </VerticalStackLayout>

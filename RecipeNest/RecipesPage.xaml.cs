@@ -28,8 +28,8 @@ public partial class RecipesPage : ContentPage
         await Shell.Current.GoToAsync($"AddRecipePage?recipeId={selectedRecipe.Id}");
     }
 
-    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
-
+        await Shell.Current.GoToAsync("RecipeDetailPage");
     }
 }

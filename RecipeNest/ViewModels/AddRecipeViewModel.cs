@@ -21,13 +21,13 @@ namespace RecipeNest.ViewModels
         public string Instructions { get; set; } = "";
         public string ImageUrl { get; set; } = "";
 
-        private string recipeId;
-        public string RecipeId
+        private int? recipeId;
+        public string? RecipeId
         {
-            get => recipeId;
+            get => recipeId.ToString();
             set
             {
-                recipeId = value;
+                recipeId = Convert.ToInt32(value);
                 LoadRecipe();
             }
         }
@@ -38,9 +38,9 @@ namespace RecipeNest.ViewModels
         }
         private async void LoadRecipe()
         {
-            if (string.IsNullOrEmpty(RecipeId))
-                return;
-            var recipe = RecipeService.Instance.Recipes.FirstOrDefault(r => r.Id == RecipeId);
+            //if (string.IsNullOrEmpty(RecipeId))
+            //    return;
+            var recipe = RecipeService.Instance.Recipes.FirstOrDefault(r => r.Id == recipeId);
             if (recipe != null)
             {
                 Name = recipe.Name;
@@ -63,10 +63,10 @@ namespace RecipeNest.ViewModels
         private async void SaveRecipe()
         {
             if (recipeId != null)
-            {
-                Services.RecipeService.Instance.UpdateRecipe(recipeId, Name, Category, Description, Ingredients, Instructions, ImageUrl);
-            }
-            Services.RecipeService.Instance.AddNewRecipe(Name, Category, Description, Ingredients, Instructions, ImageUrl);
+                Services.RecipeService.Instance.UpdateRecipe(recipeId.Value, Name, Category, Description, Ingredients, Instructions, ImageUrl);
+            else
+                await Services.RecipeService.Instance.AddNewRecipe(Name, Category, Description, Ingredients, Instructions, ImageUrl);
+
             await Shell.Current.GoToAsync("..");
         }
 

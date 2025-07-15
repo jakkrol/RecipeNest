@@ -19,8 +19,8 @@ namespace RecipeNest.ViewModels
         public string Instructions { get; set; } = "";
         public string ImageUrl { get; set; } = "";
 
-        private string recipeId;
-        public string RecipeId
+        private int? recipeId;
+        public int? RecipeId
         {
             get => recipeId;
             set
@@ -33,10 +33,11 @@ namespace RecipeNest.ViewModels
 
         private void LoadRecipeDetails()
         {
-            if(string.IsNullOrEmpty(RecipeId))
+            if (!RecipeId.HasValue)
                 return;
-            var recipe = RecipeService.Instance.Recipes.FirstOrDefault(r => r.Id == RecipeId);
-            if(recipe != null)
+
+            var recipe = RecipeService.Instance.Recipes.FirstOrDefault(r => r.Id == RecipeId.Value);
+            if (recipe != null)
             {
                 Name = recipe.Name;
                 Category = recipe.Category;
