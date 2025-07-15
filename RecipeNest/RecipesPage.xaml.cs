@@ -30,6 +30,8 @@ public partial class RecipesPage : ContentPage
 
     private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
-        await Shell.Current.GoToAsync("RecipeDetailPage");
+        var border = (Border)sender;
+        var selectedRecipe = (Models.Recipe)border.BindingContext;
+        await Shell.Current.GoToAsync($"RecipeDetailPage?recipeId={selectedRecipe.Id}");
     }
 }

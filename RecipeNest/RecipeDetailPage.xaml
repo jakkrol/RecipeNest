@@ -3,7 +3,51 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RecipeNest.RecipeDetailPage"
              Title="RecipeDetailPage">
-    <VerticalStackLayout>
-       
-    </VerticalStackLayout>
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16">
+            <!-- Name -->
+            <Label x:Name="RecipeName"
+                   Text="{Binding Name}"
+                   FontSize="24"
+                   FontAttributes="Bold"/>
+
+            <!-- Category -->
+            <Label x:Name="RecipeCategory"
+                   Text="{Binding Category}"
+                   FontSize="16"
+                   FontAttributes="Italic"/>
+
+            <!-- Description -->
+            <Label x:Name="RecipeDescription"
+                   Text="{Binding Description}"
+                   FontSize="14"/>
+
+            <!-- Ingredients Title -->
+            <Label Text="{Binding Ingredients}"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   Margin="0,0,0,0" />
+
+            <!-- Ingredients list --><!--
+            <CollectionView x:Name="IngredientsList">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Label Text="• {Binding}" FontSize="14" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>-->
+
+            <!-- Instructions Title -->
+            <Label Text="{Binding Instructions}"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   Margin="0,0,0,0" />
+
+            <!-- Instructions -->
+            <!--<Label x:Name="RecipeInstructions"
+                   FontSize="14"
+                   TextColor="Black" />-->
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

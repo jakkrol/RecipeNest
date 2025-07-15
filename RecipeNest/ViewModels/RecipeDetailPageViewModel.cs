@@ -20,12 +20,12 @@ namespace RecipeNest.ViewModels
         public string ImageUrl { get; set; } = "";
 
         private int? recipeId;
-        public int? RecipeId
+        public string? RecipeId
         {
-            get => recipeId;
+            get => recipeId.ToString();
             set
             {
-                recipeId = value;
+                recipeId = Convert.ToInt32(value);
                 LoadRecipeDetails();
             }
         }
@@ -33,19 +33,24 @@ namespace RecipeNest.ViewModels
 
         private void LoadRecipeDetails()
         {
-            if (!RecipeId.HasValue)
+            if (!recipeId.HasValue)
                 return;
 
-            var recipe = RecipeService.Instance.Recipes.FirstOrDefault(r => r.Id == RecipeId.Value);
+            var recipe = RecipeService.Instance.Recipes.FirstOrDefault(r => r.Id == recipeId.Value);
             if (recipe != null)
             {
                 Name = recipe.Name;
                 Category = recipe.Category;
-                Description = recipe.Description;
-                Ingredients = string.Join(", ", recipe.Ingredients);
-                Instructions = recipe.Instructions;
+                Description = "Opis: " + recipe.Description;
+                Ingredients = "Ingridients: " + string.Join(", ", recipe.Ingredients);
+                Instructions = "Instructions: " + recipe.Instructions;
                 ImageUrl = recipe.ImageUrl;
             }
+            OnPropertyChanged(nameof(Name));
+            OnPropertyChanged(nameof(Category));
+            OnPropertyChanged(nameof(Description));
+            OnPropertyChanged(nameof(Ingredients));
+            OnPropertyChanged(nameof(Instructions));
         }
 
 
