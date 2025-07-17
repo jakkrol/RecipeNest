@@ -1,6 +1,7 @@
 ﻿using RecipeNest.DbConfig;
 using RecipeNest.Services;
 using RecipeNest.ViewModels;
+using System.Diagnostics;
 namespace RecipeNest
 {
     public partial class MainPage : ContentPage
@@ -15,6 +16,7 @@ namespace RecipeNest
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+            Debug.WriteLine("DB PATH:  " + DbConfig.Constants.DatabasePath);
             await RecipeService.Instance.LoadRecipesFromDb();
         }
         private async void OnBrowseRecipes(object sender, EventArgs e)

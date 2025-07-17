@@ -4,49 +4,46 @@
              x:Class="RecipeNest.RecipeDetailPage"
              Title="RecipeDetailPage">
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="16">
+        <VerticalStackLayout Padding="20" Spacing="24">
             <!-- Name -->
             <Label x:Name="RecipeName"
                    Text="{Binding Name}"
                    FontSize="24"
-                   FontAttributes="Bold"/>
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"/>
 
             <!-- Category -->
-            <Label x:Name="RecipeCategory"
+            <HorizontalStackLayout Spacing="10">
+                <Label Text="Category:" FontSize="16"></Label>
+                <Label x:Name="RecipeCategory"
                    Text="{Binding Category}"
                    FontSize="16"
                    FontAttributes="Italic"/>
+            </HorizontalStackLayout>
+
 
             <!-- Description -->
-            <Label x:Name="RecipeDescription"
+            <HorizontalStackLayout Spacing="10">
+                <Label Text="Description:" FontSize="14"></Label>
+                <Label x:Name="RecipeDescription"
                    Text="{Binding Description}"
                    FontSize="14"/>
+            </HorizontalStackLayout>
 
             <!-- Ingredients Title -->
-            <Label Text="{Binding Ingredients}"
-                   FontSize="18"
-                   FontAttributes="Bold"
-                   Margin="0,0,0,0" />
-
-            <!-- Ingredients list --><!--
-            <CollectionView x:Name="IngredientsList">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Label Text="• {Binding}" FontSize="14" />
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>-->
-
-            <!-- Instructions Title -->
-            <Label Text="{Binding Instructions}"
-                   FontSize="18"
-                   FontAttributes="Bold"
-                   Margin="0,0,0,0" />
+            <HorizontalStackLayout Spacing="10">
+                <Label Text="Ingredients:" FontSize="14"></Label>
+                <Label x:Name="RecipeIngridients"
+                   Text="{Binding Ingredients}"
+                   FontSize="14"/>
+            </HorizontalStackLayout>
 
             <!-- Instructions -->
-            <!--<Label x:Name="RecipeInstructions"
-                   FontSize="14"
-                   TextColor="Black" />-->
+            <HorizontalStackLayout Spacing="10">
+                <Label Text="Instruction:" FontSize="14"></Label>
+                <Label Text="{Binding Instructions}"
+                   FontSize="14"/>
+            </HorizontalStackLayout>
 
         </VerticalStackLayout>
     </ScrollView>

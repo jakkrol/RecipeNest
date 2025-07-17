@@ -41,9 +41,9 @@ namespace RecipeNest.ViewModels
             {
                 Name = recipe.Name;
                 Category = recipe.Category;
-                Description = "Opis: " + recipe.Description;
-                Ingredients = "Ingridients: " + string.Join(", ", recipe.Ingredients);
-                Instructions = "Instructions: " + recipe.Instructions;
+                Description =  recipe.Description;
+                Ingredients = string.Join(", ", recipe.Ingredients);
+                Instructions =  recipe.Instructions;
                 ImageUrl = recipe.ImageUrl;
             }
             OnPropertyChanged(nameof(Name));

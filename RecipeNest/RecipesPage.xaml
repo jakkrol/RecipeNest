@@ -23,7 +23,7 @@
             </HorizontalStackLayout>
         </VerticalStackLayout>
 
-        <CollectionView Grid.Row="1"
+        <CollectionView x:Name="MyCollection" Grid.Row="1"
                 ItemsSource="{Binding FilteredRecipes}"
                 SelectionMode="Single"
                 SelectionChanged="CollectionView_SelectionChanged"
@@ -39,10 +39,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Border BackgroundColor="Black" VerticalOptions="Center" Padding="10" Margin="5">
-                            <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="10"/>
-                            </Border.StrokeShape>
+                        <Border BackgroundColor="#3B3B3B" VerticalOptions="Center" Padding="10" Margin="5" StrokeThickness="0">
                             <Border.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                             </Border.GestureRecognizers>
