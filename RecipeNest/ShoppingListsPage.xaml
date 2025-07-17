@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RecipeNest.ShoppingListsPage"
+             Title="ShoppingListsPage">
+    <Grid RowDefinitions="Auto, *" Padding="20">
+        <VerticalStackLayout Grid.Row="0" Spacing="10">
+            <Label Text="My Shopping Lists"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"/>
+
+            <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
+                <SearchBar Placeholder="Search recipes..."
+                           Text="{Binding SearchText}"
+                           SearchCommand="{Binding PerformSearchCommand}"
+                           HorizontalOptions="Center"
+                           WidthRequest="250"/>
+                <Button x:Name="AddList"
+                        Text="➕"
+                        Clicked="AddList_Clicked"
+                        HorizontalOptions="Center"
+                        WidthRequest="50"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+
+        <CollectionView x:Name="MyCollection" Grid.Row="1"
+                ItemsSource="{Binding FilteredShoppingLists}"
+                SelectionMode="Single"
+                SelectionChanged="MyCollection_SelectionChanged"
+                Margin="15"
+                VerticalOptions="Fill">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Border BackgroundColor="#3B3B3B" VerticalOptions="Center" Padding="10" Margin="5" StrokeThickness="0">
+                            <Grid HorizontalOptions="Fill" VerticalOptions="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="{Binding Name}"
+                                       FontSize="18"
+                                       TextColor="White"
+                                       VerticalOptions="Center"
+                                       Grid.Column="0"/>
+
+                                <!--<Button Text="Update"
+                                        Clicked="Update_Clicked"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="End"
+                                        Grid.Column="1"/>
+
+                                <Button Text="Delete"
+                                        Command="{Binding BindingContext.DeleteRecipeCommand, Source={x:Reference RecipesPageContext}}"
+                                        CommandParameter="{Binding .}"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="End"
+                                        Grid.Column="2"
+                                        Margin="10,0,0,0"/>-->
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+    </Grid>
+</ContentPage>

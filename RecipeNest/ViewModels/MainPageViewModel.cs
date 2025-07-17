@@ -13,6 +13,7 @@ namespace RecipeNest.ViewModels
     public class MainPageViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<Recipe> Recipes => RecipeService.Instance.Recipes;
+        
         public string RecipesCount => $"You have {Recipes.Count} recipes saved";
 
         public MainPageViewModel()

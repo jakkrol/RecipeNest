@@ -72,10 +72,10 @@ using System.Windows.Input;
                 }
         }
 
-        private void DeleteRecipe(Models.Recipe recipe)
+        private async void DeleteRecipe(Models.Recipe recipe)
         {
             //Debug.WriteLine($"Deleting recipe: {recipe.Name}");
-            Services.RecipeService.Instance.RemoveRecipe(recipe);
+            await Services.RecipeService.Instance.RemoveRecipe(recipe);
         }
 
 

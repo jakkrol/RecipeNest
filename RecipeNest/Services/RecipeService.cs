@@ -109,7 +109,7 @@ namespace RecipeNest.Services
 
         public async Task LoadRecipesFromDb()
         {
-            var recipesFromDb = await _db.GetItemsAsync();
+            var recipesFromDb = await _db.GetItemsAsync<Recipe>();
             Recipes.Clear();
             foreach (var item in recipesFromDb)
             {
@@ -128,19 +128,13 @@ namespace RecipeNest.Services
                 Instructions = instructions,
                 ImageUrl = imageUrl
             };
-            //Recipes.Add(newRecipe);
-            await _db.SaveItemAsync(newRecipe);
+            await _db.SaveItemAsync<Recipe>(newRecipe);
             await LoadRecipesFromDb();
         }
 
         public async Task RemoveRecipe(Recipe recipe)
         {
-            Debug.WriteLine("REMOVINGGGGGG");
-            //if (Recipes.Contains(recipe))
-            //{
-            //    Recipes.Remove(recipe);
-            //}
-            await _db.DeleteItemAsync(recipe);
+            await _db.DeleteItemAsync<Recipe>(recipe);
             await LoadRecipesFromDb();
         }
 
@@ -157,15 +151,7 @@ namespace RecipeNest.Services
                 ImageUrl = imageUrl
             };
 
-            //for (int i = 0; i < Recipes.Count; i++)
-            //{
-            //    if (Recipes[i].Id == id)
-            //    {
-            //        Recipes[i] = updatedRecipe;
-            //        break;
-            //    }
-            //}
-            await _db.SaveItemAsync(updatedRecipe);
+            await _db.SaveItemAsync<Recipe>(updatedRecipe);
             await LoadRecipesFromDb();
         }
     }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace RecipeNest.Models
 {
     [SQLite.Table("recipes")]
-    public class Recipe
+    public class Recipe : IEntity
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }

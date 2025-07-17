@@ -8,6 +8,8 @@
             Routing.RegisterRoute("RecipesPage", typeof(RecipesPage));
             Routing.RegisterRoute("AddRecipePage", typeof(AddRecipePage));
             Routing.RegisterRoute("RecipeDetailPage", typeof(RecipeDetailPage));
+            Routing.RegisterRoute("ShoppingListsPage", typeof(ShoppingListsPage));
+            Routing.RegisterRoute("AddShoppingListPage", typeof(AddShoppingListPage));
         }
     }
 }

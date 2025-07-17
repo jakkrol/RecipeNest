@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RecipeNest.AddShoppingListPage"
+             Title="AddShoppingListPage">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            <Label Text="List Name" />
+            <Entry x:Name="ListNameEntry" Placeholder="Enter list name" Text="{Binding ListName}"/>
+
+            <Label Text="Items" FontAttributes="Bold" FontSize="18" />
+
+            <HorizontalStackLayout Spacing="10">
+                <Entry x:Name="NewItemEntry" Placeholder="Add item..." WidthRequest="200" Text="{Binding NewItemName}"/>
+                <Button Text="Add" Command="{Binding AddItemCommand}" />
+            </HorizontalStackLayout>
+
+            <CollectionView x:Name="ItemsCollectionView" ItemsSource="{Binding ShoppingItems}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Padding="10" Margin="5" BackgroundColor="#f2f2f2">
+                            <Label Text="{Binding Name}" />
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Text="Save List" Command="{Binding SaveShoppingListCommand}" BackgroundColor="#4CAF50" TextColor="White" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
