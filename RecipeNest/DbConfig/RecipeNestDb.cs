@@ -1,5 +1,6 @@
 ﻿using RecipeNest.Models;
 using SQLite;
+using SQLiteNetExtensionsAsync.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -29,7 +30,8 @@ namespace RecipeNest.DbConfig
         public async Task<List<T>> GetItemsAsync<T>() where T : new()
         {
             await Init();
-            return await database.Table<T>().ToListAsync();
+            //return await database.Table<T>().ToListAsync();
+            return await database.GetAllWithChildrenAsync<T>(recursive: true);
         }
         public async Task<int> SaveItemAsync<T>(T item) where T : IEntity
         {

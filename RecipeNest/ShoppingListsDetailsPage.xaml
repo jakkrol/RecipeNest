@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RecipeNest.ShoppingListsDetailsPage"
+             Title="ShoppingListsDetailsPage">
+    <ContentPage.Content>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <!-- List Name -->
+            <Label Text="{Binding Name}"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+
+            <!-- Items List -->
+            <CollectionView ItemsSource="{Binding Items}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="Auto, *, Auto" Padding="10" RowSpacing="5">
+                            <!-- Checkbox -->
+                            <CheckBox IsChecked="{Binding IsChecked}" 
+                                      VerticalOptions="Center" />
+
+                             <!--Item Name--> 
+                            <Label Grid.Column="1"
+                                   Text="{Binding Name}"
+                                   VerticalOptions="Center" />
+
+                            <!-- Quantity + Unit --><!--
+                            <Label Grid.Column="2"
+                                   Text="{Binding Quantity}"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="End" />-->
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ContentPage.Content>
+</ContentPage>

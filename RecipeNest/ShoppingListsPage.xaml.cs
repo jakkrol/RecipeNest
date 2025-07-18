@@ -16,8 +16,10 @@ public partial class ShoppingListsPage : ContentPage
         await Shell.Current.GoToAsync("AddShoppingListPage");
     }
 
-    private void MyCollection_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private async void MyCollection_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-
+        var selectedRecipe = e.CurrentSelection.FirstOrDefault() as Models.ShoppingList;
+        if (selectedRecipe != null)
+            await Shell.Current.GoToAsync($"ShoppingListsDetailsPage?listId={selectedRecipe.Id}");
     }
 }

@@ -64,6 +64,7 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
 		<PackageReference Include="SQLiteNetExtensions" Version="2.1.0" />
+		<PackageReference Include="SQLiteNetExtensions.Async" Version="2.1.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -72,6 +73,9 @@
 	  </Compile>
 	  <Compile Update="RecipeDetailPage.xaml.cs">
 	    <DependentUpon>RecipeDetailPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="ShoppingListsDetailsPage.xaml.cs">
+	    <DependentUpon>ShoppingListsDetailsPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
@@ -89,6 +93,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="ShoppingListsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="ShoppingListsDetailsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
