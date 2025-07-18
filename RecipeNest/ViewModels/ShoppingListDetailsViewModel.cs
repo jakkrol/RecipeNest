@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +25,16 @@ namespace RecipeNest.ViewModels
             }
         }
 
-
+        private bool isChecked { get; set; }
+        public bool IsChecked
+        {
+            get => isChecked;
+            set
+            {
+                isChecked = value;
+                //OnPropertyChanged(nameof(isChecked));
+            }
+        }
         public string Name { get; set; } = "";
         public ObservableCollection<Models.ShoppingItem> Items { get; set; }
 
@@ -56,6 +66,11 @@ namespace RecipeNest.ViewModels
             OnPropertyChanged(nameof(Items));
         }
 
+        public void checkItem(Models.ShoppingItem Item)
+        {
+            //Debug.WriteLine("ITEMEK: " + Item.Name);
+            Services.ShoppingListService.Instance.CheckItem(Item);
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)

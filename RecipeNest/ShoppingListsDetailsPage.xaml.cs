@@ -10,4 +10,16 @@ public partial class ShoppingListsDetailsPage : ContentPage
 		InitializeComponent();
 		this.BindingContext = ViewModel;
 	}
+
+    private void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
+    {
+        var checkbox = sender as CheckBox;
+        var item = checkbox?.BindingContext as Models.ShoppingItem;
+
+        if (item != null)
+        {
+            var viewModel = BindingContext as ShoppingListDetailsViewModel;
+            viewModel?.checkItem(item);
+        }
+    }
 }

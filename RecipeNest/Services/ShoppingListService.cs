@@ -3,6 +3,7 @@ using RecipeNest.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,6 +50,14 @@ namespace RecipeNest.Services
         public async Task AddNewItem(ShoppingItem shoppingItem)
         {
             await _db.SaveItemAsync<ShoppingItem>(shoppingItem);
+        }
+
+        public async Task CheckItem(ShoppingItem shoppingItem)
+        {
+            Debug.WriteLine("ITEMEK: " + shoppingItem.Name);
+            shoppingItem.IsChecked = !shoppingItem.IsChecked;
+
+            await _db.checkItemInList(shoppingItem);
         }
     }
 }
