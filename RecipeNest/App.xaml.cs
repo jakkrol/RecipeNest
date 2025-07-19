@@ -5,6 +5,7 @@
         public App()
         {
             InitializeComponent();
+            Task.Run(async () => await RecipeNest.TesseractFolder.TesseractHelper.CopyTessdataFilesAsync()).Wait();
         }
 
         protected override Window CreateWindow(IActivationState? activationState)

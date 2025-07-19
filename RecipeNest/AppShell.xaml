@@ -18,4 +18,8 @@
         Title="Shopping Lists"
         ContentTemplate="{DataTemplate local:ShoppingListsPage}"
         Route="ShoppingListsPage" />
+    <ShellContent
+        Title="Tesseract Tests"
+        ContentTemplate="{DataTemplate local:TesseractTests}"
+        Route="TesseractTests" />
 </Shell>
