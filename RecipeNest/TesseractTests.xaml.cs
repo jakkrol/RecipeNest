@@ -1,4 +1,4 @@
-using Tesseract;
+using TesseractOcrMaui;
 
 namespace RecipeNest;
 
@@ -34,9 +34,9 @@ public partial class TesseractTests : ContentPage
     private async Task<string> PerformOcrAsync(Stream imageStream)
     {
         var tessdataPath = Path.Combine(FileSystem.AppDataDirectory, "tessdata");
-        using var engine = new TesseractEngine(tessdataPath, "pol", EngineMode.Default);
+        using var engine = new TessEngine("pol", tessdataPath);
         using var img = Pix.LoadFromMemory(await ReadFullyAsync(imageStream));
-        using var page = engine.Process(img);
+        using var page = engine.ProcessImage(img);
         return page.GetText();
     }
 
