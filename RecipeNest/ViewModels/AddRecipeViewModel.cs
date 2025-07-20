@@ -11,14 +11,17 @@ using RecipeNest.Services;
 namespace RecipeNest.ViewModels
 {
     [QueryProperty(nameof(RecipeId), "recipeId")]
+    [QueryProperty(nameof(Name), "name")]
+    [QueryProperty(nameof(Ingredients), "ingredients")]
+    [QueryProperty(nameof(Instructions), "instructions")]
     public class AddRecipeViewModel : INotifyPropertyChanged
     {
         public ICommand SaveRecipeCommand { get; }
-        public string Name { get; set; } = "";
+        //public string Name { get; set; } = "";
         public string Category { get; set; } = "";
         public string Description { get; set; } = "";
-        public string Ingredients { get; set; } = "";
-        public string Instructions { get; set; } = "";
+        //public string Ingredients { get; set; } = "";
+        //public string Instructions { get; set; } = "";
         public string ImageUrl { get; set; } = "";
 
         private int? recipeId;
@@ -29,6 +32,39 @@ namespace RecipeNest.ViewModels
             {
                 recipeId = Convert.ToInt32(value);
                 LoadRecipe();
+            }
+        }
+
+        private string name;
+        public string Name
+        {
+            get => name;
+            set
+            {
+                name = value;
+                OnPropertyChanged(nameof(Name));
+            }
+        }
+
+        private string ingredients;
+        public string Ingredients
+        {
+            get => ingredients;
+            set
+            {
+                ingredients = value;
+                OnPropertyChanged(nameof(Ingredients));
+            }
+        }
+
+        private string instructions;
+        public string Instructions
+        {
+            get => instructions;
+            set
+            {
+                instructions = value;
+                OnPropertyChanged(nameof(Instructions));
             }
         }
 

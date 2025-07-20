@@ -15,7 +15,7 @@
             <Label Text="Description" />
             <Editor Text="{Binding Description}" Placeholder="Short description..." AutoSize="TextChanges" HeightRequest="80" />
 
-            <Label Text="Ingredients (comma separated)" />
+            <Label Text="Ingredients" />
             <Editor Text="{Binding Ingredients}" Placeholder="e.g., pasta, eggs, cheese" AutoSize="TextChanges" HeightRequest="80" />
 
             <Label Text="Instructions" />
