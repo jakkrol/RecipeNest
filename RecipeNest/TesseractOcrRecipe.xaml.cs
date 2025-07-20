@@ -1,3 +1,4 @@
+using System.Net.Sockets;
 using System.Text.RegularExpressions;
 using TesseractOcrMaui;
 
@@ -5,7 +6,11 @@ namespace RecipeNest;
 
 public partial class TesseractOcrRecipe : ContentPage
 {
-	public TesseractOcrRecipe()
+    public string fullText = "";
+    private string selectedMode = "FullText";
+    private string ingredients = "";
+    private string preparation = "";
+    public TesseractOcrRecipe()
 	{
 		InitializeComponent();
 	}
@@ -22,14 +27,14 @@ public partial class TesseractOcrRecipe : ContentPage
             if (result != null)
             {
                 using var stream = await result.OpenReadAsync();
-                var fullText = await PerformOcrAsync(stream);
+                fullText = await PerformOcrAsync(stream);
 
                 var lower = fullText.ToLower();
                 int idxIngredients = lower.IndexOf("sk³adniki");
                 int idxPreparation = lower.IndexOf("przygotowanie");
 
-                string ingredients = "";
-                string preparation = "";
+                ingredients = "";
+                preparation = "";
                 string title = "";
 
                 if (idxIngredients >= 0 && idxPreparation > idxIngredients)
@@ -37,10 +42,10 @@ public partial class TesseractOcrRecipe : ContentPage
                     ingredients = fullText.Substring(idxIngredients, idxPreparation - idxIngredients).Trim();
                     preparation = fullText.Substring(idxPreparation).Trim();
                 }
-                //OcrResultLabel.Text = fullText;
-                ingredients = NormalizeByColumnsIngredients(ingredients);
-                Ingredients.Text = ingredients;
-                Instructions.Text = preparation;
+                OcrResultLabel.Text = fullText;
+                //ingredients = NormalizeByColumnsIngredients(ingredients);
+                //Ingredients.Text = ingredients;
+                //Instructions.Text = preparation;
 
                 //await Shell.Current.GoToAsync($"{nameof(AddRecipePage)}?name={Uri.EscapeDataString(title)}&ingredients={Uri.EscapeDataString(ingredients)}&instructions={Uri.EscapeDataString(preparation)}");
             }
@@ -67,6 +72,25 @@ public partial class TesseractOcrRecipe : ContentPage
         return ms.ToArray();
     }
 
+    string StandardParser(string rawText)
+    {
+        // Podziel tekst na linie i usuñ puste linie
+        var lines = rawText
+            .Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
+            .Select(l => l.Trim())
+            .Where(l => !string.IsNullOrWhiteSpace(l))
+            .ToList();
+        // ZnajdŸ indeks nag³ówka "Sk³adniki"
+        int startIndex = lines.FindIndex(l => Regex.IsMatch(l, @"(?i)^sk³adniki$"));
+        if (startIndex == -1) return "";
+        // Od tego miejsca analizuj linie
+        var ingredientsSection = lines.Skip(startIndex + 1).ToList();
+        // Odfiltruj œmieci typu "Autor", "³atwe", "czas", itp.
+        ingredientsSection = ingredientsSection
+            .Where(l => !Regex.IsMatch(l, @"(?i)(autor|³atwe|©|min\.|przepis|czas|l\s©|=\s*)"))
+            .ToList();
+        return string.Join(Environment.NewLine, ingredientsSection);
+    }
     string NormalizeByColumnsIngredients(string rawText)
     {
         var lines = rawText
@@ -104,4 +128,31 @@ public partial class TesseractOcrRecipe : ContentPage
         return string.Join(Environment.NewLine, result);
     }
 
+    private void RadioButton_CheckedChanged(object sender, CheckedChangedEventArgs e)
+    {
+        if (e.Value && sender is RadioButton rb)
+        {
+            selectedMode = rb.Value?.ToString();
+            if (selectedMode == "FullText")
+            {
+                // Handle FullText mode
+                // You can call your parsing logic here based on selectedMode
+                OcrResultLabel.Text = fullText;
+            }
+            else if (selectedMode == "Line")
+            {
+                // Handle Ingredients mode
+                // You can call your parsing logic here based on selectedMode
+                Ingredients.Text = StandardParser(ingredients);
+                Instructions.Text = preparation;
+            }
+            else if (selectedMode == "Column")
+            {
+                // Handle Instructions mode
+                // You can call your parsing logic here based on selectedMode
+                Ingredients.Text = NormalizeByColumnsIngredients(ingredients);
+                Instructions.Text = preparation;
+            }
+        }
+    }
 }
