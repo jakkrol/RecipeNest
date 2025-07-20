@@ -87,6 +87,9 @@
 	  <Compile Update="ShoppingListsDetailsPage.xaml.cs">
 	    <DependentUpon>ShoppingListsDetailsPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="TesseractOcrRecipe.xaml.cs">
+	    <DependentUpon>TesseractOcrRecipe.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -108,7 +111,7 @@
 	  <MauiXaml Update="ShoppingListsDetailsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="TesseractTests.xaml">
+	  <MauiXaml Update="TesseractOcrRecipe.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

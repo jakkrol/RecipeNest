@@ -1,10 +1,11 @@
+using System.Text.RegularExpressions;
 using TesseractOcrMaui;
 
 namespace RecipeNest;
 
-public partial class TesseractTests : ContentPage
+public partial class TesseractOcrRecipe : ContentPage
 {
-	public TesseractTests()
+	public TesseractOcrRecipe()
 	{
 		InitializeComponent();
 	}
@@ -21,8 +22,24 @@ public partial class TesseractTests : ContentPage
             if (result != null)
             {
                 using var stream = await result.OpenReadAsync();
-                var text = await PerformOcrAsync(stream);
-                OcrResultLabel.Text = text;
+                var fullText = await PerformOcrAsync(stream);
+
+                var lower = fullText.ToLower();
+                int idxIngredients = lower.IndexOf("sk³adniki");
+                int idxPreparation = lower.IndexOf("przygotowanie");
+
+                string ingredients = "";
+                string preparation = "";
+
+                if (idxIngredients >= 0 && idxPreparation > idxIngredients)
+                {
+                    ingredients = fullText.Substring(idxIngredients, idxPreparation - idxIngredients).Trim();
+                    preparation = fullText.Substring(idxPreparation).Trim();
+                }
+
+                Ingredients.Text = ingredients;
+                Instructions.Text = preparation;
+                //OcrResultLabel.Text = fullText;
             }
         }
         catch (Exception ex)

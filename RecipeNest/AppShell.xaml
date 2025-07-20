@@ -20,6 +20,6 @@
         Route="ShoppingListsPage" />
     <ShellContent
         Title="Tesseract Tests"
-        ContentTemplate="{DataTemplate local:TesseractTests}"
+        ContentTemplate="{DataTemplate local:TesseractOcrRecipe}"
         Route="TesseractTests" />
 </Shell>
