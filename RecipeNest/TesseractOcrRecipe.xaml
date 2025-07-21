@@ -6,16 +6,18 @@
     <ScrollView>
         <VerticalStackLayout Padding="30">
             <Button Text="Wybierz zdjęcie do zczytania" Clicked="OnPickPhotoClicked"/>
+            <Label Text="Ustaw nagłówki nad elementami textu: TYT, SKL, PREP"></Label>
             <HorizontalStackLayout>
                 <RadioButton Content="FullText" GroupName="ParsingModes" Value="FullText" IsChecked="True" CheckedChanged="RadioButton_CheckedChanged"></RadioButton>
                 <RadioButton Content="Line" GroupName="ParsingModes" Value="Line" IsChecked="False" CheckedChanged="RadioButton_CheckedChanged"></RadioButton>
                 <RadioButton Content="Column" GroupName="ParsingModes" Value="Column" IsChecked="False" CheckedChanged="RadioButton_CheckedChanged"></RadioButton>
             </HorizontalStackLayout>
-            <Label x:Name="Ingredients"></Label>
+            <!--<Label x:Name="Ingredients"></Label>
 
-            <Label x:Name="Instructions"></Label>
+            <Label x:Name="Instructions"></Label>-->
 
-            <Label x:Name="OcrResultLabel" Text="Tu pojawi się tekst z OCR" />
+            <Editor x:Name="OcrEditor" Text="Tu pojawi się tekst z OCR" AutoSize="TextChanges" />
+            <Button Text="Podziel przepis" Clicked="OnSplitRecipeClicked" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

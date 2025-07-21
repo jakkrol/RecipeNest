@@ -11,9 +11,9 @@ public partial class TesseractOcrRecipe : ContentPage
     private string ingredients = "";
     private string preparation = "";
     public TesseractOcrRecipe()
-	{
-		InitializeComponent();
-	}
+    {
+        InitializeComponent();
+    }
     private async void OnPickPhotoClicked(object sender, EventArgs e)
     {
         try
@@ -29,20 +29,21 @@ public partial class TesseractOcrRecipe : ContentPage
                 using var stream = await result.OpenReadAsync();
                 fullText = await PerformOcrAsync(stream);
 
-                var lower = fullText.ToLower();
-                int idxIngredients = lower.IndexOf("sk³adniki");
-                int idxPreparation = lower.IndexOf("przygotowanie");
+                //var lower = fullText.ToLower();
+                //int idxIngredients = lower.IndexOf("sk³adniki");
+                //int idxPreparation = lower.IndexOf("przygotowanie");
 
-                ingredients = "";
-                preparation = "";
-                string title = "";
+                //ingredients = "";
+                //preparation = "";
+                //string title = "";
 
-                if (idxIngredients >= 0 && idxPreparation > idxIngredients)
-                {
-                    ingredients = fullText.Substring(idxIngredients, idxPreparation - idxIngredients).Trim();
-                    preparation = fullText.Substring(idxPreparation).Trim();
-                }
-                OcrResultLabel.Text = fullText;
+                //if (idxIngredients >= 0 && idxPreparation > idxIngredients)
+                //{
+                //    ingredients = fullText.Substring(idxIngredients, idxPreparation - idxIngredients).Trim();
+                //    preparation = fullText.Substring(idxPreparation).Trim();
+                //}
+                fullText = RemoveJunkLines(fullText);
+                OcrEditor.Text = fullText;
                 //ingredients = NormalizeByColumnsIngredients(ingredients);
                 //Ingredients.Text = ingredients;
                 //Instructions.Text = preparation;
@@ -72,6 +73,20 @@ public partial class TesseractOcrRecipe : ContentPage
         return ms.ToArray();
     }
 
+    private string RemoveJunkLines(string rawText)
+    {
+        var junkPattern = new Regex(@"(?i)(autor|³atwe|czas|min\.|przepis|©|email|listonic|^[-=]+$|^\d+$|^\d{6,}$)");
+
+        var cleanedLines = rawText
+            .Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
+            .Select(l => l.Trim())
+            .Where(l => !string.IsNullOrWhiteSpace(l))
+            .Where(l => !junkPattern.IsMatch(l)) // remove junk lines
+            .Select(l => Regex.Replace(l, @"\.{2,}", ".")) // normalize multiple dots
+            .ToList();
+
+        return string.Join(Environment.NewLine, cleanedLines);
+    }
     string StandardParser(string rawText)
     {
         // Podziel tekst na linie i usuñ puste linie
@@ -137,22 +152,61 @@ public partial class TesseractOcrRecipe : ContentPage
             {
                 // Handle FullText mode
                 // You can call your parsing logic here based on selectedMode
-                OcrResultLabel.Text = fullText;
+                OcrEditor.Text = fullText;
             }
             else if (selectedMode == "Line")
             {
                 // Handle Ingredients mode
                 // You can call your parsing logic here based on selectedMode
-                Ingredients.Text = StandardParser(ingredients);
-                Instructions.Text = preparation;
+                //Ingredients.Text = StandardParser(ingredients);
+                //Instructions.Text = preparation;
+                OcrEditor.Text = StandardParser(ingredients);
             }
             else if (selectedMode == "Column")
             {
                 // Handle Instructions mode
                 // You can call your parsing logic here based on selectedMode
-                Ingredients.Text = NormalizeByColumnsIngredients(ingredients);
-                Instructions.Text = preparation;
+                //Ingredients.Text = NormalizeByColumnsIngredients(ingredients);
+                //Instructions.Text = preparation;
+                OcrEditor.Text = NormalizeByColumnsIngredients(ingredients);
             }
         }
+    }
+
+
+
+
+private async void OnSplitRecipeClicked(object sender, EventArgs e)
+    {
+        string rawText = OcrEditor.Text ?? "";
+        var lines = rawText
+            .Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
+            .Select(l => l.Trim())
+            .ToList();
+
+        int idxTitle = lines.FindIndex(l => Regex.IsMatch(l, @"(?i)^TYT$"));
+        int idxIngredients = lines.FindIndex(l => Regex.IsMatch(l, @"(?i)^SKL$"));
+        int idxPreparation = lines.FindIndex(l => Regex.IsMatch(l, @"(?i)^PREP$"));
+
+        string title = "";
+        string ingredients = "";
+        string preparation = "";
+
+        if (idxTitle != -1 && idxIngredients > idxTitle)
+            title = string.Join("\n", lines.Skip(idxTitle + 1).Take(idxIngredients - idxTitle - 1));
+
+        if (idxIngredients != -1 && idxPreparation > idxIngredients)
+            ingredients = string.Join("\n", lines.Skip(idxIngredients + 1).Take(idxPreparation - idxIngredients - 1));
+        else if (idxIngredients != -1)
+            ingredients = string.Join("\n", lines.Skip(idxIngredients + 1));
+
+        if (idxPreparation != -1)
+            preparation = string.Join("\n", lines.Skip(idxPreparation + 1));
+
+        //Ingredients.Text = ingredients.Trim();
+        //Instructions.Text = preparation.Trim();
+
+        //Optional: navigate to AddRecipePage with parsed data
+        await Shell.Current.GoToAsync($"{nameof(AddRecipePage)}?name={Uri.EscapeDataString(title)}&ingredients={Uri.EscapeDataString(ingredients)}&instructions={Uri.EscapeDataString(preparation)}");
     }
 }
