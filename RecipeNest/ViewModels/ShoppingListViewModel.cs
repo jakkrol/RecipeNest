@@ -28,6 +28,20 @@ namespace RecipeNest.ViewModels
             }
         }
 
+        private double progress;
+        public double Progress
+        {
+            get => progress;
+            set
+            {
+                if (progress != value)
+                {
+                    progress = value;
+                    OnPropertyChanged(nameof(Progress));
+                }
+            }
+        }
+
         private string searchText;
         public string SearchText
         {
@@ -68,6 +82,20 @@ namespace RecipeNest.ViewModels
             }
         }
 
+        public void UpdateProgress()
+        {
+            Debug.WriteLine("UpdateProgress called.");
+
+            foreach (var list in ShoppingLists)
+            {
+                if (list.Items != null)
+                {
+                    int total = list.Items.Count;
+                    int checkedCount = list.Items.Count(i => i.IsChecked);
+                    list.ListProgress = total == 0 ? 0 : (double)checkedCount / total;
+                }
+            }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
         {

@@ -11,6 +11,14 @@ public partial class ShoppingListsPage : ContentPage
 		this.BindingContext = ViewModel;
 	}
 
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        //(BindingContext as ShoppingListViewModel)?.RefreshShoppingLists();
+        MyCollection.SelectedItem = null;
+        ViewModel.UpdateProgress();
+    }
+
     private async void AddList_Clicked(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("AddShoppingListPage");

@@ -6,20 +6,28 @@
     xmlns:local="clr-namespace:RecipeNest"
     Title="RecipeNest">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
-    <ShellContent
-       Title="Recipes"
-       ContentTemplate="{DataTemplate local:RecipesPage}"
-       Route="RecipesPage" />
-    <ShellContent
-        Title="Shopping Lists"
-        ContentTemplate="{DataTemplate local:ShoppingListsPage}"
-        Route="ShoppingListsPage" />
-    <ShellContent
-        Title="Tesseract Tests"
-        ContentTemplate="{DataTemplate local:TesseractOcrRecipe}"
-        Route="TesseractTests" />
+    <FlyoutItem Title="Home" Route="MainPage">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
+        </Tab>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Recipes" Route="RecipesPage">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate local:RecipesPage}" />
+        </Tab>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Shopping Lists" Route="ShoppingListsPage">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate local:ShoppingListsPage}" />
+        </Tab>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Tesseract Tests" Route="TesseractTests">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate local:TesseractOcrRecipe}" />
+        </Tab>
+    </FlyoutItem>
+
 </Shell>

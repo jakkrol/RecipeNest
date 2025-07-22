@@ -55,7 +55,7 @@ namespace RecipeNest.Services
         public async Task CheckItem(ShoppingItem shoppingItem)
         {
             Debug.WriteLine("ITEMEK: " + shoppingItem.Name);
-            shoppingItem.IsChecked = !shoppingItem.IsChecked;
+            //shoppingItem.IsChecked = !shoppingItem.IsChecked;
 
             await _db.checkItemInList(shoppingItem);
         }

@@ -44,15 +44,17 @@
                             <Grid HorizontalOptions="Fill" VerticalOptions="Center">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
+                                
                                 <Label Text="{Binding Name}"
                                        FontSize="18"
                                        TextColor="White"
                                        VerticalOptions="Center"
                                        Grid.Column="0"/>
+                                <ProgressBar Progress="{Binding ListProgress}" ProgressColor="MediumPurple" Grid.Column="1"/>
 
                                 <!--<Button Text="Update"
                                         Clicked="Update_Clicked"

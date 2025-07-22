@@ -12,6 +12,13 @@
             Routing.RegisterRoute("AddShoppingListPage", typeof(AddShoppingListPage));
             Routing.RegisterRoute("ShoppingListsDetailsPage", typeof(ShoppingListsDetailsPage));
             Routing.RegisterRoute("TesseractOcrRecipe", typeof(TesseractOcrRecipe));
+
+            //this.Navigated += OnShellNavigating;
         }
+
+        //private async void OnShellNavigating(object sender, ShellNavigatedEventArgs e)
+        //{
+        //    await ShoppingList.Navigation.PopToRootAsync();
+        //}
     }
 }

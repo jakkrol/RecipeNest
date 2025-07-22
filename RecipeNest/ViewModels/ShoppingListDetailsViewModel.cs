@@ -66,11 +66,14 @@ namespace RecipeNest.ViewModels
             OnPropertyChanged(nameof(Items));
         }
 
-        public void checkItem(Models.ShoppingItem Item)
+        public async void checkItem(Models.ShoppingItem Item)
         {
             //Debug.WriteLine("ITEMEK: " + Item.Name);
-            Services.ShoppingListService.Instance.CheckItem(Item);
+
+
+            await Services.ShoppingListService.Instance.CheckItem(Item);
         }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
