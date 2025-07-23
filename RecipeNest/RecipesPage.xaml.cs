@@ -48,4 +48,16 @@ public partial class RecipesPage : ContentPage
     {
 
     }
+
+    private void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
+    {
+        var checkbox = sender as CheckBox;
+        var item = checkbox?.BindingContext as Models.Recipe;
+
+        if (item != null)
+        {
+            var viewModel = BindingContext as RecipeViewModel;
+            viewModel?.checkItem(item);
+        }
+    }
 }

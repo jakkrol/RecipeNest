@@ -154,5 +154,13 @@ namespace RecipeNest.Services
             await _db.SaveItemAsync<Recipe>(updatedRecipe);
             await LoadRecipesFromDb();
         }
+
+        public async Task CheckItem(Models.Recipe Item)
+        {
+            Debug.WriteLine("ITEMEK: " + Item.Name);
+            //shoppingItem.IsChecked = !shoppingItem.IsChecked;
+
+            await _db.checkItemInList(Item);
+        }
     }
 }

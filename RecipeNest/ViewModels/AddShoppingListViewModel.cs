@@ -1,15 +1,29 @@
-﻿using System;
+﻿using Microsoft.Maui.Controls;
+using RecipeNest.Models;
+using RecipeNest.Services;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
-using RecipeNest.Models;
-using RecipeNest.Services;
-using Microsoft.Maui.Controls;
+using System.Xml.Linq;
 
 namespace RecipeNest.ViewModels
 {
+    [QueryProperty(nameof(ListId), "listId")]
     public class AddShoppingListViewModel : INotifyPropertyChanged
     {
+        private int? listId;
+        public string? ListId
+        {
+            get => listId.ToString();
+            set
+            {
+                listId = Convert.ToInt32(value);
+                LoadListDetails();
+            }
+        }
+
         private string _listName;
         public string ListName
         {
@@ -49,6 +63,18 @@ namespace RecipeNest.ViewModels
             SaveShoppingListCommand = new Command(async () => await SaveShoppingList());
         }
 
+        private async void LoadListDetails()
+        {
+            var shoppinglist = ShoppingListService.Instance.ShoppingLists.FirstOrDefault(r => r.Id == listId);
+            if (shoppinglist != null)
+            {
+                ListName = shoppinglist.Name;
+                ShoppingItems = new ObservableCollection<ShoppingItem>(shoppinglist.Items);
+            }
+            OnPropertyChanged(nameof(ListName));
+            OnPropertyChanged(nameof(ShoppingItems));
+
+        }
         private void AddItem()
         {
             if (!string.IsNullOrWhiteSpace(NewItemName))
@@ -68,10 +94,11 @@ namespace RecipeNest.ViewModels
 
             var list = new ShoppingList
             {
+                Id = listId ?? 0,
                 Name = ListName
                 //CreatedAt = DateTime.Now
             };
-
+           
             await ShoppingListService.Instance.AddNewList(list);
 
             foreach (var item in ShoppingItems)
@@ -82,7 +109,7 @@ namespace RecipeNest.ViewModels
 
             await Shell.Current.DisplayAlert("Success", "Shopping list saved!", "OK");
 
-            await Shell.Current.GoToAsync("..");
+            await Shell.Current.GoToAsync("//ShoppingListsPage");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -45,13 +45,20 @@ namespace RecipeNest.Services
         public async Task AddNewList(ShoppingList shoppingList)
         {
             await _db.SaveItemAsync<ShoppingList>(shoppingList);
+            await LoadShoppingListsFromDb();
         }
 
         public async Task AddNewItem(ShoppingItem shoppingItem)
         {
             await _db.SaveItemAsync<ShoppingItem>(shoppingItem);
+            await LoadShoppingListsFromDb();
         }
 
+
+        public async Task UpdateList(ShoppingList shoppingList)
+        {
+
+        }
         public async Task CheckItem(ShoppingItem shoppingItem)
         {
             Debug.WriteLine("ITEMEK: " + shoppingItem.Name);

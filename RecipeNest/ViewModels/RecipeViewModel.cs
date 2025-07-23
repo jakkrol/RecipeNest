@@ -78,6 +78,14 @@ using System.Windows.Input;
             await Services.RecipeService.Instance.RemoveRecipe(recipe);
         }
 
+        public async void checkItem(Models.Recipe Item)
+        {
+            //Debug.WriteLine("ITEMEK: " + Item.Name);
+
+
+            await Services.RecipeService.Instance.CheckItem(Item);
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

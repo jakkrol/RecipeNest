@@ -30,4 +30,10 @@ public partial class ShoppingListsPage : ContentPage
         if (selectedRecipe != null)
             await Shell.Current.GoToAsync($"ShoppingListsDetailsPage?listId={selectedRecipe.Id}");
     }
+
+    private async void Update_Clicked(object sender, EventArgs e)
+    {
+        Models.ShoppingList selectedList = (Models.ShoppingList)((Button)sender).BindingContext;
+        await Shell.Current.GoToAsync($"AddShoppingListPage?listId={selectedList.Id}");
+    }
 }

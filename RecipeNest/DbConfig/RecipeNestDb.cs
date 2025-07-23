@@ -48,7 +48,7 @@ namespace RecipeNest.DbConfig
             return await database.DeleteAsync(item);
         }
 
-        public async Task checkItemInList(ShoppingItem item)
+        public async Task checkItemInList<T>(T item)
         {
             //shoppingItem.IsChecked = !shoppingItem.IsChecked;
 

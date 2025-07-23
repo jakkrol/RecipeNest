@@ -49,6 +49,7 @@
 
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
                                 <Label Text="{Binding Name}"
@@ -70,6 +71,11 @@
                                         HorizontalOptions="End"
                                         Grid.Column="2"
                                         Margin="10,0,0,0"/>
+                                <HorizontalStackLayout Grid.Column="3" Margin="10,0,0,0">
+                                    <CheckBox IsChecked="{Binding IsFavourite}" CheckedChanged="CheckBox_CheckedChanged" />
+                                    <Label Text="Favourite" VerticalOptions="Center" />
+                                </HorizontalStackLayout>
+
                             </Grid>
                         </Border>
                     </Grid>

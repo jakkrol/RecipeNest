@@ -43,9 +43,9 @@
                         <Border BackgroundColor="#3B3B3B" VerticalOptions="Center" Padding="10" Margin="5" StrokeThickness="0">
                             <Grid HorizontalOptions="Fill" VerticalOptions="Center">
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
                                     <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="auto" />
                                 </Grid.ColumnDefinitions>
 
                                 
@@ -54,21 +54,20 @@
                                        TextColor="White"
                                        VerticalOptions="Center"
                                        Grid.Column="0"/>
-                                <ProgressBar Progress="{Binding ListProgress}" ProgressColor="MediumPurple" Grid.Column="1"/>
+                                <ProgressBar Progress="{Binding ListProgress}" ProgressColor="MediumPurple" Grid.Column="1" Margin="10,0,0,0"/>
 
-                                <!--<Button Text="Update"
+                                <HorizontalStackLayout Grid.Column="2" Margin="10,0,10,0" HorizontalOptions="End">
+                                    <Button Text="✏️"
                                         Clicked="Update_Clicked"
                                         VerticalOptions="Center"
-                                        HorizontalOptions="End"
-                                        Grid.Column="1"/>
+                                        HorizontalOptions="End"/>
 
-                                <Button Text="Delete"
-                                        Command="{Binding BindingContext.DeleteRecipeCommand, Source={x:Reference RecipesPageContext}}"
-                                        CommandParameter="{Binding .}"
+                                    <Button Text="🗑️"
+
                                         VerticalOptions="Center"
                                         HorizontalOptions="End"
-                                        Grid.Column="2"
-                                        Margin="10,0,0,0"/>-->
+                                        Margin="10,0,0,0"/>
+                                </HorizontalStackLayout>
                             </Grid>
                         </Border>
                     </Grid>

@@ -18,6 +18,7 @@ namespace RecipeNest.Models
         public string Description { get; set; }
         public string Ingredients { get; set; }
         public string Instructions { get; set; }
+        public bool IsFavourite {  get; set; } = false;
         public string ImageUrl { get; set; }
         public Recipe(string name, string category, string description, string ingredients, string instructions, string imageUrl = null)
         {
