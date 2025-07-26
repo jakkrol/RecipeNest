@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RecipeNest.ShoppingListsPage"
+             x:Name="ListPageContext"
              Title="ShoppingListsPage">
     <Grid RowDefinitions="Auto, *" Padding="20">
         <VerticalStackLayout Grid.Row="0" Spacing="10">
@@ -63,7 +64,8 @@
                                         HorizontalOptions="End"/>
 
                                     <Button Text="🗑️"
-
+                                        Command="{Binding BindingContext.DeleteListCommand, Source={x:Reference ListPageContext}}"
+                                        CommandParameter="{Binding .}"
                                         VerticalOptions="Center"
                                         HorizontalOptions="End"
                                         Margin="10,0,0,0"/>

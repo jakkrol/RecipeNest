@@ -57,6 +57,7 @@ namespace RecipeNest.ViewModels
         }
 
         public ICommand PerformSearchCommand { get; }
+        public ICommand DeleteListCommand { get; }
 
         public ShoppingListViewModel()
         {
@@ -64,10 +65,19 @@ namespace RecipeNest.ViewModels
             FilteredShoppingLists = new ObservableCollection<Models.ShoppingList>(ShoppingLists);
             ShoppingLists.CollectionChanged += ShoppingLists_CollectionChanged;
             PerformSearchCommand = new Command(PerformSearch);
+            DeleteListCommand = new Command(DeleteList);
         }
         private void ShoppingLists_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             PerformSearch();
+        }
+        private async void DeleteList(object list)
+        {
+            if (list is Models.ShoppingList shoppingList)
+            {
+                ShoppingLists.Remove(shoppingList);
+                await Services.ShoppingListService.Instance.DeleteList(shoppingList);
+            }
         }
         private void PerformSearch()
         {
