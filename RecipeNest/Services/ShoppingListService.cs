@@ -54,7 +54,12 @@ namespace RecipeNest.Services
             await LoadShoppingListsFromDb();
         }
 
-
+        public async Task DeleteItem(ShoppingItem shoppingItem)
+        {
+            Debug.WriteLine("DELETING ITEM: " + shoppingItem.Name);
+            await _db.DeleteItemAsync<ShoppingItem>(shoppingItem);
+            await LoadShoppingListsFromDb();
+        }
         public async Task UpdateList(ShoppingList shoppingList)
         {
 
