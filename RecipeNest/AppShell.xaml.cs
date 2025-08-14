@@ -16,6 +16,13 @@
             //this.Navigated += OnShellNavigating;
         }
 
+        private void ToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            Application.Current.UserAppTheme = Application.Current.UserAppTheme == AppTheme.Light ? (AppTheme.Dark) : AppTheme.Light;
+            if (sender is ToolbarItem toolbarItem)
+                ThemeItem.Text = Application.Current.UserAppTheme == AppTheme.Dark ? "☀️" : "🌙";
+        }
+
         //private async void OnShellNavigating(object sender, ShellNavigatedEventArgs e)
         //{
         //    await ShoppingList.Navigation.PopToRootAsync();

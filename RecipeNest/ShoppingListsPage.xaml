@@ -4,7 +4,7 @@
              x:Class="RecipeNest.ShoppingListsPage"
              x:Name="ListPageContext"
              Title="ShoppingListsPage">
-    <Grid RowDefinitions="Auto, *" Padding="20">
+    <Grid RowDefinitions="Auto, *" Padding="20" MaximumWidthRequest="1000">
         <VerticalStackLayout Grid.Row="0" Spacing="10">
             <Label Text="My Shopping Lists"
                    FontSize="28"

@@ -6,6 +6,10 @@
     xmlns:local="clr-namespace:RecipeNest"
     Title="RecipeNest">
 
+    <Shell.ToolbarItems>
+        <ToolbarItem x:Name="ThemeItem" Text="☀️" Clicked="ToolbarItem_Clicked"></ToolbarItem>
+    </Shell.ToolbarItems>
+
     <FlyoutItem Title="Home" Route="MainPage">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />

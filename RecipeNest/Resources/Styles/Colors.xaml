@@ -20,6 +20,12 @@
     <Color x:Key="OffBlack">#1f1f1f</Color>
     <Color x:Key="Lime">#86b300</Color>
 
+    <!--LIGHT THEME COLORS-->
+    <Color x:Key="LightTheme">#F6F1DE</Color>
+    <Color x:Key="LightThemeText">#3E3F5B</Color>
+    <Color x:Key="LightTheme2">#8AB2A6</Color>
+    <Color x:Key="LightTheme3">#ACD3A8</Color>
+
     <Color x:Key="Gray100">#E1E1E1</Color>
     <Color x:Key="Gray200">#C8C8C8</Color>
     <Color x:Key="Gray300">#ACACAC</Color>
