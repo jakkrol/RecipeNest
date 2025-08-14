@@ -8,8 +8,7 @@
 
     <Shell.ToolbarItems>
         <ToolbarItem x:Name="ThemeItem" Text="☀️" Clicked="ToolbarItem_Clicked"></ToolbarItem>
-    </Shell.ToolbarItems>    
-    
+    </Shell.ToolbarItems>
     <FlyoutItem Title="Home" Route="MainPage">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />

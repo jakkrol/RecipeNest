@@ -3,7 +3,7 @@
              x:Class="RecipeNest.RecipesPage"
              x:Name="RecipesPageContext"
              Title="My Recipes">
-    <Grid RowDefinitions="Auto, *" Padding="20">
+    <Grid RowDefinitions="Auto, *" Padding="20" MaximumWidthRequest="1000">
         <VerticalStackLayout Grid.Row="0" Spacing="10">
             <Label Text="🍽️ My Recipes"
                    FontSize="28"
@@ -39,7 +39,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Border BackgroundColor="#3B3B3B" VerticalOptions="Center" Padding="10" Margin="5" StrokeThickness="0">
+                        <Border VerticalOptions="Center" Padding="10" Margin="5" StrokeThickness="0">
                             <Border.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                             </Border.GestureRecognizers>
@@ -54,7 +54,7 @@
 
                                 <Label Text="{Binding Name}"
                                        FontSize="18"
-                                       TextColor="White"
+                                       
                                        VerticalOptions="Center"
                                        Grid.Column="0"/>
 

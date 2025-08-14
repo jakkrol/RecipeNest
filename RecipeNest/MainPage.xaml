@@ -17,9 +17,9 @@
 
             <!-- Quick Navigation -->
             <VerticalStackLayout Spacing="15">
-                <Button Text="🍲 Browse Recipes" Clicked="OnBrowseRecipes"/>
+                <Button Text="🍲 Browse Recipes" Clicked="OnBrowseRecipes" MaximumWidthRequest="500"/>
                 <!--<Button Text="📂 Categories" Clicked="OnCategories"/>-->
-                <Button Text="➕ Add New Recipe" Clicked="OnAddRecipe"/>
+                <Button Text="➕ Add New Recipe" Clicked="OnAddRecipe" MaximumWidthRequest="500"/>
             </VerticalStackLayout>
 
             <!-- Optional: Stats -->
