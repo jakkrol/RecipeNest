@@ -34,6 +34,53 @@ namespace RecipeNest.Services
             return meal;
         }
 
+
+        public async Task<List<Models.Recipe>> SearchRecipesAsync(string searchMode, string query)
+        {
+            if (string.IsNullOrWhiteSpace(query))
+                return new List<Models.Recipe>();
+
+            string endpoint = (searchMode ?? "name").ToLower() switch
+            {
+                "name" => $"https://www.themealdb.com/api/json/v1/1/search.php?s={query}",
+                "ingredient" => $"https://www.themealdb.com/api/json/v1/1/filter.php?i={query}",
+                "category" => $"https://www.themealdb.com/api/json/v1/1/filter.php?c={query}",
+                "country" => $"https://www.themealdb.com/api/json/v1/1/filter.php?a={query}",
+                _ => $"https://www.themealdb.com/api/json/v1/1/search.php?s={query}"
+            };
+
+
+            try
+            {
+                var response = await _httpClient.GetStringAsync(endpoint);
+                using var doc = JsonDocument.Parse(response);
+
+                if (!doc.RootElement.TryGetProperty("meals", out var mealsJson) || mealsJson.ValueKind == JsonValueKind.Null)
+                    return new List<Models.Recipe>();
+
+                var recipes = new List<Models.Recipe>();
+
+                foreach (var mealJson in mealsJson.EnumerateArray())
+                {
+                    var recipe = new Models.Recipe
+                    {
+                        Id = int.Parse(mealJson.GetProperty("idMeal").GetString()),
+                        Name = mealJson.GetProperty("strMeal").GetString(),
+                        ImageUrl = mealJson.GetProperty("strMealThumb").GetString()
+                    };
+                    recipes.Add(recipe);
+                }
+
+                return recipes;
+            }
+            catch
+            {
+                return new List<Models.Recipe>();
+            }
+        }
+
+
+
         private string ExtractIngredients(JsonElement mealJson)
         {
             var ingredients = new List<string>();

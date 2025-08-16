@@ -27,6 +27,12 @@
         </Tab>
     </FlyoutItem>
 
+    <FlyoutItem Title="Recipes from internet" Route="RecipesLibraryPage">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate local:RecipesLibraryPage}" />
+        </Tab>
+    </FlyoutItem>
+
     <FlyoutItem Title="Tesseract Tests" Route="TesseractTests">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate local:TesseractOcrRecipe}" />

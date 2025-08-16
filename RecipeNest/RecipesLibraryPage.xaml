@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RecipeNest.RecipesLibraryPage"
+             Title="RecipesLibraryPage">
+    <ScrollView>
+        <VerticalStackLayout Padding="10" Spacing="20">
+
+            <!-- Recipe of the Day -->
+            <Frame CornerRadius="16" HasShadow="True" Padding="0">
+                <Grid>
+                    <Image Source="{Binding RecipeOfTheDay.ImageUrl}" 
+                           Aspect="AspectFill" HeightRequest="200"/>
+                    <BoxView BackgroundColor="Black" Opacity="0.3"/>
+                    <Label Text="{Binding RecipeOfTheDay.Name}" 
+                           TextColor="White" 
+                           FontSize="Large" 
+                           VerticalOptions="Center" 
+                           HorizontalOptions="Center"/>
+                </Grid>
+            </Frame>
+
+            <!-- Search Controls -->
+            <StackLayout Orientation="Horizontal" Spacing="10">
+                <Picker Title="Search by"
+                        WidthRequest="150"
+                        SelectedItem="{Binding SelectedSearchMode}"
+                        ItemsSource="{Binding SearchModes}"/>
+                <SearchBar Placeholder="Type your search..."
+                           Text="{Binding SearchQuery}"
+                           SearchCommand="{Binding SearchCommand}"/>
+            </StackLayout>
+
+            <!-- Search Results -->
+            <CollectionView ItemsSource="{Binding Recipes}"
+                            SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="2"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame CornerRadius="12" Margin="5" Padding="5" HasShadow="True">
+                            <VerticalStackLayout>
+                                <Image Source="{Binding ImageUrl}" 
+                                       HeightRequest="120" 
+                                       Aspect="AspectFill"/>
+                                <Label Text="{Binding Name}" 
+                                       FontSize="Small" 
+                                       FontAttributes="Bold" 
+                                       LineBreakMode="TailTruncation"/>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
