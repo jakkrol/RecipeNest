@@ -13,15 +13,8 @@ namespace RecipeNest
 
             this.BindingContext = ViewModel;
 
-            test();
         }
 
-        public async void test()
-        {
-            Services.RecipeApiService rc = new Services.RecipeApiService();
-            Models.Recipe r = await rc.SearchRecipeOfDay();
-            testLabel.Text = r.Ingredients;
-        } 
         protected override async void OnAppearing()
         {
             base.OnAppearing();

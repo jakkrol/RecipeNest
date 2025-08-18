@@ -3,6 +3,7 @@ using RecipeNest.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -68,7 +69,11 @@ namespace RecipeNest.ViewModels
             _apiService = new Services.RecipeApiService();
             SearchCommand = new Command(async () => await FetchRecipes());
 
-            // Load recipe of the day on start
+            //Debug.WriteLine("---------------------------------------------------------------------------------");
+            //_apiService.getAllCategories();
+            //_apiService.getAllRegions();
+            //_apiService.getAllIngredients();
+
             Task.Run(async () =>
             {
                 RecipeOfTheDay = await _apiService.SearchRecipeOfDay();
