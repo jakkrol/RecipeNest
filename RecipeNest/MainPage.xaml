@@ -36,7 +36,6 @@
                    CornerRadius="20"
                    Margin="0,20,0,0"/>-->
 
-            <Label x:Name="testLabel"></Label>
         </VerticalStackLayout>
     </ScrollView>
 
