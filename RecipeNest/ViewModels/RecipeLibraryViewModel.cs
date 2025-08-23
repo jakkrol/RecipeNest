@@ -69,10 +69,12 @@ namespace RecipeNest.ViewModels
             _apiService = new Services.RecipeApiService();
             SearchCommand = new Command(async () => await FetchRecipes());
 
+
             //Debug.WriteLine("---------------------------------------------------------------------------------");
             //_apiService.getAllCategories();
             //_apiService.getAllRegions();
             //_apiService.getAllIngredients();
+
 
             Task.Run(async () =>
             {

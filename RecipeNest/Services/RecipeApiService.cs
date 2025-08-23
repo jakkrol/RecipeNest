@@ -149,27 +149,27 @@ namespace RecipeNest.Services
         }
 
 
-        public async Task<Recipe> getRecipeById(int id)
-        {
-            string url = $"https://www.themealdb.com/api/json/v1/1/lookup.php?i={id}";
-            var response = await _httpClient.GetStringAsync(url);
+        //public async Task<Recipe> getRecipeById(int id)
+        //{
+        //    string url = $"https://www.themealdb.com/api/json/v1/1/lookup.php?i={id}";
+        //    var response = await _httpClient.GetStringAsync(url);
 
-            using var doc = JsonDocument.Parse(response);
-            var mealJson = doc.RootElement.GetProperty("meals")[0];
+        //    using var doc = JsonDocument.Parse(response);
+        //    var mealJson = doc.RootElement.GetProperty("meals")[0];
 
-            var meal = new Models.Recipe
-            {
-                Id = int.Parse(mealJson.GetProperty("idMeal").GetString()),
-                Name = mealJson.GetProperty("strMeal").GetString(),
-                Category = mealJson.GetProperty("strCategory").GetString(),
-                Description = $"{mealJson.GetProperty("strMeal").GetString()} - {mealJson.GetProperty("strCategory").GetString()}",
-                Instructions = mealJson.GetProperty("strInstructions").GetString(),
-                ImageUrl = mealJson.GetProperty("strMealThumb").GetString(),
-                Ingredients = ExtractIngredients(mealJson)
-            };
-            Debug.WriteLine(mealJson);
-            return meal;
-        }
+        //    var meal = new Models.Recipe
+        //    {
+        //        Id = int.Parse(mealJson.GetProperty("idMeal").GetString()),
+        //        Name = mealJson.GetProperty("strMeal").GetString(),
+        //        Category = mealJson.GetProperty("strCategory").GetString(),
+        //        Description = $"{mealJson.GetProperty("strMeal").GetString()} - {mealJson.GetProperty("strCategory").GetString()}",
+        //        Instructions = mealJson.GetProperty("strInstructions").GetString(),
+        //        ImageUrl = mealJson.GetProperty("strMealThumb").GetString(),
+        //        Ingredients = ExtractIngredients(mealJson)
+        //    };
+        //    Debug.WriteLine(mealJson);
+        //    return meal;
+        //}
 
 
         private string ExtractIngredients(JsonElement mealJson)
