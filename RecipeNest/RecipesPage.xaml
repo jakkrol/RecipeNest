@@ -47,24 +47,24 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
 
-                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
                                 <Label Text="{Binding Name}"
                                        FontSize="18"
-                                       
+                                       LineBreakMode="WordWrap"
                                        VerticalOptions="Center"
                                        Grid.Column="0"/>
 
-                                <Button Text="Update"
+                                <Button Text="✏️"
                                         Clicked="Update_Clicked"
                                         VerticalOptions="Center"
                                         HorizontalOptions="End"
                                         Grid.Column="1"/>
 
-                                <Button Text="Delete"
+                                <Button Text="🗑️"
                                         Command="{Binding BindingContext.DeleteRecipeCommand, Source={x:Reference RecipesPageContext}}"
                                         CommandParameter="{Binding .}"
                                         VerticalOptions="Center"
