@@ -39,46 +39,46 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Border VerticalOptions="Center" Padding="10" Margin="5" StrokeThickness="0">
+
+                        <Border BackgroundColor="#3B3B3B" Padding="10" Margin="5" StrokeThickness="0">
                             <Border.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                             </Border.GestureRecognizers>
-                            <Grid HorizontalOptions="Fill" VerticalOptions="Center">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
 
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-
-                                <Label Text="{Binding Name}"
+                            <Grid RowDefinitions="Auto" ColumnDefinitions="*">
+                                <FlexLayout Direction="Row" Wrap="Wrap" AlignItems="Center">
+                                    <Label Text="{Binding Name}"
                                        FontSize="18"
+                                       TextColor="White"
                                        LineBreakMode="WordWrap"
-                                       VerticalOptions="Center"
-                                       Grid.Column="0"/>
+                                       WidthRequest="200"
+                                       Margin="0,0,0,5"/>
 
-                                <Button Text="✏️"
-                                        Clicked="Update_Clicked"
-                                        VerticalOptions="Center"
-                                        HorizontalOptions="End"
-                                        Grid.Column="1"/>
+                                    <HorizontalStackLayout Spacing="10" HorizontalOptions="End" VerticalOptions="Center">
+                                        <Button Text="✏️"
+                                            Clicked="Update_Clicked"
+                                            VerticalOptions="Center"/>
+                                        <Button Text="🗑️"
+                                            Command="{Binding BindingContext.DeleteRecipeCommand, Source={x:Reference RecipesPageContext}}"
+                                            CommandParameter="{Binding .}"
+                                            VerticalOptions="Center"/>
+                                        
+                                        <HorizontalStackLayout>
+                                            <CheckBox IsChecked="{Binding IsFavourite}" 
+                                                CheckedChanged="CheckBox_CheckedChanged"
+                                                VerticalOptions="Center"/>
+                                            <Label Text="Favourite" 
+                                                TextColor="White"
+                                                VerticalOptions="Center"/>
+                                        </HorizontalStackLayout>
+                                        
+                                    </HorizontalStackLayout>
 
-                                <Button Text="🗑️"
-                                        Command="{Binding BindingContext.DeleteRecipeCommand, Source={x:Reference RecipesPageContext}}"
-                                        CommandParameter="{Binding .}"
-                                        VerticalOptions="Center"
-                                        HorizontalOptions="End"
-                                        Grid.Column="2"
-                                        Margin="10,0,0,0"/>
-                                <HorizontalStackLayout Grid.Column="3" Margin="10,0,0,0">
-                                    <CheckBox IsChecked="{Binding IsFavourite}" CheckedChanged="CheckBox_CheckedChanged" />
-                                    <Label Text="Favourite" VerticalOptions="Center" />
-                                </HorizontalStackLayout>
-
+                                </FlexLayout>
                             </Grid>
                         </Border>
                     </Grid>
+
                 </DataTemplate>
             </CollectionView.ItemTemplate>
 
