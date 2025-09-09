@@ -21,6 +21,22 @@
                         HorizontalOptions="Center"
                         WidthRequest="50"/>
             </HorizontalStackLayout>
+            
+            <!-- ORDER BY -->
+            <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
+                <Picker x:Name="picker"
+                    Title="Select order"
+                    SelectedItem="{Binding Order}">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>By favourites</x:String>
+                            <x:String>Desc</x:String>
+                            <x:String>Asc</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </HorizontalStackLayout>
+            <!-- ORDER BY -->
         </VerticalStackLayout>
 
         <CollectionView x:Name="MyCollection" Grid.Row="1"
