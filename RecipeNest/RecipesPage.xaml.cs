@@ -22,7 +22,7 @@ public partial class RecipesPage : ContentPage
     {
         var selectedRecipe = e.CurrentSelection.FirstOrDefault() as Models.Recipe;
         if(selectedRecipe != null) 
-        await Shell.Current.GoToAsync($"RecipeDetailPage?recipeId={selectedRecipe.Id}");
+        await Shell.Current.GoToAsync($"RecipeDetailPage?recipeId={selectedRecipe.Id}&source=local");
     }
 
     private async void AddRecipe_Clicked(object sender, EventArgs e)

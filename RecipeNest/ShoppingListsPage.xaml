@@ -41,7 +41,31 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Border BackgroundColor="#3B3B3B" VerticalOptions="Center" Padding="10" Margin="5" StrokeThickness="0">
+                        <Border BackgroundColor="#3B3B3B" Padding="10" Margin="5" StrokeThickness="0">
+                            <Grid RowDefinitions="Auto" ColumnDefinitions="*">
+                                <FlexLayout Direction="Row" Wrap="Wrap" AlignItems="Start">
+                                    <Label Text="{Binding Name}"
+                                       FontSize="18"
+                                       TextColor="White"
+                                       LineBreakMode="WordWrap"
+                                       WidthRequest="200"/>
+
+                                    <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                                        <ProgressBar Progress="{Binding ListProgress}" 
+                                             ProgressColor="MediumPurple"
+                                             WidthRequest="150"/>
+
+                                        <Button Text="✏️"
+                                            Clicked="Update_Clicked"/>
+
+                                        <Button Text="🗑️"
+                                            Command="{Binding BindingContext.DeleteListCommand, Source={x:Reference ListPageContext}}"
+                                            CommandParameter="{Binding .}"/>
+                                    </HorizontalStackLayout>
+                                </FlexLayout>
+                            </Grid>
+                        </Border>
+                        <!--<Border BackgroundColor="#3B3B3B" VerticalOptions="Center" Padding="10" Margin="5" StrokeThickness="0">
                             <Grid HorizontalOptions="Fill" VerticalOptions="Center">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto" />
@@ -49,7 +73,7 @@
                                     <ColumnDefinition Width="auto" />
                                 </Grid.ColumnDefinitions>
 
-                                
+
                                 <Label Text="{Binding Name}"
                                        FontSize="18"
                                        TextColor="White"
@@ -71,7 +95,8 @@
                                         Margin="10,0,0,0"/>
                                 </HorizontalStackLayout>
                             </Grid>
-                        </Border>
+                        </Border>-->
+
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
