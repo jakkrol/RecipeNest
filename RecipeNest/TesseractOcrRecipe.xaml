@@ -7,11 +7,11 @@
         <VerticalStackLayout Padding="30">
             <Button Text="Wybierz zdjęcie do zczytania" Clicked="OnPickPhotoClicked"/>
             <Label Text="Ustaw nagłówki nad elementami textu: TYT, SKL, PREP"></Label>
-            <HorizontalStackLayout>
+            <!--<HorizontalStackLayout>
                 <RadioButton Content="FullText" GroupName="ParsingModes" Value="FullText" IsChecked="True" CheckedChanged="RadioButton_CheckedChanged"></RadioButton>
                 <RadioButton Content="Line" GroupName="ParsingModes" Value="Line" IsChecked="False" CheckedChanged="RadioButton_CheckedChanged"></RadioButton>
                 <RadioButton Content="Column" GroupName="ParsingModes" Value="Column" IsChecked="False" CheckedChanged="RadioButton_CheckedChanged"></RadioButton>
-            </HorizontalStackLayout>
+            </HorizontalStackLayout>-->
             <!--<Label x:Name="Ingredients"></Label>
 
             <Label x:Name="Instructions"></Label>-->

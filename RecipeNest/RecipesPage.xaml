@@ -29,7 +29,6 @@
                     SelectedItem="{Binding Order}">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
-                            <x:String>By favourites</x:String>
                             <x:String>Desc</x:String>
                             <x:String>Asc</x:String>
                         </x:Array>

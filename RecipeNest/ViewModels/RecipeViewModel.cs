@@ -89,11 +89,18 @@ using System.Windows.Input;
                     FilteredRecipes = new ObservableCollection<Models.Recipe>(
                         Recipes.Where(r => r.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase) || r.Category.Contains(SearchText, StringComparison.OrdinalIgnoreCase) || r.Description.Contains(SearchText, StringComparison.OrdinalIgnoreCase)));
                 }
+
+            PerformOrder();
         }
 
         private void PerformOrder()
         {
             Debug.WriteLine($"ORDERING BY: {Order}");
+            if(Order == "Asc")
+            FilteredRecipes = new ObservableCollection<Models.Recipe>(FilteredRecipes.OrderBy(x => x.Name));
+
+            if(Order == "Desc")
+            FilteredRecipes = new ObservableCollection<Models.Recipe>(FilteredRecipes.OrderByDescending(x => x.Name));
         }
 
         private async void DeleteRecipe(Models.Recipe recipe)

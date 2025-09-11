@@ -83,95 +83,86 @@ public partial class TesseractOcrRecipe : ContentPage
             .Where(l => !string.IsNullOrWhiteSpace(l))
             .Where(l => !junkPattern.IsMatch(l)) // remove junk lines
             .Select(l => Regex.Replace(l, @"\.{2,}", ".")) // normalize multiple dots
+            .Select(l => Regex.Replace(l, @"(.)\1{2,}", "$1")) // remove bad format
             .ToList();
 
         return string.Join(Environment.NewLine, cleanedLines);
     }
-    string StandardParser(string rawText)
-    {
-        // Podziel tekst na linie i usuñ puste linie
-        var lines = rawText
-            .Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
-            .Select(l => l.Trim())
-            .Where(l => !string.IsNullOrWhiteSpace(l))
-            .ToList();
-        // ZnajdŸ indeks nag³ówka "Sk³adniki"
-        int startIndex = lines.FindIndex(l => Regex.IsMatch(l, @"(?i)^sk³adniki$"));
-        if (startIndex == -1) return "";
-        // Od tego miejsca analizuj linie
-        var ingredientsSection = lines.Skip(startIndex + 1).ToList();
-        // Odfiltruj œmieci typu "Autor", "³atwe", "czas", itp.
-        ingredientsSection = ingredientsSection
-            .Where(l => !Regex.IsMatch(l, @"(?i)(autor|³atwe|©|min\.|przepis|czas|l\s©|=\s*)"))
-            .ToList();
-        return string.Join(Environment.NewLine, ingredientsSection);
-    }
-    string NormalizeByColumnsIngredients(string rawText)
-    {
-        var lines = rawText
-            .Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
-            .Select(l => l.Trim())
-            .Where(l => !string.IsNullOrWhiteSpace(l))
-            .ToList();
+    //string StandardParser(string rawText)
+    //{
+    //    // Podziel tekst na linie i usuñ puste linie
+    //    var lines = rawText
+    //        .Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
+    //        .Select(l => l.Trim())
+    //        .Where(l => !string.IsNullOrWhiteSpace(l))
+    //        .ToList();
+    //    // ZnajdŸ indeks nag³ówka "Sk³adniki"
+    //    int startIndex = lines.FindIndex(l => Regex.IsMatch(l, @"(?i)^sk³adniki$"));
+    //    if (startIndex == -1) return "";
+    //    // Od tego miejsca analizuj linie
+    //    var ingredientsSection = lines.Skip(startIndex + 1).ToList();
+    //    // Odfiltruj œmieci typu "Autor", "³atwe", "czas", itp.
+    //    ingredientsSection = ingredientsSection
+    //        .Where(l => !Regex.IsMatch(l, @"(?i)(autor|³atwe|©|min\.|przepis|czas|l\s©|=\s*)"))
+    //        .ToList();
+    //    return string.Join(Environment.NewLine, ingredientsSection);
+    //}
+    //string NormalizeByColumnsIngredients(string rawText)
+    //{
+    //    var lines = rawText
+    //        .Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
+    //        .Select(l => l.Trim())
+    //        .Where(l => !string.IsNullOrWhiteSpace(l))
+    //        .ToList();
 
-        // ZnajdŸ indeks nag³ówka "Sk³adniki"
-        int startIndex = lines.FindIndex(l => Regex.IsMatch(l, @"(?i)^sk³adniki$"));
-        if (startIndex == -1) return "";
+    //    // ZnajdŸ indeks nag³ówka "Sk³adniki"
+    //    int startIndex = lines.FindIndex(l => Regex.IsMatch(l, @"(?i)^sk³adniki$"));
+    //    if (startIndex == -1) return "";
 
-        // Od tego miejsca analizuj linie
-        var ingredientsSection = lines.Skip(startIndex + 1).ToList();
+    //    // Od tego miejsca analizuj linie
+    //    var ingredientsSection = lines.Skip(startIndex + 1).ToList();
 
-        // Odfiltruj œmieci typu "Autor", "³atwe", "czas", itp.
-        ingredientsSection = ingredientsSection
-            .Where(l => !Regex.IsMatch(l, @"(?i)(autor|³atwe|©|min\.|przepis|czas|l\s©|=\s*)"))
-            .ToList();
+    //    // Odfiltruj œmieci typu "Autor", "³atwe", "czas", itp.
+    //    ingredientsSection = ingredientsSection
+    //        .Where(l => !Regex.IsMatch(l, @"(?i)(autor|³atwe|©|min\.|przepis|czas|l\s©|=\s*)"))
+    //        .ToList();
 
-        // Podziel listê: zak³adamy pierwsza po³owa to nazwy, druga po³owa to iloœci
-        int half = ingredientsSection.Count / 2;
+    //    // Podziel listê: zak³adamy pierwsza po³owa to nazwy, druga po³owa to iloœci
+    //    int half = ingredientsSection.Count / 2;
 
-        var names = ingredientsSection.Take(half).ToList();
-        var amounts = ingredientsSection.Skip(half).ToList();
+    //    var names = ingredientsSection.Take(half).ToList();
+    //    var amounts = ingredientsSection.Skip(half).ToList();
 
-        var result = new List<string>();
-        for (int i = 0; i < Math.Max(names.Count, amounts.Count); i++)
-        {
-            string name = i < names.Count ? names[i] : "(brak nazwy)";
-            string amount = i < amounts.Count ? amounts[i] : "(brak iloœci)";
-            result.Add($"{name} – {amount}");
-        }
+    //    var result = new List<string>();
+    //    for (int i = 0; i < Math.Max(names.Count, amounts.Count); i++)
+    //    {
+    //        string name = i < names.Count ? names[i] : "(brak nazwy)";
+    //        string amount = i < amounts.Count ? amounts[i] : "(brak iloœci)";
+    //        result.Add($"{name} – {amount}");
+    //    }
 
-        return string.Join(Environment.NewLine, result);
-    }
+    //    return string.Join(Environment.NewLine, result);
+    //}
 
-    private void RadioButton_CheckedChanged(object sender, CheckedChangedEventArgs e)
-    {
-        if (e.Value && sender is RadioButton rb)
-        {
-            selectedMode = rb.Value?.ToString();
-            if (selectedMode == "FullText")
-            {
-                // Handle FullText mode
-                // You can call your parsing logic here based on selectedMode
-                OcrEditor.Text = fullText;
-            }
-            else if (selectedMode == "Line")
-            {
-                // Handle Ingredients mode
-                // You can call your parsing logic here based on selectedMode
-                //Ingredients.Text = StandardParser(ingredients);
-                //Instructions.Text = preparation;
-                OcrEditor.Text = StandardParser(ingredients);
-            }
-            else if (selectedMode == "Column")
-            {
-                // Handle Instructions mode
-                // You can call your parsing logic here based on selectedMode
-                //Ingredients.Text = NormalizeByColumnsIngredients(ingredients);
-                //Instructions.Text = preparation;
-                OcrEditor.Text = NormalizeByColumnsIngredients(ingredients);
-            }
-        }
-    }
+    //private void RadioButton_CheckedChanged(object sender, CheckedChangedEventArgs e)
+    //{
+    //    if (e.Value && sender is RadioButton rb)
+    //    {
+    //        selectedMode = rb.Value?.ToString();
+    //        if (selectedMode == "FullText")
+    //        {
+    //            OcrEditor.Text = fullText;
+    //        }
+    //        else if (selectedMode == "Line")
+    //        {
+    //            OcrEditor.Text = StandardParser(ingredients);
+    //        }
+    //        else if (selectedMode == "Column")
+    //        {
+    //            OcrEditor.Text = NormalizeByColumnsIngredients(ingredients);
+    //        }
+    //    }
+    //}
 
 
 
