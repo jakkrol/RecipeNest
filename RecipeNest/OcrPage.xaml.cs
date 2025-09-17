@@ -2,18 +2,20 @@ using System.Net.Sockets;
 using System.Text.RegularExpressions;
 using TesseractOcrMaui;
 
+
 namespace RecipeNest;
 
-public partial class TesseractOcrRecipe : ContentPage
+public partial class OcrPage : ContentPage
 {
     public string fullText = "";
     private string selectedMode = "FullText";
     private string ingredients = "";
     private string preparation = "";
-    public TesseractOcrRecipe()
-    {
-        InitializeComponent();
-    }
+    public OcrPage()
+	{
+		InitializeComponent();
+	}
+
     private async void OnPickPhotoClicked(object sender, EventArgs e)
     {
         try
@@ -167,7 +169,7 @@ public partial class TesseractOcrRecipe : ContentPage
 
 
 
-private async void OnSplitRecipeClicked(object sender, EventArgs e)
+    private async void OnSplitRecipeClicked(object sender, EventArgs e)
     {
         string rawText = OcrEditor.Text ?? "";
         var lines = rawText

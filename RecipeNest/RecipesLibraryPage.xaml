@@ -17,7 +17,7 @@
                         <RoundRectangle CornerRadius="16" />
                     </Border.StrokeShape>
                     <Grid>
-                        <Image Source="{Binding RecipeOfTheDay.ImageUrl}" 
+                        <Image Source="{Binding RecipeOfTheDay.ImageUrl}"
                                Aspect="AspectFill" HeightRequest="200"/>
                         <BoxView BackgroundColor="Black" Opacity="0.3"/>
                         <Label Text="{Binding RecipeOfTheDay.Name}" 
@@ -36,7 +36,12 @@
                             ItemsSource="{Binding SearchModes}"/>
                     <SearchBar Placeholder="Type your search..."
                                Text="{Binding SearchQuery}"
-                               SearchCommand="{Binding SearchCommand}"/>
+                               SearchCommand="{Binding SearchCommand}"
+                               IsVisible="True"/>
+                    <Picker Title="Select"
+                            WidthRequest="150"
+                            IsVisible="False"
+                            />
                 </StackLayout>
 
             </VerticalStackLayout>

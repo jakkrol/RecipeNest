@@ -33,8 +33,12 @@ namespace RecipeNest.Services
 
         public async Task<List<Models.Recipe>> SearchRecipesAsync(string searchMode, string query)
         {
+            Debug.WriteLine("Im in SearchRecipeAsync right now!!!");
             if (string.IsNullOrWhiteSpace(query))
+            {
+                Debug.WriteLine("Query null");
                 return new List<Models.Recipe>();
+            }
 
             string endpoint = (searchMode ?? "name").ToLower() switch
             {
@@ -45,17 +49,24 @@ namespace RecipeNest.Services
                 _ => $"https://www.themealdb.com/api/json/v1/1/search.php?s={query}"
             };
 
-
+            Debug.WriteLine("HUJJJJJ");
             try
             {
-                var response = await _httpClient.GetStringAsync(endpoint);
+                Debug.WriteLine("JESTEM W TRY!!!:   " +  endpoint);
+                var cts = new CancellationTokenSource(TimeSpan.FromSeconds(10));
+                var httpreq = await _httpClient.GetAsync(endpoint, cts.Token);
+                httpreq.EnsureSuccessStatusCode();
+                var response = await httpreq.Content.ReadAsStringAsync();
                 using var doc = JsonDocument.Parse(response);
-
+                Debug.WriteLine("POD1");
                 if (!doc.RootElement.TryGetProperty("meals", out var mealsJson) || mealsJson.ValueKind == JsonValueKind.Null)
+                {
+                    throw new Exception($"No meals returned from API for query '{query}'");
+                    Debug.WriteLine("COS SIE ZJEBALO");
                     return new List<Models.Recipe>();
-
+                }
+                Debug.WriteLine("POD2");
                 var recipes = new List<Models.Recipe>();
-
 
                     foreach (var mealJson in mealsJson.EnumerateArray())
                     {
@@ -66,13 +77,14 @@ namespace RecipeNest.Services
                             ImageUrl = mealJson.GetProperty("strMealThumb").GetString()
                         });
                     }
-                
-
+                Debug.WriteLine("TESTTSTSTTS");
+                    Debug.WriteLine($"Recipes: {recipes}");
 
                 return recipes;
             }
-            catch
+            catch (Exception ex)
             {
+                Debug.WriteLine(ex);
                 return new List<Models.Recipe>();
             }
         }

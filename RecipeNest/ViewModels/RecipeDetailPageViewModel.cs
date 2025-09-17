@@ -33,7 +33,7 @@ namespace RecipeNest.ViewModels
             }
         }
 
-        private int? recipeId;
+private int? recipeId;
         public string? RecipeId
         {
             get => recipeId.ToString();
@@ -44,7 +44,7 @@ namespace RecipeNest.ViewModels
             }
         }
 
-        private void LoadRecipeDetails()
+        async private void LoadRecipeDetails()
         {
             if (!recipeId.HasValue)
                 return;
@@ -70,6 +70,23 @@ namespace RecipeNest.ViewModels
             if(source == "internet")
             {
                 Debug.WriteLine("FROM INTERNET");
+                RecipeApiService _apiService = new RecipeApiService();
+                Recipe recipe = await _apiService.getRecipeById(Convert.ToInt32(recipeId));
+                Debug.WriteLine("TEST RECIPE: " + recipe.Name);
+                if(recipe != null)
+                {
+                    Name = recipe.Name;
+                    Category = recipe.Category;
+                    Description = recipe.Description;
+                    Ingredients = string.Join(", ", recipe.Ingredients);
+                    Instructions = recipe.Instructions;
+                    ImageUrl = recipe.ImageUrl;
+                }
+                OnPropertyChanged(nameof(Name));
+                OnPropertyChanged(nameof(Category));
+                OnPropertyChanged(nameof(Description));
+                OnPropertyChanged(nameof(Ingredients));
+                OnPropertyChanged(nameof(Instructions));
             }
         }
 

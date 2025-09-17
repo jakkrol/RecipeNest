@@ -66,6 +66,7 @@ namespace RecipeNest.ViewModels
 
         public RecipeLibraryViewModel()
         {
+            Debug.WriteLine("FETCHING READY!!!");
             _apiService = new Services.RecipeApiService();
             SearchCommand = new Command(async () => await FetchRecipes());
 
