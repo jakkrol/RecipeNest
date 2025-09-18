@@ -30,15 +30,19 @@
 
                 <!-- Search Controls -->
                 <StackLayout Orientation="Horizontal" Spacing="10">
-                    <Picker Title="Search by"
+                    <Picker x:Name="MainPicker"
+                            SelectedIndexChanged="MainPicker_SelectedIndexChanged"
+                            Title="Search by"
                             WidthRequest="150"
                             SelectedItem="{Binding SelectedSearchMode}"
                             ItemsSource="{Binding SearchModes}"/>
-                    <SearchBar Placeholder="Type your search..."
+                    <SearchBar x:Name="MySearchbar"
+                               Placeholder="Type your search..."
                                Text="{Binding SearchQuery}"
                                SearchCommand="{Binding SearchCommand}"
                                IsVisible="True"/>
-                    <Picker Title="Select"
+                    <Picker x:Name="MyPicker"
+                            Title="Select"
                             WidthRequest="150"
                             IsVisible="False"
                             />

@@ -19,4 +19,32 @@ public partial class RecipesLibraryPage : ContentPage
         if (selectedRecipe != null)
             await Shell.Current.GoToAsync($"RecipeDetailPage?recipeId={selectedRecipe.Id}&source=internet");
     }
+
+    private void MainPicker_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        //Debug.WriteLine($"INDEX: {MainPicker.SelectedItem}");
+
+        switch (MainPicker.SelectedItem)
+        {
+            case "Country":
+                MySearchbar.IsVisible = false;
+                MyPicker.IsVisible = true;
+                break;
+
+            case "Category":
+                MySearchbar.IsVisible = false;
+                MyPicker.IsVisible = true;
+                break;
+
+            case "Ingredient":
+                MySearchbar.IsVisible = false;
+                MyPicker.IsVisible = true;
+                break;
+
+            default:
+                MySearchbar.IsVisible = true;
+                MyPicker.IsVisible = false;
+                break;
+        }
+    }
 }

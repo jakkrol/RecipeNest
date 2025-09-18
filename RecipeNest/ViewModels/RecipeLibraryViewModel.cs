@@ -43,6 +43,7 @@ namespace RecipeNest.ViewModels
                 if (_selectedSearchMode != value)
                 {
                     _selectedSearchMode = value;
+                    SelectionModeChanged();
                     OnPropertyChanged(nameof(SelectedSearchMode));
                 }
             }
@@ -83,6 +84,46 @@ namespace RecipeNest.ViewModels
             });
         }
 
+        private void SelectionModeChanged()
+        {
+            //if (SelectedSearchMode != null) return;
+
+            //if (SelectedSearchMode == "Country")
+            //{
+            //    Debug.WriteLine("Selection mode = Country");
+            //}
+            //if (SelectedSearchMode == "Category")
+            //{
+            //    Debug.WriteLine($"Selection mode = {SelectedSearchMode}");
+            //}
+            //if(SelectedSearchMode == "Ingredient")
+            //{
+            //    Debug.WriteLine($"Selection mode = {SelectedSearchMode}");
+            //}
+
+            if (SelectedSearchMode == null) return;
+
+            switch (SelectedSearchMode)
+            {
+                case "Country":
+                    Debug.WriteLine("Selection mode = Country");
+                    break;
+
+                case "Category":
+                    Debug.WriteLine("Selection mode = Category");
+                    break;
+
+                case "Ingredient":
+                    Debug.WriteLine($"Selection mode = Ingredient");
+                    break;
+
+                default:
+                    // Optional: handle unexpected values
+                    Debug.WriteLine($"Unknown selection mode: {SelectedSearchMode}");
+                    break;
+            }
+
+        }
         private async Task FetchRecipes()
         {
             if (string.IsNullOrWhiteSpace(SearchQuery))
