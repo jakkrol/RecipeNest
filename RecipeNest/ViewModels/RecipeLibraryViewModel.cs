@@ -1,9 +1,11 @@
-﻿using RecipeNest.Models;
+﻿
+using RecipeNest.Models;
 using RecipeNest.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -63,13 +65,42 @@ namespace RecipeNest.ViewModels
             }
         }
 
+        private string _selectedData;
+        public string SelectedData
+        {
+            get => _selectedData;
+            set
+            {
+                if (_selectedData != value)
+                {
+                    _selectedData = value;
+                    FetchRecipes(SelectedData);
+                    OnPropertyChanged(nameof(SelectedData));
+                }
+            }
+        }
+
+        private List<string> _searchingData;
+        public List<string> SearchingData
+        {
+            get => _searchingData;
+            set
+            {
+                if (_searchingData != value)
+                {
+                    _searchingData = value;
+                    OnPropertyChanged(nameof(SearchingData));
+                }
+            }
+        }
+
         public ICommand SearchCommand { get; }
 
         public RecipeLibraryViewModel()
         {
             Debug.WriteLine("FETCHING READY!!!");
             _apiService = new Services.RecipeApiService();
-            SearchCommand = new Command(async () => await FetchRecipes());
+            SearchCommand = new Command(async () => await FetchRecipes(SearchQuery));
 
 
             //Debug.WriteLine("---------------------------------------------------------------------------------");
@@ -84,52 +115,45 @@ namespace RecipeNest.ViewModels
             });
         }
 
-        private void SelectionModeChanged()
+        private async Task SelectionModeChanged()
         {
-            //if (SelectedSearchMode != null) return;
-
-            //if (SelectedSearchMode == "Country")
-            //{
-            //    Debug.WriteLine("Selection mode = Country");
-            //}
-            //if (SelectedSearchMode == "Category")
-            //{
-            //    Debug.WriteLine($"Selection mode = {SelectedSearchMode}");
-            //}
-            //if(SelectedSearchMode == "Ingredient")
-            //{
-            //    Debug.WriteLine($"Selection mode = {SelectedSearchMode}");
-            //}
-
-            if (SelectedSearchMode == null) return;
-
+           List<string> ls = new List<string>();
             switch (SelectedSearchMode)
             {
                 case "Country":
                     Debug.WriteLine("Selection mode = Country");
+                    ls = await _apiService.getAllRegions();
                     break;
 
                 case "Category":
                     Debug.WriteLine("Selection mode = Category");
+                    ls = await _apiService.getAllCategories();
                     break;
 
                 case "Ingredient":
                     Debug.WriteLine($"Selection mode = Ingredient");
+                    ls = await _apiService.getAllIngredients();
                     break;
 
                 default:
-                    // Optional: handle unexpected values
                     Debug.WriteLine($"Unknown selection mode: {SelectedSearchMode}");
                     break;
             }
+            
+            foreach (string s in ls)
+            {
+                Debug.WriteLine(s);
+            }
+            SearchingData = ls;
 
         }
-        private async Task FetchRecipes()
+        private async Task FetchRecipes(string search)
         {
-            if (string.IsNullOrWhiteSpace(SearchQuery))
+            Debug.WriteLine(search);
+            if (string.IsNullOrWhiteSpace(search))
                 return;
 
-            var results = await _apiService.SearchRecipesAsync(SelectedSearchMode, SearchQuery);
+            var results = await _apiService.SearchRecipesAsync(SelectedSearchMode, search);
 
             Recipes.Clear();
             foreach (var recipe in results)

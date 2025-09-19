@@ -49,7 +49,6 @@ namespace RecipeNest.Services
                 _ => $"https://www.themealdb.com/api/json/v1/1/search.php?s={query}"
             };
 
-            Debug.WriteLine("HUJJJJJ");
             try
             {
                 Debug.WriteLine("JESTEM W TRY!!!:   " +  endpoint);
@@ -62,8 +61,8 @@ namespace RecipeNest.Services
                 if (!doc.RootElement.TryGetProperty("meals", out var mealsJson) || mealsJson.ValueKind == JsonValueKind.Null)
                 {
                     throw new Exception($"No meals returned from API for query '{query}'");
-                    Debug.WriteLine("COS SIE ZJEBALO");
-                    return new List<Models.Recipe>();
+                    //Debug.WriteLine("COS SIE ZJEBALO");
+                    //return new List<Models.Recipe>();
                 }
                 Debug.WriteLine("POD2");
                 var recipes = new List<Models.Recipe>();

@@ -18,13 +18,17 @@
                     </Border.StrokeShape>
                     <Grid>
                         <Image Source="{Binding RecipeOfTheDay.ImageUrl}"
-                               Aspect="AspectFill" HeightRequest="200"/>
+                               Aspect="AspectFill" HeightRequest="200">
+                        </Image>
                         <BoxView BackgroundColor="Black" Opacity="0.3"/>
                         <Label Text="{Binding RecipeOfTheDay.Name}" 
                                TextColor="White" 
                                FontSize="Large" 
                                VerticalOptions="Center" 
                                HorizontalOptions="Center"/>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                        </Grid.GestureRecognizers>
                     </Grid>
                 </Border>
 
@@ -44,6 +48,8 @@
                     <Picker x:Name="MyPicker"
                             Title="Select"
                             WidthRequest="150"
+                            ItemsSource="{Binding SearchingData}"
+                            SelectedItem="{Binding SelectedData}"
                             IsVisible="False"
                             />
                 </StackLayout>

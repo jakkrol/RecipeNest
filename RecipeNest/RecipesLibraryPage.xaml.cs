@@ -47,4 +47,12 @@ public partial class RecipesLibraryPage : ContentPage
                 break;
         }
     }
+
+    private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    {
+        Debug.WriteLine("Header CLICKED");
+        
+        var recipeId = vm.RecipeOfTheDay.Id;
+        await Shell.Current.GoToAsync($"RecipeDetailPage?recipeId={recipeId}&source=internet");
+    }
 }
