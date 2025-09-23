@@ -7,11 +7,16 @@
     <!-- Note: For Android please see also Platforms\Android\Resources\values\colors.xml -->
 
     <Color x:Key="Primary">#512BD4</Color>
-    <Color x:Key="PrimaryDark">#ac99ea</Color>
+    <!--<Color x:Key="PrimaryDark">#ac99ea</Color>-->
+    <Color x:Key="PrimaryDark">#00B3B3</Color>
     <Color x:Key="PrimaryDarkText">#242424</Color>
     <Color x:Key="Secondary">#DFD8F7</Color>
     <Color x:Key="SecondaryDarkText">#9880e5</Color>
     <Color x:Key="Tertiary">#2B0B98</Color>
+
+    <Color x:Key="PrimaryDarkHover">#33CCCC</Color>
+    <Color x:Key="PrimaryLightHover">#33CCCC</Color>
+    
 
     <!-- Earthy Green Color Palette --><!--
     <Color x:Key="Primary">#556B2F</Color>
