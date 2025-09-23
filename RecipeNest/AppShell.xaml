@@ -4,7 +4,10 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:RecipeNest"
-    Title="RecipeNest">
+    Title="RecipeNest"
+    FlyoutBackground="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource GlobalPageBackground}}">
+    
+    
 
     <Shell.ToolbarItems>
         <ToolbarItem x:Name="ThemeItem" Text="☀️" Clicked="ToolbarItem_Clicked"></ToolbarItem>

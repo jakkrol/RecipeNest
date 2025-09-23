@@ -13,6 +13,21 @@
     <Color x:Key="SecondaryDarkText">#9880e5</Color>
     <Color x:Key="Tertiary">#2B0B98</Color>
 
+    <!-- Earthy Green Color Palette --><!--
+    <Color x:Key="Primary">#556B2F</Color>
+    --><!-- Deep Olive Green --><!--
+    <Color x:Key="PrimaryDark">#8FA31E</Color>
+    --><!-- Mossy Green --><!--
+    <Color x:Key="PrimaryDarkText">#242424</Color>
+    --><!-- Keep dark text for contrast --><!--
+    <Color x:Key="Secondary">#C6D870</Color>
+    --><!-- Soft Yellow-Green --><!--
+    <Color x:Key="SecondaryDarkText">#556B2F</Color>
+    --><!-- Olive for secondary text --><!--
+    <Color x:Key="Tertiary">#EFF5D2</Color>
+    --><!-- Pale Greenish Cream -->
+
+
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>
     <Color x:Key="Magenta">#D600AA</Color>
@@ -49,4 +64,10 @@
     <SolidColorBrush x:Key="Gray600Brush" Color="{StaticResource Gray600}"/>
     <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
     <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
+
+    <LinearGradientBrush x:Key="GlobalPageBackground" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#014D4E" Offset="0.0" />
+        <GradientStop Color="#021C1E" Offset="1.0" />
+    </LinearGradientBrush>
+    <Color x:Key="GradientDark">#014D4E</Color>
 </ResourceDictionary>
