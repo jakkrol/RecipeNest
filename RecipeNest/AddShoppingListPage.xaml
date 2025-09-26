@@ -2,8 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RecipeNest.AddShoppingListPage"
-             x:Name="AddListPageContext"
-             Title="AddShoppingListPage">
+             x:Name="AddListPageContext">
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="20">
             <Label Text="List Name" />
@@ -19,7 +18,7 @@
             <CollectionView x:Name="ItemsCollectionView" ItemsSource="{Binding ShoppingItems}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Border Padding="10" Margin="5" BackgroundColor="#f2f2f2">
+                        <Border Padding="10" Margin="5" BackgroundColor="#00000000">
                             <HorizontalStackLayout>
                                 <Label Text="{Binding Name}" />
                                 <Button Text="Remove" Command="{Binding BindingContext.DeleteItemCommand, Source={x:Reference AddListPageContext}}" CommandParameter="{Binding .}" HorizontalOptions="End" />

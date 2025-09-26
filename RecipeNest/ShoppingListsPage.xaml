@@ -2,8 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RecipeNest.ShoppingListsPage"
-             x:Name="ListPageContext"
-             Title="ShoppingListsPage">
+             x:Name="ListPageContext">
     <Grid RowDefinitions="Auto, *" Padding="20" MaximumWidthRequest="1000">
         <VerticalStackLayout Grid.Row="0" Spacing="10">
             <Label Text="My Shopping Lists"
@@ -30,7 +29,8 @@
                 SelectionMode="Single"
                 SelectionChanged="MyCollection_SelectionChanged"
                 Margin="15"
-                VerticalOptions="Fill">
+                VerticalOptions="Fill"
+                >
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical"/>
             </CollectionView.ItemsLayout>
@@ -41,18 +41,17 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Border BackgroundColor="#3B3B3B" Padding="10" Margin="5" StrokeThickness="0">
+                        <Border BackgroundColor="#00000000" Padding="10" Margin="5" StrokeThickness="0">
                             <Grid RowDefinitions="Auto" ColumnDefinitions="*">
                                 <FlexLayout Direction="Row" Wrap="Wrap" AlignItems="Start">
                                     <Label Text="{Binding Name}"
-                                       FontSize="18"
+                                       FontSize="15"
                                        TextColor="White"
                                        LineBreakMode="WordWrap"
                                        WidthRequest="200"/>
 
                                     <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
                                         <ProgressBar Progress="{Binding ListProgress}" 
-                                             ProgressColor="MediumPurple"
                                              WidthRequest="150"/>
 
                                         <Button Text="✏️"

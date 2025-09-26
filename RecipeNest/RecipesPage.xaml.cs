@@ -20,6 +20,7 @@ public partial class RecipesPage : ContentPage
 
     private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
+        Debug.WriteLine("Recipe clicked");
         var selectedRecipe = e.CurrentSelection.FirstOrDefault() as Models.Recipe;
         if(selectedRecipe != null) 
         await Shell.Current.GoToAsync($"RecipeDetailPage?recipeId={selectedRecipe.Id}&source=local");
@@ -34,14 +35,6 @@ public partial class RecipesPage : ContentPage
     {
         Models.Recipe selectedRecipe = (Models.Recipe)((Button)sender).BindingContext;
         await Shell.Current.GoToAsync($"AddRecipePage?recipeId={selectedRecipe.Id}");
-    }
-
-    private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
-    {
-        
-        //var border = (Border)sender;
-        //var selectedRecipe = (Models.Recipe)border.BindingContext;
-        //await Shell.Current.GoToAsync($"RecipeDetailPage?recipeId={selectedRecipe.Id}");
     }
 
     private void CollectionView_SelectionChanged_1(object sender, SelectionChangedEventArgs e)

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="RecipeNest.RecipesLibraryPage"
-             Title="Recipes Library">
+             x:Class="RecipeNest.RecipesLibraryPage">
 
     <CollectionView ItemsSource="{Binding Recipes}"
                     SelectionMode="Single"
-                    SelectionChanged="CollectionView_SelectionChanged">
+                    SelectionChanged="CollectionView_SelectionChanged"
+                    Background="Transparent">
 
         <CollectionView.Header>
             <VerticalStackLayout Padding="10" Spacing="20">
@@ -16,11 +16,11 @@
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="16" />
                     </Border.StrokeShape>
-                    <Grid>
+                    <Grid Background="Transparent">
                         <Image Source="{Binding RecipeOfTheDay.ImageUrl}"
                                Aspect="AspectFill" HeightRequest="200">
                         </Image>
-                        <BoxView BackgroundColor="Black" Opacity="0.3"/>
+                        <BoxView BackgroundColor="Transparent" Opacity="0.3"/>
                         <Label Text="{Binding RecipeOfTheDay.Name}" 
                                TextColor="White" 
                                FontSize="Large" 
@@ -65,11 +65,11 @@
 
         <CollectionView.ItemTemplate>
             <DataTemplate>
-                <Border Margin="5" Padding="5">
+                <Border Margin="5" Padding="5" Background="Transparent">
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="12" />
                     </Border.StrokeShape>
-                    <VerticalStackLayout>
+                    <VerticalStackLayout Background="Transparent">
                         <Image Source="{Binding ImageUrl}" 
                                HeightRequest="120" 
                                Aspect="AspectFill"/>

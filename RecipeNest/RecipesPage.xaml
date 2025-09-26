@@ -1,8 +1,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RecipeNest.RecipesPage"
-             x:Name="RecipesPageContext"
-             Title="My Recipes">
+             x:Name="RecipesPageContext">
     <Grid RowDefinitions="Auto, *" Padding="20" MaximumWidthRequest="1000">
         <VerticalStackLayout Grid.Row="0" Spacing="10">
             <Label Text="🍽️ My Recipes"
@@ -55,15 +54,11 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Border BackgroundColor="#3B3B3B" Padding="10" Margin="5" StrokeThickness="0">
-                            <Border.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
-                            </Border.GestureRecognizers>
-
+                        <Border BackgroundColor="#00000000" Padding="10" Margin="5" StrokeThickness="0">
                             <Grid RowDefinitions="Auto" ColumnDefinitions="*">
                                 <FlexLayout Direction="Row" Wrap="Wrap" AlignItems="Center">
                                     <Label Text="{Binding Name}"
-                                       FontSize="18"
+                                       FontSize="15"
                                        TextColor="White"
                                        LineBreakMode="WordWrap"
                                        WidthRequest="200"
