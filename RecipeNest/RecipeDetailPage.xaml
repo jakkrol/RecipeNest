@@ -3,46 +3,46 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RecipeNest.RecipeDetailPage">
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="24">
+        <VerticalStackLayout Padding="20" Spacing="24" Margin="10,0,10,0">
             <!-- Name -->
             <Label x:Name="RecipeName"
                    Text="{Binding Name}"
                    FontSize="24"
                    FontAttributes="Bold"
-                   HorizontalOptions="Center"/>
+                   HorizontalOptions="Center" LineBreakMode="WordWrap"/>
 
             <!-- Category -->
-            <HorizontalStackLayout Spacing="10">
+            <VerticalStackLayout Spacing="10">
                 <Label Text="Category:" FontSize="16"></Label>
                 <Label x:Name="RecipeCategory"
                    Text="{Binding Category}"
                    FontSize="16"
-                   FontAttributes="Italic"/>
-            </HorizontalStackLayout>
+                   FontAttributes="Italic" LineBreakMode="WordWrap"/>
+            </VerticalStackLayout>
 
 
             <!-- Description -->
-            <HorizontalStackLayout Spacing="10">
+            <VerticalStackLayout Spacing="10">
                 <Label Text="Description:" FontSize="14"></Label>
                 <Label x:Name="RecipeDescription"
                    Text="{Binding Description}"
-                   FontSize="14"/>
-            </HorizontalStackLayout>
+                   FontSize="14" LineBreakMode="WordWrap"/>
+            </VerticalStackLayout>
 
             <!-- Ingredients Title -->
-            <HorizontalStackLayout Spacing="10">
+            <VerticalStackLayout Spacing="10">
                 <Label Text="Ingredients:" FontSize="14"></Label>
                 <Label x:Name="RecipeIngridients"
                    Text="{Binding Ingredients}"
-                   FontSize="14"/>
-            </HorizontalStackLayout>
+                   FontSize="14" LineBreakMode="WordWrap"/>
+            </VerticalStackLayout>
 
             <!-- Instructions -->
-            <HorizontalStackLayout Spacing="10">
+            <VerticalStackLayout Spacing="10">
                 <Label Text="Instruction:" FontSize="14"></Label>
                 <Label Text="{Binding Instructions}"
-                   FontSize="14"/>
-            </HorizontalStackLayout>
+                   FontSize="14" LineBreakMode="WordWrap"/>
+            </VerticalStackLayout>
 
         </VerticalStackLayout>
     </ScrollView>
