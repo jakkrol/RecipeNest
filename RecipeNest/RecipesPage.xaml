@@ -75,9 +75,7 @@
                                                 </MenuFlyout>
                                             </FlyoutBase.ContextFlyout>
                                         </Border>
-                                        <Button Text="📋"
-                                            Clicked="Button_Clicked"
-                                            VerticalOptions="Center"/>
+                                        
                                         <Button Text="✏️"
                                             Clicked="Update_Clicked"
                                             VerticalOptions="Center"/>
