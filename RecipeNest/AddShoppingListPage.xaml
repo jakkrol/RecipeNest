@@ -20,7 +20,7 @@
                     <DataTemplate>
                         <Border Padding="10" Margin="5" BackgroundColor="#00000000">
                             <HorizontalStackLayout>
-                                <Label Text="{Binding Name}" />
+                                <Label Text="{Binding Name}" Margin="10"/>
                                 <Button Text="Remove" Command="{Binding BindingContext.DeleteItemCommand, Source={x:Reference AddListPageContext}}" CommandParameter="{Binding .}" HorizontalOptions="End" />
                             </HorizontalStackLayout>
                         </Border>

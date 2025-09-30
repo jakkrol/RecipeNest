@@ -53,4 +53,9 @@ public partial class RecipesPage : ContentPage
             viewModel?.checkItem(item);
         }
     }
+
+    private void Button_Clicked(object sender, EventArgs e)
+    {
+
+    }
 }

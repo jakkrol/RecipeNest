@@ -13,7 +13,7 @@
 
             <!-- Category -->
             <VerticalStackLayout Spacing="10">
-                <Label Text="Category:" FontSize="16"></Label>
+                <Label Text="Category:" FontSize="20" ></Label>
                 <Label x:Name="RecipeCategory"
                    Text="{Binding Category}"
                    FontSize="16"
@@ -23,7 +23,7 @@
 
             <!-- Description -->
             <VerticalStackLayout Spacing="10">
-                <Label Text="Description:" FontSize="14"></Label>
+                <Label Text="Description:" FontSize="18"></Label>
                 <Label x:Name="RecipeDescription"
                    Text="{Binding Description}"
                    FontSize="14" LineBreakMode="WordWrap"/>
@@ -31,7 +31,7 @@
 
             <!-- Ingredients Title -->
             <VerticalStackLayout Spacing="10">
-                <Label Text="Ingredients:" FontSize="14"></Label>
+                <Label Text="Ingredients:" FontSize="18"></Label>
                 <Label x:Name="RecipeIngridients"
                    Text="{Binding Ingredients}"
                    FontSize="14" LineBreakMode="WordWrap"/>
@@ -39,7 +39,7 @@
 
             <!-- Instructions -->
             <VerticalStackLayout Spacing="10">
-                <Label Text="Instruction:" FontSize="14"></Label>
+                <Label Text="Instruction:" FontSize="18"></Label>
                 <Label Text="{Binding Instructions}"
                    FontSize="14" LineBreakMode="WordWrap"/>
             </VerticalStackLayout>

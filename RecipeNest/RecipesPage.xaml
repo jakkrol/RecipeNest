@@ -65,6 +65,16 @@
                                        Margin="0,0,0,5"/>
 
                                     <HorizontalStackLayout Spacing="10" HorizontalOptions="End" VerticalOptions="Center">
+                                        <Border WidthRequest="20" BackgroundColor="Red">
+                                            <FlyoutBase.ContextFlyout>
+                                                <MenuFlyout>
+                                                    <MenuFlyoutItem Text="Delete Recipe" 
+                                                        Command="{Binding BindingContext.DeleteRecipeCommand, Source={x:Reference RecipesPageContext}}"
+                                                        CommandParameter="{Binding .}"/>
+                                                    <MenuFlyoutItem Text="Modyfi Recipe" Clicked="Update_Clicked" />
+                                                </MenuFlyout>
+                                            </FlyoutBase.ContextFlyout>
+                                        </Border>
                                         <Button Text="✏️"
                                             Clicked="Update_Clicked"
                                             VerticalOptions="Center"/>
