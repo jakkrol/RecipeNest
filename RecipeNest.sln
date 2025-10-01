@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36221.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeNest.App", "RecipeNest\RecipeNest.App.csproj", "{ED81A265-103E-4CD5-BCD3-FD81179A817A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeNest.App", "src\RecipeNest.App\RecipeNest.App.csproj", "{4FA7020D-B1A9-76F3-3C6F-47981011469D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeNest.Backend", "RecipeNest.Backend\RecipeNest.Backend.csproj", "{EEEA3F3C-97AA-4B1D-B06E-C96C30A69C4E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeNest.Backend", "src\RecipeNest.Backend\RecipeNest.Backend.csproj", "{A3FA88EF-74ED-EB5F-9845-4A20839B24EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{ED81A265-103E-4CD5-BCD3-FD81179A817A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ED81A265-103E-4CD5-BCD3-FD81179A817A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ED81A265-103E-4CD5-BCD3-FD81179A817A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ED81A265-103E-4CD5-BCD3-FD81179A817A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EEEA3F3C-97AA-4B1D-B06E-C96C30A69C4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EEEA3F3C-97AA-4B1D-B06E-C96C30A69C4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EEEA3F3C-97AA-4B1D-B06E-C96C30A69C4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EEEA3F3C-97AA-4B1D-B06E-C96C30A69C4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FA7020D-B1A9-76F3-3C6F-47981011469D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FA7020D-B1A9-76F3-3C6F-47981011469D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FA7020D-B1A9-76F3-3C6F-47981011469D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FA7020D-B1A9-76F3-3C6F-47981011469D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3FA88EF-74ED-EB5F-9845-4A20839B24EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3FA88EF-74ED-EB5F-9845-4A20839B24EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3FA88EF-74ED-EB5F-9845-4A20839B24EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3FA88EF-74ED-EB5F-9845-4A20839B24EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
