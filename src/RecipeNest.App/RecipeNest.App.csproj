@@ -59,6 +59,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="Components\**" />
+	  <Compile Remove="Components\**" />
+	  <EmbeddedResource Remove="Components\**" />
+	  <MauiCss Remove="Components\**" />
+	  <MauiXaml Remove="Components\**" />
+	  <None Remove="Components\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiAsset Remove="Resources\Raw\pol.traineddata" />
 	</ItemGroup>
 
@@ -122,10 +131,6 @@
 
 	<ItemGroup>
 	  <None Update="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Components\" />
 	</ItemGroup>
 
 </Project>
