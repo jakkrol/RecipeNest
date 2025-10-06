@@ -11,7 +11,7 @@ using RecipeNest.Backend.Data;
 namespace RecipeNest.Backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251005112342_init")]
+    [Migration("20251006081813_init")]
     partial class init
     {
         /// <inheritdoc />
