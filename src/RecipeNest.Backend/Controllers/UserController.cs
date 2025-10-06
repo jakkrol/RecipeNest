@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using RecipeNest.Backend.Models;
 
 namespace RecipeNest.Backend.Controllers
 {
@@ -15,7 +16,7 @@ namespace RecipeNest.Backend.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetUsers()
+        public ActionResult<IEnumerable<User>> GetUsers()
         {
             var users = _context.Users.ToList();
             return Ok(users);
