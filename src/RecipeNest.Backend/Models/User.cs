@@ -8,5 +8,7 @@
         public required string Password { get; set; }    
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
+        public ICollection<Recipe>? Recipes { get; set; };
+
     }
 }
