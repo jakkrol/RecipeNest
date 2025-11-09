@@ -44,18 +44,27 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Border BackgroundColor="#00000000" Padding="10" Margin="5" StrokeThickness="0">
+                        <Border Stroke="#056"
+                                StrokeThickness="1"
+                                BackgroundColor="#024e4b"
+                                StrokeShape="RoundRectangle 20"
+                                Padding="12"
+                                Margin="8"
+                                Shadow="10,10,20,#00000055">
                             <Grid RowDefinitions="Auto" ColumnDefinitions="*">
                                 <FlexLayout Direction="Row" Wrap="Wrap" AlignItems="Start">
                                     <Label Text="{Binding Name}"
-                                       FontSize="15"
+                                       FontSize="18"
+                                       FontAttributes="Bold"
                                        TextColor="White"
                                        LineBreakMode="WordWrap"
-                                       WidthRequest="200"/>
+                                       WidthRequest="200"
+                                       VerticalOptions="Center"/>
 
                                     <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
                                         <ProgressBar Progress="{Binding ListProgress}" 
-                                             WidthRequest="150"/>
+                                             WidthRequest="150"
+                                             HeightRequest="6"/>
 
                                         <Button Text="✏️"
                                             Clicked="Update_Clicked"/>
