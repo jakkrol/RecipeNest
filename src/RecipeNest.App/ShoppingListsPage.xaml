@@ -7,13 +7,16 @@
              x:DataType="vm:ShoppingListViewModel"
              x:Name="ListPageContext">
     <Grid RowDefinitions="Auto, *" Padding="20" MaximumWidthRequest="1000">
+        <!-- Header -->
         <VerticalStackLayout Grid.Row="0" Spacing="10">
             <Label Text="My Shopping Lists"
                    FontSize="28"
                    FontAttributes="Bold"
                    HorizontalOptions="Center"/>
 
-            <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
+            <HorizontalStackLayout HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   Spacing="10">
                 <SearchBar Placeholder="Search recipes..."
                            Text="{Binding SearchText}"
                            SearchCommand="{Binding PerformSearchCommand}"
@@ -27,91 +30,49 @@
             </HorizontalStackLayout>
         </VerticalStackLayout>
 
-        <CollectionView x:Name="MyCollection" Grid.Row="1"
+        <CollectionView x:Name="MyCollection"
+                Grid.Row="1"
                 ItemsSource="{Binding FilteredShoppingLists}"
                 SelectionMode="Single"
                 SelectionChanged="MyCollection_SelectionChanged"
                 Margin="15"
-                VerticalOptions="Fill"
-                >
+                VerticalOptions="Fill">
             <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical"/>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="12"/>
             </CollectionView.ItemsLayout>
 
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:ShoppingList">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Border Stroke="#056"
-                                StrokeThickness="1"
-                                BackgroundColor="#024e4b"
-                                StrokeShape="RoundRectangle 20"
-                                Padding="12"
-                                Margin="8"
-                                Shadow="10,10,20,#00000055">
-                            <Grid RowDefinitions="Auto" ColumnDefinitions="*">
-                                <FlexLayout Direction="Row" Wrap="Wrap" AlignItems="Start">
-                                    <Label Text="{Binding Name}"
-                                       FontSize="18"
-                                       FontAttributes="Bold"
-                                       TextColor="White"
-                                       LineBreakMode="WordWrap"
-                                       WidthRequest="200"
-                                       VerticalOptions="Center"/>
+                    <Border Stroke="#056"
+                    StrokeThickness="1"
+                    BackgroundColor="#024e4b"
+                    StrokeShape="RoundRectangle 20"
+                    Padding="16"
+                    Shadow="5,5,15,#00000044">
+                        <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" ColumnSpacing="10">
+                            <Label Grid.Row="0" Grid.Column="0"
+                           Text="{Binding Name}"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="White"
+                           VerticalOptions="Center"/>
 
-                                    <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
-                                        <ProgressBar Progress="{Binding ListProgress}" 
-                                             WidthRequest="150"
-                                             HeightRequest="6"/>
+                            <HorizontalStackLayout Grid.Row="0" Grid.Column="1" Spacing="8" HorizontalOptions="End">
+                                <Button Text="✏️" Clicked="Update_Clicked"/>
+                                <Button Text="🗑️"
+                                Command="{Binding BindingContext.DeleteListCommand, Source={x:Reference ListPageContext}}"
+                                CommandParameter="{Binding .}"/>
+                            </HorizontalStackLayout>
 
-                                        <Button Text="✏️"
-                                            Clicked="Update_Clicked"/>
-
-                                        <Button Text="🗑️"
-                                            Command="{Binding BindingContext.DeleteListCommand, Source={x:Reference ListPageContext}}"
-                                            CommandParameter="{Binding .}"/>
-                                    </HorizontalStackLayout>
-                                </FlexLayout>
-                            </Grid>
-                        </Border>
-                        <!--<Border BackgroundColor="#3B3B3B" VerticalOptions="Center" Padding="10" Margin="5" StrokeThickness="0">
-                            <Grid HorizontalOptions="Fill" VerticalOptions="Center">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="auto" />
-                                </Grid.ColumnDefinitions>
-
-
-                                <Label Text="{Binding Name}"
-                                       FontSize="18"
-                                       TextColor="White"
-                                       VerticalOptions="Center"
-                                       Grid.Column="0"/>
-                                <ProgressBar Progress="{Binding ListProgress}" ProgressColor="MediumPurple" Grid.Column="1" Margin="10,0,0,0"/>
-
-                                <HorizontalStackLayout Grid.Column="2" Margin="10,0,10,0" HorizontalOptions="End">
-                                    <Button Text="✏️"
-                                        Clicked="Update_Clicked"
-                                        VerticalOptions="Center"
-                                        HorizontalOptions="End"/>
-
-                                    <Button Text="🗑️"
-                                        Command="{Binding BindingContext.DeleteListCommand, Source={x:Reference ListPageContext}}"
-                                        CommandParameter="{Binding .}"
-                                        VerticalOptions="Center"
-                                        HorizontalOptions="End"
-                                        Margin="10,0,0,0"/>
-                                </HorizontalStackLayout>
-                            </Grid>
-                        </Border>-->
-
-                    </Grid>
+                            <ProgressBar Grid.Row="1" Grid.ColumnSpan="2"
+                                 Progress="{Binding ListProgress}"
+                                 HeightRequest="6"
+                                 Margin="0,8,0,0"/>
+                        </Grid>
+                    </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-
         </CollectionView>
+
     </Grid>
 </ContentPage>

@@ -57,50 +57,31 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Border BackgroundColor="#00000000" Padding="10" Margin="5" StrokeThickness="0">
-                            <Grid RowDefinitions="Auto" ColumnDefinitions="*">
-                                <FlexLayout Direction="Row" Wrap="Wrap" AlignItems="Center">
-                                    <Label Text="{Binding Name}"
-                                       FontSize="15"
+                        <Border Stroke="#056"
+                                StrokeThickness="1"
+                                BackgroundColor="#024e4b"
+                                StrokeShape="RoundRectangle 20"
+                                Padding="16"
+                                Margin="8,6"
+                                Shadow="5,5,15,#00000044">
+                            <Grid ColumnDefinitions="Auto, *, Auto" RowDefinitions="Auto" VerticalOptions="Center">
+                                <Label Grid.Column="0" 
+                                       Text="{Binding Name}" 
+                                       FontSize="20" 
+                                       FontAttributes="Bold" 
                                        TextColor="White"
-                                       LineBreakMode="WordWrap"
-                                       WidthRequest="200"
-                                       Margin="0,0,0,5"/>
+                                       VerticalOptions="Center"/>
 
-                                    <HorizontalStackLayout Spacing="10" HorizontalOptions="End" VerticalOptions="Center">
-                                        <Border WidthRequest="20" BackgroundColor="Red">
-                                            <FlyoutBase.ContextFlyout>
-                                                <MenuFlyout>
-                                                    <MenuFlyoutItem Text="Delete Recipe" 
-                                                        Command="{Binding BindingContext.DeleteRecipeCommand, Source={x:Reference RecipesPageContext}}"
-                                                        CommandParameter="{Binding .}"/>
-                                                    <MenuFlyoutItem Text="Modyfi Recipe" Clicked="Update_Clicked" />
-                                                </MenuFlyout>
-                                            </FlyoutBase.ContextFlyout>
-                                        </Border>
-                                        
-                                        <Button Text="✏️"
-                                            Clicked="Update_Clicked"
-                                            VerticalOptions="Center"/>
-                                        <Button Text="🗑️"
+                                <HorizontalStackLayout Grid.Column="2" Spacing="8" VerticalOptions="Center">
+                                    <Button Text="✏️" Clicked="Update_Clicked" />
+                                    <Button Text="🗑️"
                                             Command="{Binding BindingContext.DeleteRecipeCommand, Source={x:Reference RecipesPageContext}}"
-                                            CommandParameter="{Binding .}"
-                                            VerticalOptions="Center"/>
-                                        
-                                        <HorizontalStackLayout>
-                                            <CheckBox IsChecked="{Binding IsFavourite}" 
-                                                CheckedChanged="CheckBox_CheckedChanged"
-                                                VerticalOptions="Center"/>
-                                            <Label Text="Favourite" 
-                                                TextColor="White"
-                                                VerticalOptions="Center"/>
-                                        </HorizontalStackLayout>
-                                        
-                                    </HorizontalStackLayout>
-
-                                </FlexLayout>
+                                            CommandParameter="{Binding .}"/>
+                                    <CheckBox IsChecked="{Binding IsFavourite}" CheckedChanged="CheckBox_CheckedChanged" />
+                                </HorizontalStackLayout>
                             </Grid>
                         </Border>
+
                     </Grid>
 
                 </DataTemplate>
