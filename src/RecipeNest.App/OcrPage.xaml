@@ -4,8 +4,8 @@
              x:Class="RecipeNest.OcrPage">
     <ScrollView>
         <VerticalStackLayout Padding="30">
-            <Button Text="Wybierz zdjęcie do zczytania" Clicked="OnPickPhotoClicked"/>
-            <Label Text="Ustaw nagłówki nad elementami textu: TYT, SKL, PREP"></Label>
+            <Button Text="Wybierz zdjęcie do zczytania" Clicked="OnPickPhotoClicked" VerticalOptions="Center" Margin="10,10,10,0" MaximumWidthRequest="250"/>
+            <Label FontSize="16" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Margin="10,10,10,10" Text="Ustaw nagłówki nad elementami textu: TYT, SKL, PREP"></Label>
             <!--<HorizontalStackLayout>
                 <RadioButton Content="FullText" GroupName="ParsingModes" Value="FullText" IsChecked="True" CheckedChanged="RadioButton_CheckedChanged"></RadioButton>
                 <RadioButton Content="Line" GroupName="ParsingModes" Value="Line" IsChecked="False" CheckedChanged="RadioButton_CheckedChanged"></RadioButton>
@@ -16,7 +16,7 @@
             <Label x:Name="Instructions"></Label>-->
 
             <Editor x:Name="OcrEditor" Text="Tu pojawi się tekst z OCR" AutoSize="TextChanges" />
-            <Button Text="Podziel przepis" Clicked="OnSplitRecipeClicked" />
+            <Button Text="Podziel przepis" VerticalOptions="End" Margin="5,5,5,5" MaximumWidthRequest="250" Clicked="OnSplitRecipeClicked" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
