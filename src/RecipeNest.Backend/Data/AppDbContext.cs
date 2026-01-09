@@ -18,5 +18,8 @@ namespace RecipeNest.Backend.Data
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Recipe> Recipes { get; set; }
+        public DbSet<ShoppingItem> ShoppingItems { get; set; }
+        public DbSet<ShoppingList> ShoppingList { get; set; }
     }
 }

@@ -22,10 +22,10 @@ if (app.Environment.IsDevelopment())
 }
 
 
-app.MapGet("/test", () => "TEST");
+//app.MapGet("/test", () => "TEST");
 
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
