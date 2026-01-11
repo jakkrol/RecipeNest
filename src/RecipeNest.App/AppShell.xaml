@@ -9,6 +9,7 @@
     
 
     <Shell.ToolbarItems>
+        <ToolbarItem x:Name="Account" IconImageSource="accounticon.png" Text="Account"></ToolbarItem>
         <ToolbarItem x:Name="ThemeItem" Text="☀️" Clicked="ToolbarItem_Clicked"></ToolbarItem>
     </Shell.ToolbarItems>
     <FlyoutItem Title="Home" Route="MainPage">
