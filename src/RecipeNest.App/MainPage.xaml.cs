@@ -21,6 +21,10 @@ namespace RecipeNest
             Debug.WriteLine("DB PATH:  " + DbConfig.Constants.DatabasePath);
             await RecipeService.Instance.LoadRecipesFromDb();
             await ShoppingListService.Instance.LoadShoppingListsFromDb();
+
+            HttpClient cl = new HttpClient();
+            BackendServices.AuthService sr = new BackendServices.AuthService(cl);
+            await sr.getUsers();
         }
         private async void OnBrowseRecipes(object sender, EventArgs e)
         {
