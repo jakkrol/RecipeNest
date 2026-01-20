@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using RecipeNest.BackendServices;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace RecipeNest
 {
@@ -19,7 +21,8 @@ namespace RecipeNest
 
 #if DEBUG
     		builder.Logging.AddDebug();
-#endif
+#endif      
+            builder.Services.AddHttpClient<AuthService>();
 
             return builder.Build();
         }

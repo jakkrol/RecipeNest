@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RecipeNest.Models
 {
-    internal class User
+    public class User
     {
         public int Id { get; set; }
         public required string Name { get; set; }

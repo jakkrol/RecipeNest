@@ -98,5 +98,21 @@ namespace RecipeNest.Backend.Controllers
             await _context.SaveChangesAsync();
             return Ok();
         }
+
+
+
+        // to complete this
+        [HttpPost("data")]
+        public async Task<ActionResult<User>> Login(User loginuser)
+        {
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u => u.Login == loginuser.Login && u.Password == loginuser.Password);
+
+
+            if(user != null)
+                return Ok();
+            else
+                return Unauthorized();
+        }
     }
 }

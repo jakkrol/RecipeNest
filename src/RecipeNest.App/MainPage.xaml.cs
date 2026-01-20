@@ -1,4 +1,5 @@
-﻿using RecipeNest.DbConfig;
+﻿using RecipeNest.BackendServices;
+using RecipeNest.DbConfig;
 using RecipeNest.Services;
 using RecipeNest.ViewModels;
 using System.Diagnostics;
@@ -7,10 +8,11 @@ namespace RecipeNest
     public partial class MainPage : ContentPage
     {
         public MainPageViewModel ViewModel = new MainPageViewModel();
-        public MainPage()
+        AuthService _auth;
+        public MainPage(AuthService sr)
         {
             InitializeComponent();
-
+            this._auth = sr;
             this.BindingContext = ViewModel;
 
         }
@@ -21,10 +23,12 @@ namespace RecipeNest
             Debug.WriteLine("DB PATH:  " + DbConfig.Constants.DatabasePath);
             await RecipeService.Instance.LoadRecipesFromDb();
             await ShoppingListService.Instance.LoadShoppingListsFromDb();
+            
 
-            HttpClient cl = new HttpClient();
-            BackendServices.AuthService sr = new BackendServices.AuthService(cl);
-            await sr.getUsers();
+            //HttpClient cl = new HttpClient();
+            //BackendServices.AuthService sr = new BackendServices.AuthService(cl);
+            await _auth.getUsers();
+            //await sr.getUsers();
         }
         private async void OnBrowseRecipes(object sender, EventArgs e)
         {

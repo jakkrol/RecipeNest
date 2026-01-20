@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RecipeNest.BackendServices
 {
-    internal class AuthService
+    public class AuthService
     {
         HttpClient _httpClient;
 
