@@ -20,15 +20,16 @@ namespace RecipeNest
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            Debug.WriteLine("DB PATH:  " + DbConfig.Constants.DatabasePath);
+            Debug.WriteLine("DB PATH:  " + Constants.DatabasePath);
             await RecipeService.Instance.LoadRecipesFromDb();
             await ShoppingListService.Instance.LoadShoppingListsFromDb();
             
 
             //HttpClient cl = new HttpClient();
             //BackendServices.AuthService sr = new BackendServices.AuthService(cl);
-            await _auth.getUsers();
+            var test = await _auth.getUsers();
             //await sr.getUsers();
+            await DisplayAlert("Test", test[0].Name, "X");
         }
         private async void OnBrowseRecipes(object sender, EventArgs e)
         {

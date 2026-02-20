@@ -70,12 +70,12 @@ namespace RecipeNest.Backend.Controllers
         public async Task<ActionResult<User>> PostUser(User user)
         {
 
-            user = new User
-            {
-                Login = "a",
-                Password = "b",
-                Name = "c",
-            };
+            //user = new User
+            //{
+            //    Login = "a",
+            //    Password = "b",
+            //    Name = "c",
+            //};
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
@@ -101,18 +101,18 @@ namespace RecipeNest.Backend.Controllers
 
 
 
-        // to complete this
-        [HttpPost("data")]
+        // to complete this - login
+        [HttpPost("login")]
         public async Task<ActionResult<User>> Login(User loginuser)
         {
-            var user = await _context.Users
-                .FirstOrDefaultAsync(u => u.Login == loginuser.Login && u.Password == loginuser.Password);
-
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Login == loginuser.Login && u.Password == loginuser.Password);
 
             if(user != null)
                 return Ok();
             else
                 return Unauthorized();
         }
+
+
     }
 }

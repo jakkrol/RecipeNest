@@ -18,10 +18,52 @@ namespace RecipeNest.Backend.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Recipe>> GetRecipes()
+        public async Task<ActionResult<IEnumerable<Recipe>>> GetRecipes()
         {
-            var recipes = _dbContext.Recipes.ToList();
+            var recipes = await _dbContext.Recipes.ToListAsync();
             return Ok(recipes);
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Recipe>> GetRecipe(long id)
+        {
+            var recipe = await _dbContext.Recipes.FindAsync(id);
+            if (recipe == null) 
+            {
+                return NotFound();
+            }
+            return Ok(recipe);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<Recipe>> PostRecipe(Recipe recipe)
+        {
+
+            _dbContext.Recipes.Add(recipe);
+            await _dbContext.SaveChangesAsync();
+            //await _dbContext.Recipes.AddAsync(recipe);
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Recipe>> DeleteRecipe(long id)
+        {
+            var recipe = await _dbContext.Recipes.FindAsync(id);
+            if (recipe == null)
+            {
+                return NotFound();
+            }
+
+            _dbContext.Recipes.Remove(recipe);
+            await _dbContext.SaveChangesAsync();
+            return Ok();
+        }
+
+        //[HttpPut("{id}")]
+        //public async Task<ActionResult<Recipe>> PutRecipe(long id)
+        //{
+
+        //}
+
     }
 }
