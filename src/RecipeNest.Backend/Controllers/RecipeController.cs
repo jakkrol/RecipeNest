@@ -46,7 +46,7 @@ namespace RecipeNest.Backend.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Recipe>> DeleteRecipe(long id)
+        public async Task<IActionResult> DeleteRecipe(long id)
         {
             var recipe = await _dbContext.Recipes.FindAsync(id);
             if (recipe == null)
@@ -59,11 +59,32 @@ namespace RecipeNest.Backend.Controllers
             return Ok();
         }
 
-        //[HttpPut("{id}")]
-        //public async Task<ActionResult<Recipe>> PutRecipe(long id)
-        //{
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Recipe>> PutRecipe(long id, Recipe recipe)
+        {
+            if(id != recipe.Id)
+            {
+                return BadRequest();
+            }
 
-        //}
+            _dbContext.Entry(recipe).State = EntityState.Modified;
+            try
+            {
+                await _dbContext.SaveChangesAsync();
+            }catch(Exception ex)
+            {
+                if (!_dbContext.Recipes.Any(e => e.Id == id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return Ok();
+        }
 
     }
 }

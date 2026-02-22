@@ -76,7 +76,7 @@ namespace RecipeNest.Backend.Controllers
             //    Password = "b",
             //    Name = "c",
             //};
-
+            user.CreatedAt = DateTime.UtcNow;
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
@@ -98,6 +98,7 @@ namespace RecipeNest.Backend.Controllers
             await _context.SaveChangesAsync();
             return Ok();
         }
+
 
 
 

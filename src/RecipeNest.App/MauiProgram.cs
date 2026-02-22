@@ -22,7 +22,17 @@ namespace RecipeNest
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif      
-            builder.Services.AddHttpClient<AuthService>();
+            builder.Services.AddScoped(sp =>
+            {
+                return new HttpClient
+                {
+                    //BaseAddress = new Uri("https://recipenestapi.azurewebsites.net/")
+                    BaseAddress = new Uri("http://localhost:5264/")
+                };
+            });
+
+            builder.Services.AddScoped<AuthService>();
+            builder.Services.AddScoped<UserApiService>();
 
             return builder.Build();
         }

@@ -27,6 +27,7 @@ namespace RecipeNest
 
             //HttpClient cl = new HttpClient();
             //BackendServices.AuthService sr = new BackendServices.AuthService(cl);
+            //await _auth.addUser();
             var test = await _auth.getUsers();
             //await sr.getUsers();
             await DisplayAlert("Test", test[0].Name, "X");

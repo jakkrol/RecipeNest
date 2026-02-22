@@ -9,20 +9,29 @@ using System.Threading.Tasks;
 
 namespace RecipeNest.BackendServices
 {
-    public class AuthService
+    public class AuthService : BaseApiService
     {
-        HttpClient _httpClient;
+        public AuthService(HttpClient httpClient) : base(httpClient) { }
 
-        public AuthService(HttpClient httpClient)
-        {
-            _httpClient = httpClient;
-        }
 
         public async Task<List<User>> getUsers()
         {
-            List<User> users = await _httpClient.GetFromJsonAsync<List<User>>("http://localhost:5264/api/User");
-            Debug.WriteLine(users[0].Name);
-            return users ?? new List<User>();
+            List<User> users = await _httpClient.GetFromJsonAsync<List<User>>("http://localhost:5264/api/User") ?? new List<User>();
+            //Debug.WriteLine(users[0].Name);
+            return users;
+        }
+
+        public async Task<User> getUser(int id)
+        {
+            var user = await _httpClient.GetFromJsonAsync<User>($"http://localhost:5264/api/User/{id}");
+            if (user != null)
+            {
+                return user;
+            }
+            else
+            {
+                throw new Exception("User not found");
+            }
         }
 
         public async Task addUser()
