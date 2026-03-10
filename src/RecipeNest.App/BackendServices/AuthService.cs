@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
+using RecipeNest.Shared.DTO;
 
 namespace RecipeNest.BackendServices
 {
@@ -16,14 +17,15 @@ namespace RecipeNest.BackendServices
 
         public async Task<List<User>> getUsers()
         {
-            List<User> users = await _httpClient.GetFromJsonAsync<List<User>>("http://localhost:5264/api/User") ?? new List<User>();
+            List<User> users = await _httpClient.GetFromJsonAsync<List<User>>("api/User") ?? new List<User>();
             //Debug.WriteLine(users[0].Name);
+            
             return users;
         }
 
         public async Task<User> getUser(int id)
         {
-            var user = await _httpClient.GetFromJsonAsync<User>($"http://localhost:5264/api/User/{id}");
+            var user = await _httpClient.GetFromJsonAsync<User>($"api/User/{id}");
             if (user != null)
             {
                 return user;
@@ -41,7 +43,7 @@ namespace RecipeNest.BackendServices
                 Login = "test2",
                 Password = "test3",
             };
-            await _httpClient.PostAsJsonAsync<User>("http://localhost:5264/api/User", user);
+            await _httpClient.PostAsJsonAsync<User>("api/User", user);
         }
     }
 }

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeNest.App", "src\Recip
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeNest.Backend", "src\RecipeNest.Backend\RecipeNest.Backend.csproj", "{A3FA88EF-74ED-EB5F-9845-4A20839B24EA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{7934751E-E385-4C82-A105-D19207CA3761}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A3FA88EF-74ED-EB5F-9845-4A20839B24EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3FA88EF-74ED-EB5F-9845-4A20839B24EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3FA88EF-74ED-EB5F-9845-4A20839B24EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7934751E-E385-4C82-A105-D19207CA3761}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7934751E-E385-4C82-A105-D19207CA3761}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7934751E-E385-4C82-A105-D19207CA3761}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7934751E-E385-4C82-A105-D19207CA3761}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -90,6 +90,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\..\RecipeNest.Shared\RecipeNest.Shared.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Compile Update="AddShoppingListPage.xaml.cs">
 	    <DependentUpon>AddShoppingListPage.xaml</DependentUpon>
 	  </Compile>
