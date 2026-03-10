@@ -15,17 +15,17 @@ namespace RecipeNest.BackendServices
         public AuthService(HttpClient httpClient) : base(httpClient) { }
 
 
-        public async Task<List<User>> getUsers()
+        public async Task<List<UserDTO>> getUsers()
         {
-            List<User> users = await _httpClient.GetFromJsonAsync<List<User>>("api/User") ?? new List<User>();
+            List<UserDTO> users = await _httpClient.GetFromJsonAsync<List<UserDTO>>("api/User") ?? new List<UserDTO>();
             //Debug.WriteLine(users[0].Name);
             
             return users;
         }
 
-        public async Task<User> getUser(int id)
+        public async Task<UserDTO> getUser(int id)
         {
-            var user = await _httpClient.GetFromJsonAsync<User>($"api/User/{id}");
+            var user = await _httpClient.GetFromJsonAsync<UserDTO>($"api/User/{id}");
             if (user != null)
             {
                 return user;
@@ -38,12 +38,12 @@ namespace RecipeNest.BackendServices
 
         public async Task addUser()
         {
-            User user = new User {
+            RegisterDTO user = new RegisterDTO {
                 Name = "test",
                 Login = "test2",
                 Password = "test3",
             };
-            await _httpClient.PostAsJsonAsync<User>("api/User", user);
+            await _httpClient.PostAsJsonAsync<RegisterDTO>("api/User", user);
         }
     }
 }

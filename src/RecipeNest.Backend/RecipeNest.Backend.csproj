@@ -17,4 +17,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RecipeNest.Shared\RecipeNest.Shared.csproj" />
+  </ItemGroup>
+
 </Project>
