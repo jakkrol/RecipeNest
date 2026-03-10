@@ -90,7 +90,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\RecipeNest.Shared\RecipeNest.Shared.csproj" />
+	  <ProjectReference Include="..\RecipeNest.Shared\RecipeNest.Shared.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

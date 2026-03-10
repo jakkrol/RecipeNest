@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RecipeNest.Backend.Models;
+using System.Net.WebSockets;
+using RecipeNest.Shared.DTO;
 
 namespace RecipeNest.Backend.Controllers
 {
@@ -20,6 +22,13 @@ namespace RecipeNest.Backend.Controllers
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             var users = await _context.Users.ToListAsync();
+            //var users = await _context.Users.Select(u => new UserDTO
+            //{
+            //    Id = u.Id,
+            //    Name = u.Name,
+            //    CreatedAt = u.CreatedAt
+            //}).ToListAsync();
+
             return Ok(users);
         }
 
