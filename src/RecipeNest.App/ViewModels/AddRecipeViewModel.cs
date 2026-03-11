@@ -68,15 +68,17 @@ namespace RecipeNest.ViewModels
             }
         }
 
-        public AddRecipeViewModel()
+        private readonly RecipeService _recipeService;
+        public AddRecipeViewModel(RecipeService recipeService)
         {
             SaveRecipeCommand = new Command(SaveRecipe);
+            _recipeService = recipeService;
         }
         private async void LoadRecipe()
         {
             //if (string.IsNullOrEmpty(RecipeId))
             //    return;
-            var recipe = RecipeService.Instance.Recipes.FirstOrDefault(r => r.Id == recipeId);
+            var recipe = _recipeService.Recipes.FirstOrDefault(r => r.Id == recipeId);
             if (recipe != null)
             {
                 Name = recipe.Name;
@@ -99,9 +101,9 @@ namespace RecipeNest.ViewModels
         private async void SaveRecipe()
         {
             if (recipeId != null)
-                Services.RecipeService.Instance.UpdateRecipe(recipeId.Value, Name, Category, Description, Ingredients, Instructions, ImageUrl);
+                await _recipeService.UpdateRecipe(recipeId.Value, Name, Category, Description, Ingredients, Instructions, ImageUrl);
             else
-                await Services.RecipeService.Instance.AddNewRecipe(Name, Category, Description, Ingredients, Instructions, ImageUrl);
+                await _recipeService.AddNewRecipe(Name, Category, Description, Ingredients, Instructions, ImageUrl);
 
             await Shell.Current.GoToAsync("..");
         }

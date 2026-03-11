@@ -4,11 +4,12 @@ namespace RecipeNest;
 
 public partial class ShoppingListsPage : ContentPage
 {
-	public ShoppingListViewModel ViewModel = new ShoppingListViewModel();
-	public ShoppingListsPage()
+	public ShoppingListViewModel ViewModel { get; }
+	public ShoppingListsPage(ShoppingListViewModel viewModel)
 	{
 		InitializeComponent();
-		this.BindingContext = ViewModel;
+        ViewModel = viewModel;
+        this.BindingContext = ViewModel;
 	}
 
     protected override void OnAppearing()

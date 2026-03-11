@@ -4,11 +4,12 @@ namespace RecipeNest;
 
 public partial class ShoppingListsDetailsPage : ContentPage
 {
-	ShoppingListDetailsViewModel ViewModel = new ShoppingListDetailsViewModel();
-	public ShoppingListsDetailsPage()
+	ShoppingListDetailsViewModel ViewModel { get; }
+	public ShoppingListsDetailsPage(ShoppingListDetailsViewModel viewModel)
 	{
 		InitializeComponent();
-		this.BindingContext = ViewModel;
+        ViewModel = viewModel;
+        this.BindingContext = ViewModel;
 	}
 
     private void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)

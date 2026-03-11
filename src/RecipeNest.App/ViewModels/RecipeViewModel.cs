@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RecipeNest.Services;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -62,9 +63,13 @@ using System.Windows.Input;
         public ICommand PerformSearchCommand { get; }
         public ICommand PerformOrderSelectionCommand {  get; }
         public ICommand DeleteRecipeCommand { get; }
-        public RecipeViewModel()
+
+        private readonly RecipeService _recipeService;
+        public RecipeViewModel(RecipeService recipeService)
         {
-            Recipes = Services.RecipeService.Instance.Recipes;
+            _recipeService = recipeService;
+            Recipes = recipeService.Recipes;
+            //Recipes = Services.RecipeService.Instance.Recipes;
             FilteredRecipes = new ObservableCollection<Models.Recipe>(Recipes);
             Recipes.CollectionChanged += Recipes_CollectionChanged;
             PerformSearchCommand = new Command(PerformSearch);
@@ -106,7 +111,7 @@ using System.Windows.Input;
         private async void DeleteRecipe(Models.Recipe recipe)
         {
             //Debug.WriteLine($"Deleting recipe: {recipe.Name}");
-            await Services.RecipeService.Instance.RemoveRecipe(recipe);
+            await _recipeService.RemoveRecipe(recipe);
         }
 
         public async void checkItem(Models.Recipe Item)
@@ -114,7 +119,7 @@ using System.Windows.Input;
             //Debug.WriteLine("ITEMEK: " + Item.Name);
 
 
-            await Services.RecipeService.Instance.CheckItem(Item);
+            await _recipeService.CheckItem(Item);
         }
 
 

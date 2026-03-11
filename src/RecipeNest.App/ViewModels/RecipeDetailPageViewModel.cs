@@ -14,6 +14,15 @@ namespace RecipeNest.ViewModels
     [QueryProperty(nameof(RecipeId), "recipeId")]
     public class RecipeDetailPageViewModel : INotifyPropertyChanged
     {
+        private readonly RecipeService _recipeService;
+        private readonly RecipeApiService _recipeApiService;
+
+        public RecipeDetailPageViewModel(RecipeService recipeService, RecipeApiService recipeApiService)
+        {
+            _recipeService = recipeService;
+            _recipeApiService = recipeApiService;
+        }
+
         public string Name { get; set; } = "";
         public string Category { get; set; } = "";
         public string Description { get; set; } = "";
@@ -51,7 +60,7 @@ private int? recipeId;
 
             if (source == "local")
             {
-                var recipe = RecipeService.Instance.Recipes.FirstOrDefault(r => r.Id == recipeId.Value);
+                var recipe = _recipeService.Recipes.FirstOrDefault(r => r.Id == recipeId.Value);
                 if (recipe != null)
                 {
                     Name = recipe.Name;
@@ -70,8 +79,8 @@ private int? recipeId;
             if(source == "internet")
             {
                 Debug.WriteLine("FROM INTERNET");
-                RecipeApiService _apiService = new RecipeApiService();
-                Recipe recipe = await _apiService.getRecipeById(Convert.ToInt32(recipeId));
+                //RecipeApiService _apiService = new RecipeApiService();
+                var recipe = await _recipeApiService.getRecipeById(Convert.ToInt32(recipeId));
                 Debug.WriteLine("TEST RECIPE: " + recipe.Name);
                 if(recipe != null)
                 {

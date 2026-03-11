@@ -4,10 +4,11 @@ namespace RecipeNest;
 
 public partial class RecipeDetailPage : ContentPage
 {
-	public RecipeDetailPageViewModel ViewModel = new RecipeDetailPageViewModel();
-	public RecipeDetailPage()
+    public RecipeDetailPageViewModel ViewModel { get; }
+    public RecipeDetailPage(RecipeDetailPageViewModel viewModel)
 	{
 		InitializeComponent();
-		this.BindingContext = ViewModel;
+		ViewModel = viewModel;
+        this.BindingContext = ViewModel;
 	}
 }

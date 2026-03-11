@@ -11,7 +11,12 @@ namespace RecipeNest.Services
 {
     public class RecipeApiService
     {
-        private readonly HttpClient _httpClient = new();
+        private readonly HttpClient _httpClient;
+
+        public RecipeApiService(HttpClient httpClient)
+        {
+            _httpClient = httpClient;
+        }
 
         public async Task<Models.Recipe> SearchRecipeOfDay()
         {

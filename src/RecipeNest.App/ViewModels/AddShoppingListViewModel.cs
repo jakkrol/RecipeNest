@@ -59,16 +59,18 @@ namespace RecipeNest.ViewModels
         public ICommand DeleteItemCommand { get; }
         public ICommand SaveShoppingListCommand { get; }
 
-        public AddShoppingListViewModel()
+        private readonly ShoppingListService _shoppingListService;
+        public AddShoppingListViewModel(ShoppingListService shoppingListService)
         {
             AddItemCommand = new Command(AddItem);
             DeleteItemCommand = new Command(DeleteItem);
             SaveShoppingListCommand = new Command(async () => await SaveShoppingList());
+            _shoppingListService = shoppingListService;
         }
 
         private async void LoadListDetails()
         {
-            shoppinglist = ShoppingListService.Instance.ShoppingLists.FirstOrDefault(r => r.Id == listId);
+            shoppinglist = _shoppingListService.ShoppingLists.FirstOrDefault(r => r.Id == listId);
             if (shoppinglist != null)
             {
                 ListName = shoppinglist.Name;
@@ -108,7 +110,7 @@ namespace RecipeNest.ViewModels
                 Name = ListName
             };
 
-            await ShoppingListService.Instance.AddNewList(list);
+            await _shoppingListService.AddNewList(list);
 
             var dbItems = shoppinglist.Items ?? new List<ShoppingItem>();
 
@@ -116,13 +118,13 @@ namespace RecipeNest.ViewModels
 
             foreach (var removedItem in removedItems)
             {
-                await ShoppingListService.Instance.DeleteItem(removedItem);
+                await _shoppingListService.DeleteItem(removedItem);
             }
 
             foreach (var item in ShoppingItems)
             {
                 item.ShoppingListId = list.Id;
-                await ShoppingListService.Instance.AddNewItem(item); // wywołuje SaveItemAsync / insert/update
+                await _shoppingListService.AddNewItem(item); // wywołuje SaveItemAsync / insert/update
             }
 
             await Shell.Current.DisplayAlert("Success", "Shopping list saved!", "OK");

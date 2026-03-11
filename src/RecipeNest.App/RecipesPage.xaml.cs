@@ -5,11 +5,12 @@ namespace RecipeNest;
 
 public partial class RecipesPage : ContentPage
 {
-	public RecipeViewModel ViewModel = new RecipeViewModel();
-	public RecipesPage()
+	public RecipeViewModel ViewModel { get; }
+	public RecipesPage(RecipeViewModel viewModel)
 	{
 		InitializeComponent();
-		this.BindingContext = ViewModel;
+        ViewModel = viewModel;
+        this.BindingContext = ViewModel;
     }
 
     protected override void OnAppearing()

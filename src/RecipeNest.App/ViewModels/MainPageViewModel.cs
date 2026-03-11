@@ -12,13 +12,15 @@ namespace RecipeNest.ViewModels
 {
     public class MainPageViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<Recipe> Recipes => RecipeService.Instance.Recipes;
+        private readonly RecipeService _recipeService;
+        public ObservableCollection<Recipe> Recipes => _recipeService.Recipes;
         
         public string RecipesCount => $"You have {Recipes.Count} recipes saved";
 
-        public MainPageViewModel()
+        public MainPageViewModel(RecipeService recipeService)
         {
             Recipes.CollectionChanged += (s, e) => OnPropertyChanged(nameof(RecipesCount));
+            _recipeService = recipeService;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

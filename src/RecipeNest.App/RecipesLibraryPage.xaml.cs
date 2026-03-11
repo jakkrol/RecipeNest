@@ -5,11 +5,12 @@ namespace RecipeNest;
 
 public partial class RecipesLibraryPage : ContentPage
 {
-	public RecipeLibraryViewModel vm = new RecipeLibraryViewModel();
-    public RecipesLibraryPage()
+	public RecipeLibraryViewModel vm { get; }
+    public RecipesLibraryPage(RecipeLibraryViewModel recipeLibraryPage)
 	{
 		InitializeComponent();
-		this.BindingContext = vm;
+        vm = recipeLibraryPage;
+        this.BindingContext = vm;
     }
 
     private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -1,4 +1,5 @@
 ﻿using RecipeNest.Models;
+using RecipeNest.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -59,9 +60,12 @@ namespace RecipeNest.ViewModels
         public ICommand PerformSearchCommand { get; }
         public ICommand DeleteListCommand { get; }
 
-        public ShoppingListViewModel()
+        private readonly ShoppingListService _shoppingListService;
+        public ShoppingListViewModel(ShoppingListService shoppingListService)
         {
-            ShoppingLists = Services.ShoppingListService.Instance.ShoppingLists;
+            _shoppingListService = shoppingListService;
+            ShoppingLists = _shoppingListService.ShoppingLists;
+            //ShoppingLists = Services.ShoppingListService.Instance.ShoppingLists;
             FilteredShoppingLists = new ObservableCollection<Models.ShoppingList>(ShoppingLists);
             ShoppingLists.CollectionChanged += ShoppingLists_CollectionChanged;
             PerformSearchCommand = new Command(PerformSearch);
@@ -76,7 +80,7 @@ namespace RecipeNest.ViewModels
             if (list is Models.ShoppingList shoppingList)
             {
                 ShoppingLists.Remove(shoppingList);
-                await Services.ShoppingListService.Instance.DeleteList(shoppingList);
+                await _shoppingListService.DeleteList(shoppingList);
             }
         }
         private void PerformSearch()

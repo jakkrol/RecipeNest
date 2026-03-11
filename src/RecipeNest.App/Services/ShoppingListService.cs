@@ -12,24 +12,26 @@ namespace RecipeNest.Services
 {
     public class ShoppingListService
     {
-        private static ShoppingListService _instance;
-        public static ShoppingListService Instance
-        {
-            get { 
-                if( _instance == null)
-                {
-                    _instance = new ShoppingListService();
-                }
-                return _instance;
-            }
-        }
+        //private static ShoppingListService _instance;
+        //public static ShoppingListService Instance
+        //{
+        //    get { 
+        //        if( _instance == null)
+        //        {
+        //            _instance = new ShoppingListService();
+        //        }
+        //        return _instance;
+        //    }
+        //}
 
         public ObservableCollection<ShoppingList> ShoppingLists { get; }
         private readonly RecipeNestDb _db;
-        public ShoppingListService()
+        private readonly UserSession _userSession;
+        public ShoppingListService(UserSession userSession)
         {
             ShoppingLists = new ObservableCollection<ShoppingList>();
             _db = new RecipeNestDb();
+            _userSession = userSession;
         }
 
         public async Task LoadShoppingListsFromDb()

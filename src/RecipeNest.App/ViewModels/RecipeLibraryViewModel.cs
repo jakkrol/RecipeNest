@@ -15,6 +15,7 @@ namespace RecipeNest.ViewModels
     {
         private readonly RecipeApiService _apiService;
 
+
         public ObservableCollection<Recipe> Recipes { get; set; } = new();
 
         private Recipe _recipeOfTheDay;
@@ -96,10 +97,10 @@ namespace RecipeNest.ViewModels
 
         public ICommand SearchCommand { get; }
 
-        public RecipeLibraryViewModel()
+        public RecipeLibraryViewModel(RecipeApiService apiService)
         {
             Debug.WriteLine("FETCHING READY!!!");
-            _apiService = new Services.RecipeApiService();
+            _apiService = apiService;
             SearchCommand = new Command(async () => await FetchRecipes(SearchQuery));
 
 

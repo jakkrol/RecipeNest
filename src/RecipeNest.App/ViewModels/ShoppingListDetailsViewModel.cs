@@ -39,13 +39,19 @@ namespace RecipeNest.ViewModels
         public ObservableCollection<Models.ShoppingItem> Items { get; set; }
 
 
+        private readonly ShoppingListService _shoppingListService;
+        public ShoppingListDetailsViewModel(ShoppingListService shoppingListService)
+        {
+            _shoppingListService = shoppingListService;
+            Items = new ObservableCollection<Models.ShoppingItem>();
+        }
 
         public void LoadListDetails()
         {
             if (!listId.HasValue)
                 return;
 
-            var list = ShoppingListService.Instance.ShoppingLists.FirstOrDefault(r => r.Id == listId.Value);
+            var list = _shoppingListService.ShoppingLists.FirstOrDefault(r => r.Id == listId.Value);
             if (list != null)
             {
                 Name = list.Name;
@@ -71,7 +77,7 @@ namespace RecipeNest.ViewModels
             //Debug.WriteLine("ITEMEK: " + Item.Name);
 
 
-            await Services.ShoppingListService.Instance.CheckItem(Item);
+            await _shoppingListService.CheckItem(Item);
         }
 
 

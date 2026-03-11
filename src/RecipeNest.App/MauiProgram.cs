@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Logging;
 using RecipeNest.BackendServices;
 using Microsoft.Extensions.DependencyInjection;
+using RecipeNest.Services;
+using RecipeNest.ViewModels;
 
 namespace RecipeNest
 {
@@ -21,18 +23,45 @@ namespace RecipeNest
 
 #if DEBUG
     		builder.Logging.AddDebug();
-#endif      
-            builder.Services.AddScoped(sp =>
+#endif
+            builder.Services.AddSingleton(sp =>
             {
                 return new HttpClient
                 {
-                    //BaseAddress = new Uri("https://recipenestapi.azurewebsites.net/")
                     BaseAddress = new Uri("http://localhost:5264/")
                 };
             });
 
-            builder.Services.AddScoped<AuthService>();
-            builder.Services.AddScoped<UserApiService>();
+
+            // --- SERWISY LOGICZNE I SESJA ---
+            builder.Services.AddSingleton<UserSession>(); // TO JEST KLUCZOWE
+            builder.Services.AddSingleton<RecipeService>(); // TO NAPRAWI TWÓJ BŁĄD
+            builder.Services.AddSingleton<ShoppingListService>();
+
+            // --- SERWISY API (Zewnętrzne i Twoje) ---
+            builder.Services.AddSingleton<RecipeApiService>();
+            builder.Services.AddSingleton<UserApiService>();
+            builder.Services.AddSingleton<AuthService>();
+
+            // --- VIEWMODELE ---
+            builder.Services.AddTransient<RecipeLibraryViewModel>();
+            builder.Services.AddTransient<RecipeDetailPageViewModel>();
+            builder.Services.AddTransient<MainPageViewModel>();
+            builder.Services.AddTransient<RecipeViewModel>();
+            builder.Services.AddTransient<AddRecipeViewModel>();
+            builder.Services.AddTransient<AddShoppingListViewModel>();
+            builder.Services.AddTransient<ShoppingListViewModel>();
+            builder.Services.AddTransient<ShoppingListDetailsViewModel>();
+
+
+
+            // --- STRONY ---
+            builder.Services.AddTransient<MainPage>();
+            builder.Services.AddTransient<RecipesLibraryPage>();
+            builder.Services.AddTransient<RecipeDetailPage>();
+            builder.Services.AddTransient<AddRecipePage>();
+            builder.Services.AddTransient<AddShoppingListPage>();
+
 
             return builder.Build();
         }
