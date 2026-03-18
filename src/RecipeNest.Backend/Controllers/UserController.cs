@@ -130,7 +130,7 @@ namespace RecipeNest.Backend.Controllers
 
         // to complete this - login
         [HttpPost("login")]
-        public async Task<ActionResult<User>> Login(User loginuser)
+        public async Task<ActionResult<LoginDTO>> Login(LoginDTO loginuser)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Login == loginuser.Login && u.Password == loginuser.Password);
 

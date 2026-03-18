@@ -5,17 +5,17 @@ namespace RecipeNest.Backend.Data
 {
     public class AppDbContext : DbContext
     {
-        protected readonly IConfiguration _configuration;
+        //protected readonly IConfiguration _configuration;
 
-        public AppDbContext(IConfiguration configuration)
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-            _configuration = configuration;
+            //_configuration = configuration;
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseNpgsql(_configuration.GetConnectionString("WebApiDatabase"));
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseNpgsql(_configuration.GetConnectionString("WebApiDatabase"));
+        //}
 
         public DbSet<User> Users { get; set; }
         public DbSet<Recipe> Recipes { get; set; }
