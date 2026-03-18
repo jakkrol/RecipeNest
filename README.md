@@ -31,10 +31,7 @@ The solution is architected into three distinct layers to maximize code reusabil
 
 ## 🔬 Technical Deep Dive
 
-### 📂 Data Persistence & Synchronization
-The application implements an **Optimistic UI** pattern. User actions are committed instantly to the local **SQLite** database to ensure zero latency.
-
-**The Sync Workflow:**
+**The Sync Workflow Planned Implementation:**
 1.  **Change Tracking:** The app identifies new or modified records in the local store.
 2.  **Delta Push:** Only the changes (deltas) are sent to the **ASP.NET Core** backend via DTOs.
 3.  **Conflict Resolution:** The backend compares timestamps and versions against the **PostgreSQL** master record to ensure data integrity.
@@ -50,7 +47,7 @@ By housing all **Data Transfer Objects (DTOs)** in a shared library, we achieve 
 * **Language:** C# 12 / .NET 8
 * **Frontend:** .NET MAUI (Multi-platform App UI)
 * **Backend:** ASP.NET Core Web API
-* **Databases:** PostgreSQL (Cloud), SQLite (Local)
+* **Databases:** PostgreSQL, SQLite (Local)
 * **ORM:** Entity Framework Core
 * **OCR Engine:** Tesseract
 
@@ -75,4 +72,3 @@ By housing all **Data Transfer Objects (DTOs)** in a shared library, we achieve 
 - [x] SQLite Local Persistence
 - [ ] **[IN PROGRESS]** ASP.NET Core Sync Endpoints
 - [ ] **[IN PROGRESS]** PostgreSQL Schema Optimization
-- [ ] Tesseract OCR Parsing Logic
