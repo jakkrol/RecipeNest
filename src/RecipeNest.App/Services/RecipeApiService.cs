@@ -20,7 +20,7 @@ namespace RecipeNest.Services
 
         public async Task<Models.Recipe> SearchRecipeOfDay()
         {
-            string url = "https://www.themealdb.com/api/json/v1/1/random.php";
+            string url = "random.php";
             var response = await _httpClient.GetStringAsync(url);
 
             using var doc = JsonDocument.Parse(response);
@@ -47,11 +47,11 @@ namespace RecipeNest.Services
 
             string endpoint = (searchMode ?? "name").ToLower() switch
             {
-                "name" => $"https://www.themealdb.com/api/json/v1/1/search.php?s={query}",
-                "ingredient" => $"https://www.themealdb.com/api/json/v1/1/filter.php?i={query}",
-                "category" => $"https://www.themealdb.com/api/json/v1/1/filter.php?c={query}",
-                "country" => $"https://www.themealdb.com/api/json/v1/1/filter.php?a={query}",
-                _ => $"https://www.themealdb.com/api/json/v1/1/search.php?s={query}"
+                "name" => $"search.php?s={query}",
+                "ingredient" => $"filter.php?i={query}",
+                "category" => $"filter.php?c={query}",
+                "country" => $"filter.php?a={query}",
+                _ => $"search.php?s={query}"
             };
 
             try
@@ -95,7 +95,7 @@ namespace RecipeNest.Services
 
         public async Task<Recipe> getRecipeById(int id)
         {
-            string url = $"https://www.themealdb.com/api/json/v1/1/lookup.php?i={id}";
+            string url = $"lookup.php?i={id}";
             var response = await _httpClient.GetStringAsync(url);
 
             using var doc = JsonDocument.Parse(response);
@@ -117,7 +117,7 @@ namespace RecipeNest.Services
 
         public async Task<List<string>> getAllRegions()
         {
-            string url = "https://www.themealdb.com/api/json/v1/1/list.php?a=list";
+            string url = "list.php?a=list";
             var response = await _httpClient.GetStringAsync(url);
 
             var doc = JsonDocument.Parse(response);
@@ -132,7 +132,7 @@ namespace RecipeNest.Services
         }
         public async Task<List<string>> getAllCategories()
         {
-            string url = "https://www.themealdb.com/api/json/v1/1/list.php?c=list";
+            string url = "list.php?c=list";
             var response = await _httpClient.GetStringAsync(url);
 
             var doc = JsonDocument.Parse(response);
@@ -147,7 +147,7 @@ namespace RecipeNest.Services
         }
         public async Task<List<string>> getAllIngredients()
         {
-            string url = "https://www.themealdb.com/api/json/v1/1/list.php?i=list";
+            string url = "list.php?i=list";
             var response = await _httpClient.GetStringAsync(url);
 
             var doc = JsonDocument.Parse(response);

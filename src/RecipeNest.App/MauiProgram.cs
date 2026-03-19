@@ -24,22 +24,31 @@ namespace RecipeNest
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
-            builder.Services.AddSingleton(sp =>
+            //builder.Services.AddSingleton(sp =>
+            //{
+            //    return new HttpClient
+            //    {
+            //        BaseAddress = new Uri("http://localhost:5264/")
+            //    };
+            //});
+
+            builder.Services.AddHttpClient<BaseApiService>(c =>
             {
-                return new HttpClient
-                {
-                    BaseAddress = new Uri("http://localhost:5264/")
-                };
+                c.BaseAddress = new Uri("http://localhost:5264/");
+            });
+            builder.Services.AddHttpClient<RecipeApiService>(c =>
+            {
+                c.BaseAddress = new Uri("https://www.themealdb.com/api/json/v1/1/");
             });
 
 
             // --- SERWISY LOGICZNE I SESJA ---
-            builder.Services.AddSingleton<UserSession>(); // TO JEST KLUCZOWE
-            builder.Services.AddSingleton<RecipeService>(); // TO NAPRAWI TWÓJ BŁĄD
+            builder.Services.AddSingleton<UserSession>();
+            builder.Services.AddSingleton<RecipeService>(); 
             builder.Services.AddSingleton<ShoppingListService>();
 
-            // --- SERWISY API (Zewnętrzne i Twoje) ---
-            builder.Services.AddSingleton<RecipeApiService>();
+            // --- SERWISY API ---
+            //builder.Services.AddSingleton<RecipeApiService>();
             builder.Services.AddSingleton<UserApiService>();
             builder.Services.AddSingleton<AuthService>();
 
