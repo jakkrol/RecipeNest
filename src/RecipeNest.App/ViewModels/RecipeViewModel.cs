@@ -64,6 +64,8 @@ using System.Windows.Input;
         public ICommand PerformOrderSelectionCommand {  get; }
         public ICommand DeleteRecipeCommand { get; }
 
+        public ICommand SetOrderCommand { get; }
+
         private readonly RecipeService _recipeService;
         public RecipeViewModel(RecipeService recipeService)
         {
@@ -75,6 +77,8 @@ using System.Windows.Input;
             PerformSearchCommand = new Command(PerformSearch);
             DeleteRecipeCommand = new Command<Models.Recipe>(DeleteRecipe);
             PerformOrderSelectionCommand = new Command(PerformOrder);
+
+            SetOrderCommand = new Command<String>(param => Order = param);
         }
 
         private void Recipes_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)

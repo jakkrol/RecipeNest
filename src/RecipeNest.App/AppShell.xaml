@@ -4,9 +4,10 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:RecipeNest"
-    FlyoutBackground="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource GlobalPageBackground}}">
-    
-    
+    FlyoutBackground="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource GlobalPageBackground}}"
+    Padding="5">
+
+
 
     <Shell.ToolbarItems>
         <ToolbarItem x:Name="Account" IconImageSource="accounticon.png" Text="Account"></ToolbarItem>

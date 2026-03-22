@@ -6,26 +6,54 @@
              x:DataType="vm:AddRecipeViewModel">
 
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="15">
-            <Label Text="Recipe Name" />
-            <Entry Text="{Binding Name}" Placeholder="e.g., Spaghetti Carbonara" />
+        <VerticalStackLayout Padding="20" Spacing="20">
 
-            <Label Text="Category" />
-            <Entry Text="{Binding Category}" Placeholder="e.g., Italian" />
+            <VerticalStackLayout Spacing="2">
+                <Label Text="Recipe Name" FontAttributes="Bold" TextColor="WhiteSmoke" />
+                <Entry Text="{Binding Name}" Placeholder="e.g., Spaghetti Carbonara" />
+            </VerticalStackLayout>
 
-            <Label Text="Description" />
-            <Editor Text="{Binding Description}" Placeholder="Short description..." AutoSize="TextChanges" HeightRequest="80" />
+            <VerticalStackLayout Spacing="2">
+                <Label Text="Category" FontAttributes="Bold" TextColor="WhiteSmoke" />
+                <Entry Text="{Binding Category}" Placeholder="e.g., Italian" />
+            </VerticalStackLayout>
 
-            <Label Text="Ingredients" />
-            <Editor Text="{Binding Ingredients}" Placeholder="e.g., pasta, eggs, cheese" AutoSize="TextChanges" HeightRequest="80" />
+            <VerticalStackLayout Spacing="2">
+                <Label Text="Description" FontAttributes="Bold" TextColor="WhiteSmoke" />
+                <Editor Text="{Binding Description}" 
+                Placeholder="Short description..." 
+                AutoSize="TextChanges" 
+                MinimumHeightRequest="80" />
+            </VerticalStackLayout>
 
-            <Label Text="Instructions" />
-            <Editor Text="{Binding Instructions}" Placeholder="How to make it..." AutoSize="TextChanges" HeightRequest="120" />
+            <VerticalStackLayout Spacing="2">
+                <Label Text="Ingredients" FontAttributes="Bold" TextColor="WhiteSmoke" />
+                <Editor Text="{Binding Ingredients}" 
+                Placeholder="e.g., pasta, eggs, cheese" 
+                AutoSize="TextChanges" 
+                MinimumHeightRequest="80" />
+            </VerticalStackLayout>
 
-            <Label Text="Image URL (optional)" />
-            <Entry Text="{Binding ImageUrl}" Placeholder="http://..." />
+            <VerticalStackLayout Spacing="2">
+                <Label Text="Instructions" FontAttributes="Bold" TextColor="WhiteSmoke" />
+                <Editor Text="{Binding Instructions}" 
+                Placeholder="How to make it..." 
+                AutoSize="TextChanges" 
+                MinimumHeightRequest="120" />
+            </VerticalStackLayout>
 
-            <Button Text="Add Recipe" Command="{Binding SaveRecipeCommand}" />
+            <VerticalStackLayout Spacing="2">
+                <Label Text="Image URL (optional)" FontAttributes="Bold" TextColor="WhiteSmoke" />
+                <Entry Text="{Binding ImageUrl}" Placeholder="http://..." />
+            </VerticalStackLayout>
+
+            <Button Text="Add Recipe" 
+            Command="{Binding SaveRecipeCommand}" 
+            Margin="0,10,0,0"
+            CornerRadius="10"
+            HeightRequest="50"
+            BackgroundColor="#00bfa5" />
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

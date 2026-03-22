@@ -10,9 +10,10 @@
             <Label Text="🍽️ My Recipes"
                    FontSize="28"
                    FontAttributes="Bold"
-                   HorizontalOptions="Center"/>
+                   HorizontalOptions="Center"
+                   Margin="10"/>
 
-            <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
+            <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10" Margin="0, 0, 10, 0">
                 <SearchBar Placeholder="Search recipes..."
                            Text="{Binding SearchText}"
                            SearchCommand="{Binding PerformSearchCommand}"
@@ -25,27 +26,61 @@
             </HorizontalStackLayout>
             
             <!-- ORDER BY -->
-            <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
-                <Picker x:Name="picker"
-                    Title="Select order"
-                    SelectedItem="{Binding Order}">
-                    <Picker.ItemsSource>
-                        <x:Array Type="{x:Type x:String}">
-                            <x:String>Desc</x:String>
-                            <x:String>Asc</x:String>
-                        </x:Array>
-                    </Picker.ItemsSource>
-                </Picker>
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,10">
+                <Label Text="Sort by:" VerticalOptions="Center" TextColor="WhiteSmoke" Opacity="0.8" />
+
+                <HorizontalStackLayout Spacing="0">
+                    <Border Stroke="#056" 
+                            StrokeThickness="1" 
+                            BackgroundColor="#013a38"
+                            HeightRequest="40">     
+                        <Border.Triggers>
+                            <DataTrigger TargetType="Border" Binding="{Binding Order}" Value="Desc">
+                                <Setter Property="BackgroundColor" Value="#00bfa5" />
+                                <Setter Property="Stroke" Value="White" />
+                            </DataTrigger>
+                        </Border.Triggers>
+                        <Button Text="DESC" 
+                                Command="{Binding SetOrderCommand}" 
+                                CommandParameter="Desc"
+                                BackgroundColor="Transparent"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                FontSize="12"
+                                Padding="15,0" />
+                    </Border>
+
+                    <Border Stroke="#056" 
+                            StrokeThickness="1" 
+                            BackgroundColor="#013a38"
+                            HeightRequest="40"
+                            Margin="-1,0,0,0">
+                        <Border.Triggers>
+                            <DataTrigger TargetType="Border" Binding="{Binding Order}" Value="Asc">
+                                <Setter Property="BackgroundColor" Value="#00bfa5" />
+                                <Setter Property="Stroke" Value="White" />
+                            </DataTrigger>
+                        </Border.Triggers>
+                        <Button Text="ASC" 
+                                Command="{Binding SetOrderCommand}" 
+                                CommandParameter="Asc"
+                                BackgroundColor="Transparent"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                FontSize="12"
+                                Padding="15,0" />
+                    </Border>
+                </HorizontalStackLayout>
             </HorizontalStackLayout>
             <!-- ORDER BY -->
         </VerticalStackLayout>
 
         <CollectionView x:Name="MyCollection" Grid.Row="1"
-                ItemsSource="{Binding FilteredRecipes}"
-                SelectionMode="Single"
-                SelectionChanged="CollectionView_SelectionChanged"
-                Margin="15"
-                VerticalOptions="Fill">
+                        ItemsSource="{Binding FilteredRecipes}"
+                        SelectionMode="Single"
+                        SelectionChanged="CollectionView_SelectionChanged"
+                        Margin="15"
+                        VerticalOptions="Fill">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical"/>
             </CollectionView.ItemsLayout>
@@ -64,19 +99,22 @@
                                 Padding="16"
                                 Margin="8,6"
                                 Shadow="5,5,15,#00000044">
-                            <Grid ColumnDefinitions="Auto, *, Auto" RowDefinitions="Auto" VerticalOptions="Center">
+                            <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto" VerticalOptions="Center">
                                 <Label Grid.Column="0" 
                                        Text="{Binding Name}" 
                                        FontSize="20" 
                                        FontAttributes="Bold" 
                                        TextColor="White"
-                                       VerticalOptions="Center"/>
+                                       VerticalOptions="Center"
+                                       LineBreakMode="TailTruncation"
+                                       MaxLines="2"/>
 
                                 <HorizontalStackLayout Grid.Column="2" Spacing="8" VerticalOptions="Center">
-                                    <Button Text="✏️" Clicked="Update_Clicked" />
+                                    <Button Text="✏️" Clicked="Update_Clicked" BackgroundColor="Transparent" />
                                     <Button Text="🗑️"
                                             Command="{Binding BindingContext.DeleteRecipeCommand, Source={x:Reference RecipesPageContext}}"
-                                            CommandParameter="{Binding .}"/>
+                                            CommandParameter="{Binding .}"
+                                            BackgroundColor="Transparent"/>
                                     <CheckBox IsChecked="{Binding IsFavourite}" CheckedChanged="CheckBox_CheckedChanged" />
                                 </HorizontalStackLayout>
                             </Grid>
