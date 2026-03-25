@@ -49,6 +49,18 @@
                     StrokeShape="RoundRectangle 20"
                     Padding="16"
                     Shadow="5,5,15,#00000044">
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup Name="CommonStates">
+                                <VisualState Name="Normal" />
+                                <VisualState Name="Selected">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#024e4b" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
                         <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" ColumnSpacing="10">
                             <Label Grid.Row="0" Grid.Column="0"
                            Text="{Binding Name}"
