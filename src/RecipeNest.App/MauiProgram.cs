@@ -4,6 +4,7 @@ using RecipeNest.BackendServices;
 using Microsoft.Extensions.DependencyInjection;
 using RecipeNest.Services;
 using RecipeNest.ViewModels;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace RecipeNest
 {
@@ -14,6 +15,7 @@ namespace RecipeNest
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseSkiaSharp()
                 .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {

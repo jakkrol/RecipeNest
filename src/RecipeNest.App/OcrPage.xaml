@@ -1,22 +1,52 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="RecipeNest.OcrPage">
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Maui.Controls;assembly=SkiaSharp.Views.Maui.Controls"
+             x:Class="RecipeNest.OcrPage"
+             Title="Zczytywanie Przepisu">
+
     <ScrollView>
-        <VerticalStackLayout Padding="30">
-            <Button Text="Wybierz zdjęcie do zczytania" Clicked="OnPickPhotoClicked" VerticalOptions="Center" Margin="10,10,10,0" MaximumWidthRequest="250"/>
-            <Label FontSize="16" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Margin="10,10,10,10" Text="Ustaw nagłówki nad elementami textu: TYT, SKL, PREP"></Label>
-            <!--<HorizontalStackLayout>
-                <RadioButton Content="FullText" GroupName="ParsingModes" Value="FullText" IsChecked="True" CheckedChanged="RadioButton_CheckedChanged"></RadioButton>
-                <RadioButton Content="Line" GroupName="ParsingModes" Value="Line" IsChecked="False" CheckedChanged="RadioButton_CheckedChanged"></RadioButton>
-                <RadioButton Content="Column" GroupName="ParsingModes" Value="Column" IsChecked="False" CheckedChanged="RadioButton_CheckedChanged"></RadioButton>
-            </HorizontalStackLayout>-->
-            <!--<Label x:Name="Ingredients"></Label>
+        <VerticalStackLayout Padding="20" Spacing="15">
 
-            <Label x:Name="Instructions"></Label>-->
+            <Label Text="1. Wybierz zdjęcie i zaznacz tekst" 
+                   FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" />
 
-            <Editor x:Name="OcrEditor" Text="Tu pojawi się tekst z OCR" AutoSize="TextChanges" />
-            <Button Text="Podziel przepis" VerticalOptions="End" Margin="5,5,5,5" MaximumWidthRequest="250" Clicked="OnSplitRecipeClicked" />
+            <Border Stroke="Gray" StrokeThickness="2" HeightRequest="450">
+                <Grid BackgroundColor="Black">
+                    <skia:SKCanvasView x:Name="CanvasView"
+                                       PaintSurface="CanvasView_PaintSurface">
+                        <skia:SKCanvasView.GestureRecognizers>
+                            <PanGestureRecognizer PanUpdated="PanGestureRecognizer_PanUpdated" />
+                        </skia:SKCanvasView.GestureRecognizers>
+                    </skia:SKCanvasView>
+                </Grid>
+            </Border>
+
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+                <Button Text="Wybierz zdjęcie" 
+                        Clicked="OnPickPhotoClicked" 
+                        WidthRequest="150" />
+                <Button Text="Zczytaj zaznaczone" 
+                        Clicked="OnCropClicked"
+                        BackgroundColor="DarkGreen"
+                        TextColor="White"
+                        WidthRequest="180" />
+            </HorizontalStackLayout>
+
+            <Label Text="2. Sprawdź i oznacz tekst (TYT, SKL, PREP)" 
+                   FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,10,0,0" />
+
+            <Editor x:Name="OcrEditor" 
+                    Text="{Binding FullText, Mode=TwoWay}" 
+                    AutoSize="TextChanges" 
+                    HeightRequest="200"
+                    Placeholder="Tu pojawi się tekst z OCR..." />
+
+            <Button Text="Gotowe - Podziel przepis" 
+                    Clicked="OnSplitRecipeClicked" 
+                    HeightRequest="50"
+                    Margin="0,10,0,20" />
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
