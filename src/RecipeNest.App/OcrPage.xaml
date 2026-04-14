@@ -17,6 +17,7 @@
                                        PaintSurface="CanvasView_PaintSurface">
                         <skia:SKCanvasView.GestureRecognizers>
                             <PanGestureRecognizer PanUpdated="PanGestureRecognizer_PanUpdated" />
+                            <PointerGestureRecognizer PointerPressed="PointerGestureRecognizer_PointerPressed"/>
                         </skia:SKCanvasView.GestureRecognizers>
                     </skia:SKCanvasView>
                 </Grid>
