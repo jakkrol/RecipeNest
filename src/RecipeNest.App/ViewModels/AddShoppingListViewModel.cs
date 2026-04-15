@@ -14,13 +14,13 @@ namespace RecipeNest.ViewModels
     public class AddShoppingListViewModel : INotifyPropertyChanged
     {
         ShoppingList? shoppinglist = new ShoppingList();
-        private int? listId;
+        private Guid? listId;
         public string? ListId
         {
             get => listId.ToString();
             set
             {
-                listId = Convert.ToInt32(value);
+                listId = Guid.Parse(value);
                 LoadListDetails();
             }
         }
@@ -106,7 +106,7 @@ namespace RecipeNest.ViewModels
 
             var list = new ShoppingList
             {
-                Id = listId ?? 0,
+                Id = listId ?? Guid.Empty,
                 Name = ListName
             };
 

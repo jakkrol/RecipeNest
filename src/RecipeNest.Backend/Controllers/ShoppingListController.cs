@@ -23,7 +23,7 @@ namespace RecipeNest.Backend.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ShoppingList>> GetShoppingList(int id)
+        public async Task<ActionResult<ShoppingList>> GetShoppingList(Guid id)
         {
             var result = await _dbContext.ShoppingList.FindAsync(id);
             if (result == null)
@@ -48,7 +48,7 @@ namespace RecipeNest.Backend.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<ShoppingList>> PutShoppingList(int id, ShoppingList sl)
+        public async Task<ActionResult<ShoppingList>> PutShoppingList(Guid id, ShoppingList sl)
         {
             if (id != sl.Id)
             {
@@ -77,7 +77,7 @@ namespace RecipeNest.Backend.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteShoppingList(int id)
+        public async Task<ActionResult> DeleteShoppingList(Guid id)
         {
             var sl = await _dbContext.ShoppingList.FindAsync(id);
             if(sl == null)

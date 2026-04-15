@@ -14,13 +14,13 @@ namespace RecipeNest.ViewModels
     [QueryProperty(nameof(ListId), "listId")]
     public class ShoppingListDetailsViewModel : INotifyPropertyChanged
     {
-        private int? listId;
+        private Guid? listId;
         public string? ListId
         {
             get => listId.ToString();
             set
             {
-                listId = Convert.ToInt32(value);
+                listId = Guid.Parse(value);
                 LoadListDetails();
             }
         }

@@ -2,7 +2,7 @@
 {
     public class Recipe
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
 
         public required string Name { get; set; }
@@ -17,7 +17,7 @@
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
   
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         public User? User { get; set; }
     }
 }

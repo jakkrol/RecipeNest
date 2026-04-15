@@ -13,7 +13,7 @@ namespace RecipeNest.BackendServices
         public UserApiService(HttpClient httpClient) : base(httpClient) { }
 
 
-        public async Task<UserDTO> getUser(int id)
+        public async Task<UserDTO> getUser(Guid id)
         {
             var user = await _httpClient.GetFromJsonAsync<UserDTO>($"api/User/{id}");
             if (user != null)

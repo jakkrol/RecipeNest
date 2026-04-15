@@ -94,43 +94,43 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="AddShoppingListPage.xaml.cs">
+	  <Compile Update="Views\AddShoppingListPage.xaml.cs">
 	    <DependentUpon>AddShoppingListPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="RecipesLibraryPage.xaml.cs">
+	  <Compile Update="Views\RecipesLibraryPage.xaml.cs">
 	    <DependentUpon>RecipesLibraryPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="RecipeDetailPage.xaml.cs">
+	  <Compile Update="Views\RecipeDetailPage.xaml.cs">
 	    <DependentUpon>RecipeDetailPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="ShoppingListsDetailsPage.xaml.cs">
+	  <Compile Update="Views\ShoppingListsDetailsPage.xaml.cs">
 	    <DependentUpon>ShoppingListsDetailsPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="AddShoppingListPage.xaml">
+	  <MauiXaml Update="Views\AddShoppingListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="AddRecipePage.xaml">
+	  <MauiXaml Update="Views\AddRecipePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="OcrPage.xaml">
+	  <MauiXaml Update="Views\OcrPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="RecipesLibraryPage.xaml">
+	  <MauiXaml Update="Views\RecipesLibraryPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="RecipeDetailPage.xaml">
+	  <MauiXaml Update="Views\RecipeDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="RecipesPage.xaml">
+	  <MauiXaml Update="Views\RecipesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="ShoppingListsPage.xaml">
+	  <MauiXaml Update="Views\ShoppingListsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="ShoppingListsDetailsPage.xaml">
+	  <MauiXaml Update="Views\ShoppingListsDetailsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

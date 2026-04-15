@@ -28,7 +28,7 @@ namespace RecipeNest.Services
 
             var meal = new Models.Recipe
             {
-                Id = int.Parse(mealJson.GetProperty("idMeal").GetString()),
+                Id = Guid.Parse(mealJson.GetProperty("idMeal").GetString()),
                 Name = mealJson.GetProperty("strMeal").GetString(),
                 ImageUrl = mealJson.GetProperty("strMealThumb").GetString()
             };
@@ -76,7 +76,7 @@ namespace RecipeNest.Services
                     {
                         recipes.Add(new Models.Recipe
                         {
-                            Id = int.Parse(mealJson.GetProperty("idMeal").GetString()),
+                            Id = Guid.Parse(mealJson.GetProperty("idMeal").GetString()),
                             Name = mealJson.GetProperty("strMeal").GetString(),
                             ImageUrl = mealJson.GetProperty("strMealThumb").GetString()
                         });
@@ -103,7 +103,7 @@ namespace RecipeNest.Services
 
             var meal = new Models.Recipe
             {
-                Id = int.Parse(mealJson.GetProperty("idMeal").GetString()),
+                Id = Guid.Parse(mealJson.GetProperty("idMeal").GetString()),
                 Name = mealJson.GetProperty("strMeal").GetString(),
                 Category = mealJson.GetProperty("strCategory").GetString(),
                 Description = $"{mealJson.GetProperty("strMeal").GetString()} - {mealJson.GetProperty("strCategory").GetString()}",

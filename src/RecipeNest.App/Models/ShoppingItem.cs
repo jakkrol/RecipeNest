@@ -12,7 +12,7 @@ namespace RecipeNest.Models
     public class ShoppingItem : IEntity
     {
         [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Name { get; set; } = string.Empty;
 
@@ -23,7 +23,7 @@ namespace RecipeNest.Models
         public bool IsChecked { get; set; }
 
         [ForeignKey(typeof(ShoppingList))]
-        public int ShoppingListId { get; set; }
+        public Guid ShoppingListId { get; set; }
 
         [ManyToOne]
         public ShoppingList ShoppingList { get; set; } = null!;

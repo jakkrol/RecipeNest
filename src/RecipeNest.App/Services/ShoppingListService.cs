@@ -27,10 +27,10 @@ namespace RecipeNest.Services
         public ObservableCollection<ShoppingList> ShoppingLists { get; }
         private readonly RecipeNestDb _db;
         private readonly UserSession _userSession;
-        public ShoppingListService(UserSession userSession)
+        public ShoppingListService(UserSession userSession, RecipeNestDb db)
         {
             ShoppingLists = new ObservableCollection<ShoppingList>();
-            _db = new RecipeNestDb();
+            _db = db;
             _userSession = userSession;
         }
 

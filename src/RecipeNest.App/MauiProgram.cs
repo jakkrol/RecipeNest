@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using RecipeNest.Services;
 using RecipeNest.ViewModels;
 using SkiaSharp.Views.Maui.Controls.Hosting;
+using RecipeNest.DbConfig;
 
 namespace RecipeNest
 {
@@ -34,7 +35,11 @@ namespace RecipeNest
             //    };
             //});
 
-            builder.Services.AddHttpClient<BaseApiService>(c =>
+            //builder.Services.AddHttpClient<BaseApiService>(c =>
+            //{
+            //    c.BaseAddress = new Uri("http://localhost:5264/");
+            //});
+            builder.Services.AddHttpClient(string.Empty, c =>
             {
                 c.BaseAddress = new Uri("http://localhost:5264/");
             });
@@ -73,6 +78,9 @@ namespace RecipeNest
             builder.Services.AddTransient<AddRecipePage>();
             builder.Services.AddTransient<AddShoppingListPage>();
 
+
+            // ---- BAZA -----
+            builder.Services.AddSingleton<RecipeNestDb>();
 
             return builder.Build();
         }

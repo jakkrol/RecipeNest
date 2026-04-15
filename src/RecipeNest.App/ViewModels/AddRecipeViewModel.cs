@@ -24,13 +24,13 @@ namespace RecipeNest.ViewModels
         //public string Instructions { get; set; } = "";
         public string ImageUrl { get; set; } = "";
 
-        private int? recipeId;
+        private Guid? recipeId;
         public string? RecipeId
         {
             get => recipeId.ToString();
             set
             {
-                recipeId = Convert.ToInt32(value);
+                recipeId = Guid.Parse(value);
                 LoadRecipe();
             }
         }

@@ -27,10 +27,10 @@ namespace RecipeNest.Services
         private readonly UserSession _userSession;
         public ObservableCollection<Recipe> Recipes { get; } 
 
-        public RecipeService(UserSession userSession)
+        public RecipeService(UserSession userSession, RecipeNestDb db)
         {
             Recipes = new ObservableCollection<Recipe>();
-            _db = new RecipeNestDb();
+            _db = db;
            _userSession = userSession;
         }
 
@@ -65,7 +65,7 @@ namespace RecipeNest.Services
             await LoadRecipesFromDb();
         }
 
-        public async Task UpdateRecipe(int id, string name, string category, string description, string ingredients, string instructions, string imageUrl = null)
+        public async Task UpdateRecipe(Guid id, string name, string category, string description, string ingredients, string instructions, string imageUrl = null)
         {
             var updatedRecipe = new Recipe
             {

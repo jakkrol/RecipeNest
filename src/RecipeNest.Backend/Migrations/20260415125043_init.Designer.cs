@@ -12,8 +12,8 @@ using RecipeNest.Backend.Data;
 namespace RecipeNest.Backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260109151024_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260415125043_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,9 @@ namespace RecipeNest.Backend.Migrations
 
             modelBuilder.Entity("RecipeNest.Backend.Models.Recipe", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Category")
                         .HasColumnType("text");
@@ -58,8 +56,8 @@ namespace RecipeNest.Backend.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -70,11 +68,9 @@ namespace RecipeNest.Backend.Migrations
 
             modelBuilder.Entity("RecipeNest.Backend.Models.ShoppingItem", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<bool>("IsChecked")
                         .HasColumnType("boolean");
@@ -86,8 +82,8 @@ namespace RecipeNest.Backend.Migrations
                     b.Property<double>("Quantity")
                         .HasColumnType("double precision");
 
-                    b.Property<int>("ShoppingListId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("ShoppingListId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Unit")
                         .HasColumnType("text");
@@ -101,11 +97,9 @@ namespace RecipeNest.Backend.Migrations
 
             modelBuilder.Entity("RecipeNest.Backend.Models.ShoppingList", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -114,8 +108,8 @@ namespace RecipeNest.Backend.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -126,11 +120,9 @@ namespace RecipeNest.Backend.Migrations
 
             modelBuilder.Entity("RecipeNest.Backend.Models.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");

@@ -21,6 +21,8 @@ namespace RecipeNest.DbConfig
                 return;
             }
 
+            //if(File.Exists(Constants.DatabasePath)) { File.Delete(Constants.DatabasePath); }
+
             database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
             await database.CreateTableAsync<Recipe>();
             await database.CreateTableAsync<ShoppingList>();
@@ -36,10 +38,22 @@ namespace RecipeNest.DbConfig
         public async Task<int> SaveItemAsync<T>(T item) where T : IEntity
         {
             await Init();
-            if (item.Id != 0)
-                return await database.UpdateAsync(item);
+            int result;
+
+            if (item.Id != Guid.Empty)
+            {
+                Debug.WriteLine($"Próba UPDATE dla Id: {item.Id}");
+                result = await database.UpdateAsync(item);
+            }
             else
-                return await database.InsertAsync(item);
+            {
+                item.Id = Guid.NewGuid();
+                Debug.WriteLine($"Próba INSERT z nowym Id: {item.Id}");
+                result = await database.InsertAsync(item);
+            }
+
+            Debug.WriteLine($"WYNIK OPERACJI: {result}"); // Powinno być 1
+            return result;
         }
         public async Task<int> DeleteItemAsync<T>(T item)
         {

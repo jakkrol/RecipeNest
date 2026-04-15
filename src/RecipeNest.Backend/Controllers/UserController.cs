@@ -33,7 +33,7 @@ namespace RecipeNest.Backend.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserDTO>> GetUser(int id)
+        public async Task<ActionResult<UserDTO>> GetUser(Guid id)
         {
             //var user = await _context.Users.FindAsync(id);
             var user = await _context.Users.Where(u => u.Id == id).Select(u => new UserDTO
@@ -53,7 +53,7 @@ namespace RecipeNest.Backend.Controllers
 
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, UpdateUserDTO user)
+        public async Task<IActionResult> PutUser(Guid id, UpdateUserDTO user)
         {
             //if(id != user.Id)
             //{
@@ -112,7 +112,7 @@ namespace RecipeNest.Backend.Controllers
 
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        public async Task<IActionResult> DeleteUser(Guid id)
         {
             var user = await _context.Users.FindAsync(id);
             if(user == null)

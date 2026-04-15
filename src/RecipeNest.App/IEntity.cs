@@ -8,6 +8,6 @@ namespace RecipeNest
 {
     public interface IEntity
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
     }
 }

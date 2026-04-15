@@ -42,13 +42,13 @@ namespace RecipeNest.ViewModels
             }
         }
 
-private int? recipeId;
+private Guid? recipeId;
         public string? RecipeId
         {
             get => recipeId.ToString();
             set
             {
-                recipeId = Convert.ToInt32(value);
+                recipeId = Guid.Parse(value);
                 LoadRecipeDetails();
             }
         }

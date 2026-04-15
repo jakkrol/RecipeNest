@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RecipeNest.Backend.Models;
+using System.Diagnostics;
 
 
 namespace RecipeNest.Backend.Controllers
@@ -25,7 +26,7 @@ namespace RecipeNest.Backend.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Recipe>> GetRecipe(long id)
+        public async Task<ActionResult<Recipe>> GetRecipe(Guid id)
         {
             var recipe = await _dbContext.Recipes.FindAsync(id);
             if (recipe == null) 
@@ -46,7 +47,7 @@ namespace RecipeNest.Backend.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteRecipe(long id)
+        public async Task<IActionResult> DeleteRecipe(Guid id)
         {
             var recipe = await _dbContext.Recipes.FindAsync(id);
             if (recipe == null)
@@ -60,7 +61,7 @@ namespace RecipeNest.Backend.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Recipe>> PutRecipe(long id, Recipe recipe)
+        public async Task<ActionResult<Recipe>> PutRecipe(Guid id, Recipe recipe)
         {
             if(id != recipe.Id)
             {
@@ -75,10 +76,12 @@ namespace RecipeNest.Backend.Controllers
             {
                 if (!_dbContext.Recipes.Any(e => e.Id == id))
                 {
+                    
                     return NotFound();
                 }
                 else
                 {
+                    Debug.WriteLine($"Error updating recipe with id {id}: {ex.Message}");
                     throw;
                 }
             }

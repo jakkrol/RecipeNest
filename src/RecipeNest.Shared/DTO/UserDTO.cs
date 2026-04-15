@@ -8,7 +8,7 @@ namespace RecipeNest.Shared.DTO
 {
     public class UserDTO
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public required string Name { get; set; }
         public DateTime CreatedAt { get; set; }
         public ICollection<RecipeSummaryDTO>? Recipes { get; set; }
