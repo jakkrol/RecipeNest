@@ -9,3 +9,13 @@ Content-Type: application/json
   "login": "123",
   "password": "123"
 }
+
+###
+POST http://localhost:5264/api/User/register
+Content-Type: application/json
+
+{
+    "name": "user",
+    "login": "testLogin",
+    "password": "testPassword"
+}

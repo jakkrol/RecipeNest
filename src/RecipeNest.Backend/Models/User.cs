@@ -1,5 +1,8 @@
-﻿namespace RecipeNest.Backend.Models
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace RecipeNest.Backend.Models
 {
+    [Index(nameof(Login), IsUnique = true)]
     public class User
     {
         public Guid Id { get; set; }

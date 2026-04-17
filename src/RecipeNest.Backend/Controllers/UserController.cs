@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using RecipeNest.Backend.Models;
 using System.Net.WebSockets;
 using RecipeNest.Shared.DTO;
+using RecipeNest.Backend.Services;
 
 namespace RecipeNest.Backend.Controllers
 {
@@ -140,6 +141,31 @@ namespace RecipeNest.Backend.Controllers
                 return Unauthorized();
         }
 
+        [HttpPost("register")]
+        public async Task<ActionResult<string>> Register(RegisterDTO registerDTO)
+        {
+            try
+            {
+                HashingService hs = new HashingService();
+
+                registerDTO.Password = hs.HashUserPassword(registerDTO.Password);
+                var user = new User
+                {
+                    Name = registerDTO.Name,
+                    Login = registerDTO.Login,
+                    Password = registerDTO.Password,
+                    CreatedAt = DateTime.UtcNow,
+                };
+
+                _context.Users.Add(user);
+                await _context.SaveChangesAsync();
+                return Ok();
+            }
+            catch (Exception ex) 
+            {
+                return StatusCode(500, "Error occured during registration");
+            }
+        }
 
     }
 }
