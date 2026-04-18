@@ -128,32 +128,63 @@ namespace RecipeNest.Backend.Controllers
 
 
 
-
-        // to complete this - login
         [HttpPost("login")]
-        public async Task<ActionResult<LoginDTO>> Login(LoginDTO loginuser)
+        public async Task<ActionResult<UserDTO>> Login(LoginDTO loginuser)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Login == loginuser.Login && u.Password == loginuser.Password);
+            try
+            {
+                var user = await _context.Users.FirstOrDefaultAsync(u => u.Login == loginuser.Login);
 
-            if(user != null)
-                return Ok();
-            else
-                return Unauthorized();
+                if (user == null)
+                {
+                    return Unauthorized("Wrong login or password");
+                }
+
+                HashingService hs = new HashingService();
+
+                if (hs.VerifyPassword(user.Password, loginuser.Password))
+                {
+                    UserDTO verifiedUser = new UserDTO
+                    {
+                        Id = user.Id,
+                        Name = user.Name,
+                        CreatedAt = user.CreatedAt,
+                    };
+                    return Ok(verifiedUser);
+                }
+                else
+                {
+                    return Unauthorized("Wrong login or password");
+                }
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(500, "An internal server error occurred.");
+            }
         }
 
+
+        // to complete
         [HttpPost("register")]
         public async Task<ActionResult<string>> Register(RegisterDTO registerDTO)
         {
             try
             {
+                var userExists = await _context.Users.AnyAsync(u => u.Login == registerDTO.Login);
+
+                if (userExists)
+                {
+                    return BadRequest("This login is already taken. Try different one");
+                }
+
                 HashingService hs = new HashingService();
 
-                registerDTO.Password = hs.HashUserPassword(registerDTO.Password);
+                var hashed = hs.HashUserPassword(registerDTO.Password);
                 var user = new User
                 {
                     Name = registerDTO.Name,
                     Login = registerDTO.Login,
-                    Password = registerDTO.Password,
+                    Password = hashed,
                     CreatedAt = DateTime.UtcNow,
                 };
 
@@ -161,7 +192,7 @@ namespace RecipeNest.Backend.Controllers
                 await _context.SaveChangesAsync();
                 return Ok();
             }
-            catch (Exception ex) 
+            catch(Exception ex) 
             {
                 return StatusCode(500, "Error occured during registration");
             }
