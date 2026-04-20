@@ -7,7 +7,7 @@ namespace RecipeNest
 {
     public partial class AppShell : Shell
     {
-        AuthService _auth;
+        //AuthService _auth;
         public AppShell()
         {
             InitializeComponent();
@@ -38,7 +38,7 @@ namespace RecipeNest
         ///Only for testing purposes, to be removed later
         async private void Account_Clicked(object sender, EventArgs e)
         {
-            await Current.GoToAsync("///LoginPage");
+            await Current.GoToAsync("/LoginPage");
             //LoginDTO loginuUser = new LoginDTO
             //{
             //    Login = "123",
