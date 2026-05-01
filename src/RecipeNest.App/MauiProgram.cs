@@ -6,6 +6,7 @@ using RecipeNest.Services;
 using RecipeNest.ViewModels;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 using RecipeNest.DbConfig;
+using RecipeNest.Views;
 
 namespace RecipeNest
 {
@@ -68,6 +69,7 @@ namespace RecipeNest
             builder.Services.AddTransient<AddShoppingListViewModel>();
             builder.Services.AddTransient<ShoppingListViewModel>();
             builder.Services.AddTransient<ShoppingListDetailsViewModel>();
+            builder.Services.AddTransient<LoginPageViewModel>();
 
 
 
@@ -77,7 +79,7 @@ namespace RecipeNest
             builder.Services.AddTransient<RecipeDetailPage>();
             builder.Services.AddTransient<AddRecipePage>();
             builder.Services.AddTransient<AddShoppingListPage>();
-
+            builder.Services.AddTransient<LoginPage>();
 
             // ---- BAZA -----
             builder.Services.AddSingleton<RecipeNestDb>();
