@@ -17,11 +17,13 @@
             <HorizontalStackLayout HorizontalOptions="Center"
                                    VerticalOptions="Center"
                                    Spacing="10">
-                <SearchBar Placeholder="Search recipes..."
+                <Border BackgroundColor="Transparent">
+                    <SearchBar Placeholder="Search recipes..."
                            Text="{Binding SearchText}"
                            SearchCommand="{Binding PerformSearchCommand}"
                            HorizontalOptions="Center"
                            WidthRequest="250"/>
+                </Border>
                 <Button x:Name="AddList"
                         Text="➕"
                         Clicked="AddList_Clicked"

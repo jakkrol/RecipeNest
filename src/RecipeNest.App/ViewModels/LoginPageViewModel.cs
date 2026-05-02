@@ -1,24 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace RecipeNest.ViewModels
 {
-    public class LoginPageViewModel
+    public partial class LoginPageViewModel : ObservableObject 
     {
-        public ICommand LoginCommand { get; set; }
+        [ObservableProperty]
+        private string _login;
+        [ObservableProperty]
+        private string _password;
 
-        public LoginPageViewModel() 
+
+        [RelayCommand]
+        private void PerformLogin()
         {
-            LoginCommand = new Command(Login);
-        }
-
-        private void Login()
-        {
-
+            Debug.WriteLine("GIGA TEST");
+            Debug.WriteLine(Login + ", " + Password);
         }
     }
 }
