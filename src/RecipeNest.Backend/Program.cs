@@ -23,7 +23,7 @@ if (app.Environment.IsDevelopment())
 
 
 //app.MapGet("/test", () => "TEST");
-app.MapGet("/", () => "Hello");
+app.MapGet("/", () => "Hello"); 
 
 //app.UseHttpsRedirection();
 app.UseAuthorization();
