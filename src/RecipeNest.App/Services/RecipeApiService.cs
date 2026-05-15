@@ -25,10 +25,10 @@ namespace RecipeNest.Services
 
             using var doc = JsonDocument.Parse(response);
             var mealJson = doc.RootElement.GetProperty("meals")[0];
-
+            int numericId = int.Parse(mealJson.GetProperty("idMeal").GetString());
             var meal = new Models.Recipe
             {
-                Id = Guid.Parse(mealJson.GetProperty("idMeal").GetString()),
+                Id = new Guid(numericId, 0, 0, new byte[8]),
                 Name = mealJson.GetProperty("strMeal").GetString(),
                 ImageUrl = mealJson.GetProperty("strMealThumb").GetString()
             };
@@ -74,9 +74,10 @@ namespace RecipeNest.Services
 
                     foreach (var mealJson in mealsJson.EnumerateArray())
                     {
-                        recipes.Add(new Models.Recipe
+                    int numericId = int.Parse(mealJson.GetProperty("idMeal").GetString());
+                    recipes.Add(new Models.Recipe
                         {
-                            Id = Guid.Parse(mealJson.GetProperty("idMeal").GetString()),
+                            Id = new Guid(numericId, 0, 0, new byte[8]),
                             Name = mealJson.GetProperty("strMeal").GetString(),
                             ImageUrl = mealJson.GetProperty("strMealThumb").GetString()
                         });
@@ -100,10 +101,10 @@ namespace RecipeNest.Services
 
             using var doc = JsonDocument.Parse(response);
             var mealJson = doc.RootElement.GetProperty("meals")[0];
-
+            int numericId = int.Parse(mealJson.GetProperty("idMeal").GetString());
             var meal = new Models.Recipe
             {
-                Id = Guid.Parse(mealJson.GetProperty("idMeal").GetString()),
+                Id = new Guid(numericId, 0, 0, new byte[8]),
                 Name = mealJson.GetProperty("strMeal").GetString(),
                 Category = mealJson.GetProperty("strCategory").GetString(),
                 Description = $"{mealJson.GetProperty("strMeal").GetString()} - {mealJson.GetProperty("strCategory").GetString()}",

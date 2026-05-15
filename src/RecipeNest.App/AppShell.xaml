@@ -37,7 +37,7 @@
         </Tab>
     </FlyoutItem>
 
-    <FlyoutItem Title="Tesseract Tests" Route="TesseractTests">
+    <FlyoutItem Title="Scan Recipe" Route="TesseractTests">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate local:OcrPage}" />
         </Tab>
