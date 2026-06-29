@@ -1,12 +1,15 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using RecipeNest.Backend.Data;
+using RecipeNest.Backend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDbContext<AppDbContext>(
     options => options.UseNpgsql(builder.Configuration.GetConnectionString("WebApiDatabase")));
+
+builder.Services.AddSingleton<HashingService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

@@ -13,10 +13,12 @@ namespace RecipeNest.Backend.Controllers
     public class UserController : ControllerBase
     {
         private readonly Data.AppDbContext _context;
+        private readonly HashingService _hashingService;
 
-        public UserController(Data.AppDbContext context)
+        public UserController(Data.AppDbContext context, HashingService hashingService  )
         {
             _context = context;
+            _hashingService = hashingService;
         }
 
         [HttpGet]
@@ -86,6 +88,7 @@ namespace RecipeNest.Backend.Controllers
         }
 
 
+        //To delete - for tests only now
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(RegisterDTO registerDTO)
         {
@@ -140,9 +143,8 @@ namespace RecipeNest.Backend.Controllers
                     return Unauthorized("Wrong login or password");
                 }
 
-                HashingService hs = new HashingService();
 
-                if (hs.VerifyPassword(user.Password, loginuser.Password))
+                if (_hashingService.VerifyPassword(user.Password, loginuser.Password))
                 {
                     UserDTO verifiedUser = new UserDTO
                     {
@@ -177,9 +179,9 @@ namespace RecipeNest.Backend.Controllers
                     return BadRequest("This login is already taken. Try different one");
                 }
 
-                HashingService hs = new HashingService();
+                
 
-                var hashed = hs.HashUserPassword(registerDTO.Password);
+                var hashed = _hashingService.HashUserPassword(registerDTO.Password);
                 var user = new User
                 {
                     Name = registerDTO.Name,
