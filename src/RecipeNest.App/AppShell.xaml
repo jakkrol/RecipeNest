@@ -8,11 +8,12 @@
     Padding="5">
 
 
-
     <Shell.ToolbarItems>
         <ToolbarItem x:Name="Account" IconImageSource="accounticon.png" Text="Account" Clicked="Account_Clicked"></ToolbarItem>
+        <ToolbarItem Text="{Binding UserName}"></ToolbarItem>
         <ToolbarItem x:Name="ThemeItem" Text="☀️" Clicked="ToolbarItem_Clicked"></ToolbarItem>
     </Shell.ToolbarItems>
+    
     <FlyoutItem Title="Home" Route="MainPage">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />

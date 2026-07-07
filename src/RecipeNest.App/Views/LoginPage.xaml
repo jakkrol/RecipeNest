@@ -47,7 +47,8 @@
                 <Button x:Name="GoToRegisterButton"
                         Text="Sign up"
                         BackgroundColor="Transparent"
-                        TextColor="{StaticResource Primary}" />
+                        TextColor="{StaticResource Primary}"
+                        Command="{Binding GoToRegisterCommand}"/>
             </HorizontalStackLayout>
 
             <Label x:Name="ErrorLabel"

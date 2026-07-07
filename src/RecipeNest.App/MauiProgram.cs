@@ -50,6 +50,7 @@ namespace RecipeNest
             });
 
 
+            builder.Services.AddSingleton<AppShell>();
             // --- SERWISY LOGICZNE I SESJA ---
             builder.Services.AddSingleton<UserSession>();
             builder.Services.AddSingleton<RecipeService>(); 
@@ -70,7 +71,7 @@ namespace RecipeNest
             builder.Services.AddTransient<ShoppingListViewModel>();
             builder.Services.AddTransient<ShoppingListDetailsViewModel>();
             builder.Services.AddTransient<LoginPageViewModel>();
-
+            builder.Services.AddTransient<RegisterPageViewModel>();
 
 
             // --- STRONY ---
@@ -80,6 +81,7 @@ namespace RecipeNest
             builder.Services.AddTransient<AddRecipePage>();
             builder.Services.AddTransient<AddShoppingListPage>();
             builder.Services.AddTransient<LoginPage>();
+            builder.Services.AddTransient<RegisterPage>();
 
             // ---- BAZA -----
             builder.Services.AddSingleton<RecipeNestDb>();

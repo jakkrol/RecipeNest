@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RecipeNest.Views.RegisterPage"
+             Title="RegisterPage">
+    <ScrollView>
+        <VerticalStackLayout Spacing="20"
+                             Padding="30"
+                             VerticalOptions="Center">
+
+            <Image Source="accounticon.png"
+                   HeightRequest="80"
+                   HorizontalOptions="Center" />
+
+            <Label Text="Create your RecipeNest account"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+
+            <VerticalStackLayout Spacing="15"
+                                 MaximumWidthRequest="800">
+
+                <Label Text="Username"
+                       Margin="5,0"/>
+                <Border StrokeShape="RoundRectangle 10"
+                        Padding="5,0">
+                    <Entry Placeholder="Choose a username"
+                           Text="{Binding Username}" />
+                </Border>
+
+                <Label Text="Email"
+                       Margin="5,0"/>
+                <Border StrokeShape="RoundRectangle 10"
+                        Padding="5,0">
+                    <Entry Placeholder="Enter your email"
+                           Keyboard="Email"
+                           Text="{Binding Login}" />
+                </Border>
+
+                <Label Text="Password"
+                       Margin="5,0"/>
+                <Border StrokeShape="RoundRectangle 10"
+                        Padding="5,0">
+                    <Entry Placeholder="••••••••"
+                           IsPassword="True"
+                           Text="{Binding Password}" />
+                </Border>
+
+                <Label Text="Confirm password"
+                       Margin="5,0"/>
+                <Border StrokeShape="RoundRectangle 10"
+                        Padding="5,0">
+                    <Entry Placeholder="••••••••"
+                           IsPassword="True"
+                           Text="{Binding ConfirmPassword}" />
+                </Border>
+
+                <Button Text="CREATE ACCOUNT"
+                        Margin="0,10,0,0"
+                        CornerRadius="10"
+                        HeightRequest="50"
+                        Command="{Binding PerformRegisterCommand}" />
+
+            </VerticalStackLayout>
+
+            <HorizontalStackLayout HorizontalOptions="Center"
+                                   Spacing="5">
+
+                <Label Text="Already have an account?"
+                       VerticalOptions="Center"/>
+
+                <Button Text="Sign in"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource Primary}"
+                        Command="{Binding GoToLoginCommand}" />
+
+            </HorizontalStackLayout>
+
+            <Label Text="{Binding ErrorMessage}"
+                   TextColor="Red"
+                   HorizontalOptions="Center"
+                   IsVisible="{Binding HasError}" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

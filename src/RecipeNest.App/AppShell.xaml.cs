@@ -1,4 +1,5 @@
 ﻿using RecipeNest.BackendServices;
+using RecipeNest.Services;
 using RecipeNest.Shared.DTO;
 using RecipeNest.Views;
 using System.Diagnostics;
@@ -8,9 +9,13 @@ namespace RecipeNest
     public partial class AppShell : Shell
     {
         //AuthService _auth;
-        public AppShell()
+        UserSession _userSession;
+        public AppShell(UserSession userSession)
         {
             InitializeComponent();
+            _userSession = userSession;
+            this.BindingContext = _userSession;
+
             Routing.RegisterRoute("RecipesPage", typeof(RecipesPage));
             Routing.RegisterRoute("AddRecipePage", typeof(AddRecipePage));
             Routing.RegisterRoute("RecipeDetailPage", typeof(RecipeDetailPage));
@@ -21,6 +26,8 @@ namespace RecipeNest
             Routing.RegisterRoute("RecipesLibraryPage", typeof(RecipesLibraryPage));
 
             Routing.RegisterRoute("LoginPage", typeof(LoginPage));
+            Routing.RegisterRoute("RegisterPage", typeof(RegisterPage));
+            Routing.RegisterRoute("ProfilePage", typeof(ProfilePage));
 
             // --- For teting purposes only, to be removed later ---
             //_auth = IPlatformApplication.Current.Services.GetService<AuthService>();
@@ -38,7 +45,14 @@ namespace RecipeNest
         ///Only for testing purposes, to be removed later
         async private void Account_Clicked(object sender, EventArgs e)
         {
-            await Current.GoToAsync("/LoginPage");
+            if (_userSession.IsLoggedIn)
+            {
+                await Current.GoToAsync("/ProfilePage");
+            }
+            else
+            {
+                await Current.GoToAsync("/LoginPage");
+            }
             //LoginDTO loginuUser = new LoginDTO
             //{
             //    Login = "123",

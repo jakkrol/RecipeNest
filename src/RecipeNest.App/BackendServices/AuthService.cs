@@ -23,7 +23,21 @@ namespace RecipeNest.BackendServices
         {
 
             var response = await _httpClient.PostAsJsonAsync("api/User/login", loginuUser);
+            if (!response.IsSuccessStatusCode)
+            {
+                return false;
+            }
+
+            var user = await response.Content.ReadFromJsonAsync<UserDTO>();
             Debug.WriteLine("THIS IS RESPONSE:   " + response);
+            Debug.WriteLine("THIS IS USER:   " + user.Name);
+            _userSession.StartSession(user.Id, user.Name);
+            return true;
+        }
+
+        public async Task<bool> Register(RegisterDTO registerUser)
+        {
+            var response = await _httpClient.PostAsJsonAsync("api/User/register", registerUser);
             return true;
         }
     }

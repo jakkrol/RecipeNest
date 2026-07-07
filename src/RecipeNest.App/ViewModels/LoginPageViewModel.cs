@@ -7,22 +7,46 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using RecipeNest.BackendServices;
+using RecipeNest.Views;
 
 namespace RecipeNest.ViewModels
 {
     public partial class LoginPageViewModel : ObservableObject 
     {
         [ObservableProperty]
-        private string _login;
+        private string _login = "";
         [ObservableProperty]
-        private string _password;
+        private string _password = "";
 
+        private readonly AuthService _authService;
+
+        public LoginPageViewModel(AuthService authService)
+        {
+            _authService = authService;
+        }
 
         [RelayCommand]
-        private void PerformLogin()
+        private async Task PerformLogin()
         {
             Debug.WriteLine("GIGA TEST");
             Debug.WriteLine(Login + ", " + Password);
+            bool res = await _authService.Login(new Shared.DTO.LoginDTO { Login = Login, Password = Password });
+            if (res)
+            {
+                await Shell.Current.GoToAsync("//MainPage");
+
+            }
+            else
+            {
+                Debug.WriteLine("Login failed");
+            }
+        }
+
+        [RelayCommand]
+        private async Task GoToRegister()
+        {
+            await Shell.Current.GoToAsync(nameof(RegisterPage));
         }
     }
 }

@@ -17,6 +17,13 @@ namespace RecipeNest.Backend.Data
         //    optionsBuilder.UseNpgsql(_configuration.GetConnectionString("WebApiDatabase"));
         //}
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            
+        }
+
         public DbSet<User> Users { get; set; }
         public DbSet<Recipe> Recipes { get; set; }
         public DbSet<ShoppingItem> ShoppingItems { get; set; }
