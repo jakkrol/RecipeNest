@@ -18,7 +18,7 @@ namespace RecipeNest.Services
             _httpClient = httpClient;
         }
 
-        public async Task<Models.Recipe> SearchRecipeOfDay()
+        public async Task<Models.ApiRecipe> SearchRecipeOfDay()
         {
             string url = "random.php";
             var response = await _httpClient.GetStringAsync(url);
@@ -26,9 +26,9 @@ namespace RecipeNest.Services
             using var doc = JsonDocument.Parse(response);
             var mealJson = doc.RootElement.GetProperty("meals")[0];
             int numericId = int.Parse(mealJson.GetProperty("idMeal").GetString());
-            var meal = new Models.Recipe
+            var meal = new Models.ApiRecipe
             {
-                Id = new Guid(numericId, 0, 0, new byte[8]),
+                Id = numericId,
                 Name = mealJson.GetProperty("strMeal").GetString(),
                 ImageUrl = mealJson.GetProperty("strMealThumb").GetString()
             };
@@ -36,13 +36,13 @@ namespace RecipeNest.Services
         }
 
 
-        public async Task<List<Models.Recipe>> SearchRecipesAsync(string searchMode, string query)
+        public async Task<List<Models.ApiRecipe>> SearchRecipesAsync(string searchMode, string query)
         {
             Debug.WriteLine("Im in SearchRecipeAsync right now!!!");
             if (string.IsNullOrWhiteSpace(query))
             {
                 Debug.WriteLine("Query null");
-                return new List<Models.Recipe>();
+                return new List<Models.ApiRecipe>();
             }
 
             string endpoint = (searchMode ?? "name").ToLower() switch
@@ -70,14 +70,14 @@ namespace RecipeNest.Services
                     //return new List<Models.Recipe>();
                 }
                 Debug.WriteLine("POD2");
-                var recipes = new List<Models.Recipe>();
+                var recipes = new List<Models.ApiRecipe>();
 
                     foreach (var mealJson in mealsJson.EnumerateArray())
                     {
                     int numericId = int.Parse(mealJson.GetProperty("idMeal").GetString());
-                    recipes.Add(new Models.Recipe
+                    recipes.Add(new Models.ApiRecipe
                         {
-                            Id = new Guid(numericId, 0, 0, new byte[8]),
+                            Id = numericId,
                             Name = mealJson.GetProperty("strMeal").GetString(),
                             ImageUrl = mealJson.GetProperty("strMealThumb").GetString()
                         });
@@ -90,11 +90,11 @@ namespace RecipeNest.Services
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
-                return new List<Models.Recipe>();
+                return new List<Models.ApiRecipe>();
             }
         }
 
-        public async Task<Recipe> getRecipeById(int id)
+        public async Task<ApiRecipe> getRecipeById(int id)
         {
             string url = $"lookup.php?i={id}";
             var response = await _httpClient.GetStringAsync(url);
@@ -102,9 +102,9 @@ namespace RecipeNest.Services
             using var doc = JsonDocument.Parse(response);
             var mealJson = doc.RootElement.GetProperty("meals")[0];
             int numericId = int.Parse(mealJson.GetProperty("idMeal").GetString());
-            var meal = new Models.Recipe
+            var meal = new Models.ApiRecipe
             {
-                Id = new Guid(numericId, 0, 0, new byte[8]),
+                Id = numericId,
                 Name = mealJson.GetProperty("strMeal").GetString(),
                 Category = mealJson.GetProperty("strCategory").GetString(),
                 Description = $"{mealJson.GetProperty("strMeal").GetString()} - {mealJson.GetProperty("strCategory").GetString()}",

@@ -16,10 +16,10 @@ namespace RecipeNest.ViewModels
         private readonly RecipeApiService _apiService;
 
 
-        public ObservableCollection<Recipe> Recipes { get; set; } = new();
+        public ObservableCollection<ApiRecipe> Recipes { get; set; } = new();
 
-        private Recipe _recipeOfTheDay;
-        public Recipe RecipeOfTheDay
+        private ApiRecipe _recipeOfTheDay;
+        public ApiRecipe RecipeOfTheDay
         {
             get => _recipeOfTheDay;
             set

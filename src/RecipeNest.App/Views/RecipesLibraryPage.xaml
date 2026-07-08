@@ -67,7 +67,7 @@
 
 
         <CollectionView.ItemTemplate>
-            <DataTemplate x:DataType="models:Recipe">
+            <DataTemplate x:DataType="models:ApiRecipe">
                 <Border Margin="5" Padding="5" Background="Transparent">
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="12" />

@@ -22,7 +22,7 @@ namespace RecipeNest.BackendServices
         public async Task<bool> Login(LoginDTO loginuUser)
         {
 
-            var response = await _httpClient.PostAsJsonAsync("api/User/login", loginuUser);
+            var response = await _httpClient.PostAsJsonAsync("api/Auth/login", loginuUser);
             if (!response.IsSuccessStatusCode)
             {
                 return false;
@@ -37,7 +37,7 @@ namespace RecipeNest.BackendServices
 
         public async Task<bool> Register(RegisterDTO registerUser)
         {
-            var response = await _httpClient.PostAsJsonAsync("api/User/register", registerUser);
+            var response = await _httpClient.PostAsJsonAsync("api/Auth/register", registerUser);
             return true;
         }
     }

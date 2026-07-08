@@ -131,74 +131,74 @@ namespace RecipeNest.Backend.Controllers
 
 
 
-        [HttpPost("login")]
-        public async Task<ActionResult<UserDTO>> Login(LoginDTO loginuser)
-        {
-            try
-            {
-                var user = await _context.Users.FirstOrDefaultAsync(u => u.Login == loginuser.Login);
+        //[HttpPost("login")]
+        //public async Task<ActionResult<UserDTO>> Login(LoginDTO loginuser)
+        //{
+        //    try
+        //    {
+        //        var user = await _context.Users.FirstOrDefaultAsync(u => u.Login == loginuser.Login);
 
-                if (user == null)
-                {
-                    return Unauthorized("Wrong login or password");
-                }
-
-
-                if (_hashingService.VerifyPassword(user.Password, loginuser.Password))
-                {
-                    UserDTO verifiedUser = new UserDTO
-                    {
-                        Id = user.Id,
-                        Name = user.Name,
-                        CreatedAt = user.CreatedAt,
-                    };
-                    return Ok(verifiedUser);
-                }
-                else
-                {
-                    return Unauthorized("Wrong login or password");
-                }
-            }
-            catch(Exception ex)
-            {
-                return StatusCode(500, "An internal server error occurred.");
-            }
-        }
+        //        if (user == null)
+        //        {
+        //            return Unauthorized("Wrong login or password");
+        //        }
 
 
-        // to complete
-        [HttpPost("register")]
-        public async Task<ActionResult<string>> Register(RegisterDTO registerDTO)
-        {
-            try
-            {
-                var userExists = await _context.Users.AnyAsync(u => u.Login == registerDTO.Login);
+        //        if (_hashingService.VerifyPassword(user.Password, loginuser.Password))
+        //        {
+        //            UserDTO verifiedUser = new UserDTO
+        //            {
+        //                Id = user.Id,
+        //                Name = user.Name,
+        //                CreatedAt = user.CreatedAt,
+        //            };
+        //            return Ok(verifiedUser);
+        //        }
+        //        else
+        //        {
+        //            return Unauthorized("Wrong login or password");
+        //        }
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        return StatusCode(500, "An internal server error occurred.");
+        //    }
+        //}
 
-                if (userExists)
-                {
-                    return BadRequest("This login is already taken. Try different one");
-                }
+
+        //// to complete
+        //[HttpPost("register")]
+        //public async Task<ActionResult<string>> Register(RegisterDTO registerDTO)
+        //{
+        //    try
+        //    {
+        //        var userExists = await _context.Users.AnyAsync(u => u.Login == registerDTO.Login);
+
+        //        if (userExists)
+        //        {
+        //            return BadRequest("This login is already taken. Try different one");
+        //        }
 
                 
 
-                var hashed = _hashingService.HashUserPassword(registerDTO.Password);
-                var user = new User
-                {
-                    Name = registerDTO.Name,
-                    Login = registerDTO.Login,
-                    Password = hashed,
-                    CreatedAt = DateTime.UtcNow,
-                };
+        //        var hashed = _hashingService.HashUserPassword(registerDTO.Password);
+        //        var user = new User
+        //        {
+        //            Name = registerDTO.Name,
+        //            Login = registerDTO.Login,
+        //            Password = hashed,
+        //            CreatedAt = DateTime.UtcNow,
+        //        };
 
-                _context.Users.Add(user);
-                await _context.SaveChangesAsync();
-                return Ok();
-            }
-            catch(Exception ex) 
-            {
-                return StatusCode(500, "Error occured during registration");
-            }
-        }
+        //        _context.Users.Add(user);
+        //        await _context.SaveChangesAsync();
+        //        return Ok();
+        //    }
+        //    catch(Exception ex) 
+        //    {
+        //        return StatusCode(500, "Error occured during registration");
+        //    }
+        //}
 
     }
 }

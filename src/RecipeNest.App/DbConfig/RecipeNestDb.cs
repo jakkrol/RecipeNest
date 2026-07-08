@@ -29,7 +29,7 @@ namespace RecipeNest.DbConfig
             await database.CreateTableAsync<ShoppingItem>();
         }
 
-        public async Task<List<T>> GetItemsAsync<T>() where T : new()
+        public async Task<List<T>> GetItemsAsync<T>() where T : class, IEntity, new()
         {
             await Init();
             //return await database.Table<T>().ToListAsync();

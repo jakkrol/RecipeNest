@@ -18,6 +18,8 @@ namespace RecipeNest.ViewModels
         private string _login = "";
         [ObservableProperty]
         private string _password = "";
+        [ObservableProperty]
+        private bool _isLoginError = false;
 
         private readonly AuthService _authService;
 
@@ -29,6 +31,7 @@ namespace RecipeNest.ViewModels
         [RelayCommand]
         private async Task PerformLogin()
         {
+            IsLoginError = false;
             Debug.WriteLine("GIGA TEST");
             Debug.WriteLine(Login + ", " + Password);
             bool res = await _authService.Login(new Shared.DTO.LoginDTO { Login = Login, Password = Password });
@@ -40,6 +43,7 @@ namespace RecipeNest.ViewModels
             else
             {
                 Debug.WriteLine("Login failed");
+                IsLoginError = true;
             }
         }
 

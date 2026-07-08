@@ -55,7 +55,7 @@
                    Text="Invalid login or password"
                    TextColor="Red"
                    HorizontalOptions="Center"
-                   IsVisible="False" />
+                   IsVisible="{Binding IsLoginError}" />
 
         </VerticalStackLayout>
     </ScrollView>

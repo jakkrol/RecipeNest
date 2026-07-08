@@ -16,9 +16,9 @@ public partial class RecipesLibraryPage : ContentPage
     private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         Debug.WriteLine("CLICKED");
-        var selectedRecipe = e.CurrentSelection.FirstOrDefault() as Models.Recipe;
+        var selectedRecipe = e.CurrentSelection.FirstOrDefault() as Models.ApiRecipe;
         if (selectedRecipe != null)
-            await Shell.Current.GoToAsync($"RecipeDetailPage?recipeId={selectedRecipe.Id}&source=internet");
+            await Shell.Current.GoToAsync($"RecipeDetailPage?sourceId={selectedRecipe.Id}&source=internet");
     }
 
     private void MainPicker_SelectedIndexChanged(object sender, EventArgs e)
@@ -54,6 +54,6 @@ public partial class RecipesLibraryPage : ContentPage
         Debug.WriteLine("Header CLICKED");
         
         var recipeId = vm.RecipeOfTheDay.Id;
-        await Shell.Current.GoToAsync($"RecipeDetailPage?recipeId={recipeId}&source=internet");
+        await Shell.Current.GoToAsync($"RecipeDetailPage?sourceId={recipeId}&source=internet");
     }
 }

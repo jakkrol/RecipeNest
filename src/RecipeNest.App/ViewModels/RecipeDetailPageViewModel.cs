@@ -12,6 +12,7 @@ namespace RecipeNest.ViewModels
 {
     [QueryProperty(nameof(Source), "source")]
     [QueryProperty(nameof(RecipeId), "recipeId")]
+    [QueryProperty(nameof(SourceId), "sourceId")]
     public class RecipeDetailPageViewModel : INotifyPropertyChanged
     {
         private readonly RecipeService _recipeService;
@@ -42,7 +43,7 @@ namespace RecipeNest.ViewModels
             }
         }
 
-private Guid? recipeId;
+        private Guid? recipeId;
         public string? RecipeId
         {
             get => recipeId.ToString();
@@ -53,13 +54,24 @@ private Guid? recipeId;
             }
         }
 
+        private Int32 sourceId;
+        public string? SourceId
+        {
+            get => sourceId.ToString();
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                    sourceId = int.Parse(value);
+                LoadRecipeDetails();
+            }
+        }
+
         async private void LoadRecipeDetails()
         {
-            if (!recipeId.HasValue)
-                return;
-
             if (source == "local")
             {
+                if (!recipeId.HasValue)
+                    return;
                 var recipe = _recipeService.Recipes.FirstOrDefault(r => r.Id == recipeId.Value);
                 if (recipe != null)
                 {
@@ -76,11 +88,11 @@ private Guid? recipeId;
                 OnPropertyChanged(nameof(Ingredients));
                 OnPropertyChanged(nameof(Instructions));
             }
-            if(source == "internet")
+            else if(source == "internet")
             {
                 Debug.WriteLine("FROM INTERNET");
                 //RecipeApiService _apiService = new RecipeApiService();
-                var recipe = await _recipeApiService.getRecipeById(Convert.ToInt32(recipeId));
+                var recipe = await _recipeApiService.getRecipeById(sourceId);
                 Debug.WriteLine("TEST RECIPE: " + recipe.Name);
                 if(recipe != null)
                 {
