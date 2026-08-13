@@ -56,10 +56,12 @@ namespace RecipeNest
             builder.Services.AddSingleton<RecipeService>(); 
             builder.Services.AddSingleton<ShoppingListService>();
 
+
             // --- SERWISY API ---
             //builder.Services.AddSingleton<RecipeApiService>();
             builder.Services.AddSingleton<UserApiService>();
             builder.Services.AddSingleton<AuthService>();
+            builder.Services.AddSingleton<SyncDbData>();
 
             // --- VIEWMODELE ---
             builder.Services.AddTransient<RecipeLibraryViewModel>();
@@ -72,6 +74,7 @@ namespace RecipeNest
             builder.Services.AddTransient<ShoppingListDetailsViewModel>();
             builder.Services.AddTransient<LoginPageViewModel>();
             builder.Services.AddTransient<RegisterPageViewModel>();
+            builder.Services.AddTransient<ProfilePageViewModel>();
 
 
             // --- STRONY ---
@@ -82,6 +85,7 @@ namespace RecipeNest
             builder.Services.AddTransient<AddShoppingListPage>();
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<RegisterPage>();
+            builder.Services.AddTransient<ProfilePage>();
 
             // ---- BAZA -----
             builder.Services.AddSingleton<RecipeNestDb>();

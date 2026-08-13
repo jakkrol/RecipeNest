@@ -1,9 +1,14 @@
+using RecipeNest.ViewModels;
+
 namespace RecipeNest.Views;
 
 public partial class ProfilePage : ContentPage
 {
-	public ProfilePage()
+	private ProfilePageViewModel vm { get; set; }
+	public ProfilePage(ProfilePageViewModel viewModel)
 	{
 		InitializeComponent();
+		vm = viewModel;
+		this.BindingContext = vm;
 	}
 }

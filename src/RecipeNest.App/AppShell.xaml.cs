@@ -45,20 +45,15 @@ namespace RecipeNest
         ///Only for testing purposes, to be removed later
         async private void Account_Clicked(object sender, EventArgs e)
         {
-            if (_userSession.IsLoggedIn)
+            var currentRoute = Shell.Current.CurrentState.Location.OriginalString;
+            if (_userSession.IsLoggedIn && !currentRoute.EndsWith("/ProfilePage"))
             {
                 await Current.GoToAsync("/ProfilePage");
             }
-            else
+            else if(!_userSession.IsLoggedIn && !currentRoute.EndsWith("/LoginPage"))
             {
                 await Current.GoToAsync("/LoginPage");
             }
-            //LoginDTO loginuUser = new LoginDTO
-            //{
-            //    Login = "123",
-            //    Password = "123"
-            //};
-            //await _auth.Login(loginuUser);
         }
 
         //private async void OnShellNavigating(object sender, ShellNavigatedEventArgs e)
